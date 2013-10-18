@@ -1,0 +1,114 @@
+### file: Makefile.msw
+###
+### This Makefile is for compiliation on a Windows machine
+### using MinGW/MSYS etc
+###
+###
+###
+
+WXINCLUDE = `wxmsw-2.4-config --cppflags` -I/usr/local/include
+WXLIB = `wxmsw-2.4-config --libs` 
+
+WXBASEINCLUDE = `wxbase-2.4-config --cppflags` -I/usr/local/include
+WXBASELIB = `wxbase-2.4-config --libs`
+
+COMPILERFLAGS = -g -O2 
+
+CC = g++
+
+all: RMAExpress convertor
+
+
+RMAExpress: RMAExpress.cpp ResidualsDataGroup.o DataGroup.o  PMProbeBatch.o expressionGroup.o rma_background3.o PreferencesDialog.o residualimages.o
+	$(CC) $(COMPILERFLAGS) RMAExpress.cpp  $(WXINCLUDE) pnorm.o weightedkerneldensity.o rma_background3.o threestep_common.o medianpolish.o expressionGroup.o PMProbeBatch.o Matrix.o BufferedMatrix.o read_cdf_xda.o DataGroup.o CDFLocMapTree.o rma_common.o qnorm.o PreferencesDialog.o residualimages.o ResidualsDataGroup.o $(WXLIB)  -o RMAExpress.exe
+
+convertor: RMADataConv.cpp DataGroup.o
+	$(CC) $(COMPILERFLAGS) RMADataConv.cpp Matrix.o read_cdf_xda.o BufferedMatrix.o PreferencesDialog.o DataGroup.o CDFLocMapTree.o $(WXINCLUDE) $(WXLIB) -o RMADataConv.exe
+
+
+ResidualsDataGroup.o: DataGroup.o ResidualsDataGroup.cpp
+	$(CC) -c $(COMPILERFLAGS) ResidualsDataGroup.cpp $(WXINCLUDE) -o ResidualsDataGroup.o
+
+DataGroup.o: DataGroup.cpp CDFLocMapTree.cpp Matrix.o BufferedMatrix.o read_cdf_xda.o
+	$(CC) -c $(COMPILERFLAGS) DataGroup.cpp $(WXINCLUDE) -o DataGroup.o
+	$(CC) -c $(COMPILERFLAGS) CDFLocMapTree.cpp $(WXINCLUDE) -o CDFLocMapTree.o
+
+PMProbeBatch.o: PMProbeBatch.cpp qnorm.o medianpolish.o
+	$(CC) -c $(COMPILERFLAGS) PMProbeBatch.cpp $(WXINCLUDE) -o PMProbeBatch.o
+
+qnorm.o: qnorm.c rma_common.c
+	$(CC) -c $(COMPILERFLAGS) qnorm.c $(WXINCLUDE) -o qnorm.o	
+	$(CC) -c $(COMPILERFLAGS) rma_common.c $(WXINCLUDE) -o rma_common.o
+
+medianpolish.o: medianpolish.c
+	$(CC) -c $(COMPILERFLAGS) medianpolish.c $(WXINCLUDE) -o medianpolish.o	
+
+expressionGroup.o: expressionGroup.cpp
+	$(CC) -c $(COMPILERFLAGS) expressionGroup.cpp $(WXINCLUDE) -o expressionGroup.o
+	$(CC) -c $(COMPILERFLAGS) threestep_common.c $(WXINCLUDE) -o threestep_common.o		
+
+rma_background3.o: rma_background3.c pnorm.c weightedkerneldensity.c
+	$(CC) -c $(COMPILERFLAGS) pnorm.c  $(WXINCLUDE) -o pnorm.o
+	$(CC) -c $(COMPILERFLAGS) weightedkerneldensity.c  $(WXINCLUDE) -o weightedkerneldensity.o
+	$(CC) -c $(COMPILERFLAGS) rma_background3.c $(WXINCLUDE) -o rma_background3.o	
+
+Matrix.o: Matrix.cpp
+	$(CC) -c $(COMPILERFLAGS) Matrix.cpp  $(WXINCLUDE) -o Matrix.o
+
+PreferencesDialog.o: PreferencesDialog.cpp
+	$(CC) -c $(COMPILERFLAGS) PreferencesDialog.cpp  $(WXINCLUDE) 
+
+
+residualimages.o: residualimages.cpp 
+	$(CC) -c $(COMPILERFLAGS) residualimages.cpp  $(WXINCLUDE) -o residualimages.o	
+
+read_cdf_xda.o: read_cdf_xda.c
+	$(CC) -c $(COMPILERFLAGS) read_cdf_xda.c $(WXINCLUDE) -o read_cdf_xda.o	
+
+BufferedMatrix.o:  BufferedMatrix.cpp
+	$(CC) -c $(COMPILERFLAGS) BufferedMatrix.cpp
+
+
+src:
+	tar c Makefile* *.c* *.h *.rc COPYING > RMAExpress_src.tar 
+	gzip RMAExpress_src.tar
+
+
+console: RMAExpressConsole.cpp DataGroupBase.o MatrixBase.o PMProbeBatchBase.o  expressionGroupBase.o rma_background3Base.o read_cdf_xdaBase.o BufferedMatrixBase.o PreferencesDialogBase.o
+	$(CC) $(COMPILERFLAGS) RMAExpressConsole.cpp  pnormBase.o weightedkerneldensityBase.o rma_background3Base.o MatrixBase.o  rma_commonBase.o threestep_commonBase.o  expressionGroupBase.o medianpolishBase.o qnormBase.o PMProbeBatchBase.o read_cdf_xdaBase.o BufferedMatrixBase.o PreferencesDialogBase.o DataGroupBase.o CDFLocMapTreeBase.o $(WXBASEINCLUDE) $(WXBASELIB) -o RMAExpressConsole.exe
+	
+DataGroupBase.o: DataGroup.cpp PreferencesDialogBase.o
+	$(CC) -c $(COMPILERFLAGS) DataGroup.cpp $(WXBASEINCLUDE) -o DataGroupBase.o
+	$(CC) -c $(COMPILERFLAGS) CDFLocMapTree.cpp $(WXBASEINCLUDE) -o CDFLocMapTreeBase.o
+
+MatrixBase.o: Matrix.cpp
+	$(CC) -c $(COMPILERFLAGS) Matrix.cpp  $(WXBASEINCLUDE) -o MatrixBase.o
+	
+PMProbeBatchBase.o: PMProbeBatch.cpp qnormBase.o medianpolishBase.o
+	$(CC) -c $(COMPILERFLAGS) PMProbeBatch.cpp $(WXBASEINCLUDE) -o PMProbeBatchBase.o
+
+qnormBase.o: qnorm.c rma_common.c
+	$(CC) -c $(COMPILERFLAGS) qnorm.c $(WXBASEINCLUDE) -o qnormBase.o	
+	$(CC) -c $(COMPILERFLAGS) rma_common.c $(WXBASEINCLUDE) -o rma_commonBase.o
+
+medianpolishBase.o: medianpolish.c
+	$(CC) -c $(COMPILERFLAGS) medianpolish.c $(WXBASEINCLUDE) -o medianpolishBase.o	
+
+expressionGroupBase.o: expressionGroup.cpp
+	$(CC) -c $(COMPILERFLAGS) expressionGroup.cpp $(WXBASEINCLUDE) -o expressionGroupBase.o
+	$(CC) -c $(COMPILERFLAGS) threestep_common.c $(WXBASEINCLUDE) -o threestep_commonBase.o	
+
+rma_background3Base.o: rma_background3.c pnorm.c weightedkerneldensity.c
+	$(CC) -c $(COMPILERFLAGS) pnorm.c  $(WXBASEINCLUDE) -o pnormBase.o
+	$(CC) -c $(COMPILERFLAGS) weightedkerneldensity.c  $(WXBASEINCLUDE) -o weightedkerneldensityBase.o
+	$(CC) -c $(COMPILERFLAGS) rma_background3.c $(WXBASEINCLUDE) -o rma_background3Base.o
+
+read_cdf_xdaBase.o: read_cdf_xda.c
+	$(CC) -c $(COMPILERFLAGS) read_cdf_xda.c $(WXBASEINCLUDE) -o read_cdf_xdaBase.o	
+
+PreferencesDialogBase.o: PreferencesDialog.cpp
+	$(CC) -c $(COMPILERFLAGS) PreferencesDialog.cpp  $(WXBASEINCLUDE) -o PreferencesDialogBase.o
+
+BufferedMatrixBase.o:  BufferedMatrix.cpp
+	$(CC) -c $(COMPILERFLAGS) BufferedMatrix.cpp $(WXBASEINCLUDE) -o BufferedMatrixBase.o
+

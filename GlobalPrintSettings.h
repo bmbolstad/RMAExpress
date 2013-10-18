@@ -1,0 +1,5 @@
+#ifndef GLOBAL_PRINTSETTINGS_H
+#define GLOBAL_PRINTSETTINGS_H
+
+
+#endif

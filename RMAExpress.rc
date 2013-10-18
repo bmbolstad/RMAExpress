@@ -1,0 +1,4 @@
+expressicon ICON "RMAExpress_MasterLOGO.ico"
+
+
+#include <wx/msw/wx.rc>
