@@ -78,7 +78,7 @@ class RawDataVisualizeDrawingWindow: public wxWindow
 class RawDataVisualizePrintout: public wxPrintout
 {
  public:
-  RawDataVisualizePrintout(wxChar *title = _T("My printout")):wxPrintout(title) {}
+  RawDataVisualizePrintout(const wxChar *title = _T("My printout")):wxPrintout(title) {}
     bool OnPrintPage(int page);
     bool HasPage(int page);
     bool OnBeginDocument(int startPage, int endPage);

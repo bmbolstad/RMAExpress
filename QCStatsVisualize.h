@@ -98,7 +98,7 @@ class QCStatsVisualizeDrawingWindow: public wxWindow
 class QCStatsVisualizePrintout: public wxPrintout
 {
  public:
-  QCStatsVisualizePrintout(wxChar *title = _T("My printout")):wxPrintout(title) {}
+  QCStatsVisualizePrintout(const wxChar *title = _T("My printout")):wxPrintout(title) {}
     bool OnPrintPage(int page);
     bool HasPage(int page);
     bool OnBeginDocument(int startPage, int endPage);
