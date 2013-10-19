@@ -43,21 +43,21 @@
 #define MPSBROWSE_BUTTON 10017
 
 static const wxChar
-  *CDFFILETYPES = _T( "CDF files|*.cdf;*.CDF;*.Cdf|" );
+  *CDFFILETYPES = _T( "CDF files|*.cdf;*.CDF;*.Cdf" );
 static const wxChar
-  *CELFILETYPES = _T( "*.cel;*.Cel;*.CEL|" );
+  *CELFILETYPES = _T( "CEL files|*.cel;*.Cel;*.CEL" );
 
 static const wxChar
-  *PGFFILETYPES = _T( "PGF files|*.pgf;*.PGF;*.Pgf|" );
+  *PGFFILETYPES = _T( "PGF files|*.pgf;*.PGF;*.Pgf" );
 
 static const wxChar
-  *CLFFILETYPES = _T( "CLF files|*.clf;*.CLF;*.Clf|" );
+  *CLFFILETYPES = _T( "CLF files|*.clf;*.CLF;*.Clf" );
 
 static const wxChar
-  *PSFILETYPES = _T( "PS files|*.ps;*.PS;*.Ps|" );
+  *PSFILETYPES = _T( "PS files|*.ps;*.PS;*.Ps" );
 
 static const wxChar
-  *MPSFILETYPES = _T( "MPS files|*.mps;*.MPS;*.Mps|" );
+  *MPSFILETYPES = _T( "MPS files|*.mps;*.MPS;*.Mps" );
 
 
 
