@@ -142,9 +142,9 @@ read_mps.o: Parsing/read_mps.cpp
 
  
 clean:
-	rm *.o
-	rm RMAExpress
-	rm RMADataConv
+	rm -f *.o
+	rm -f RMAExpress
+	rm -f RMADataConv
 
 
 cleansrc:
