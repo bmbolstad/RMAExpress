@@ -256,6 +256,12 @@ Dump_CDFRME: Dump_CDFRME.cpp
 	$(CC) $(COMPILERFLAGSBASE) Dump_CDFRME.cpp  $(WXBASEINCLUDE) $(WXBASELIB) -o Dump_CDFRME	
 
 
+MacApps: CleanMacApps RMAExpress.app RMADataConv.app
+
+CleanMacApps:
+	rm -r RMAExpress.app RMADataConv.app
+	
+
 RMAExpress.app: macosx/RMAExpress/Info.plist RMAExpress macosx/RMAExpress/RMAExpress.icns  
 	mkdir RMAExpress.app
 	mkdir RMAExpress.app/Contents
@@ -265,3 +271,13 @@ RMAExpress.app: macosx/RMAExpress/Info.plist RMAExpress macosx/RMAExpress/RMAExp
 	echo -n 'APPL????' > RMAExpress.app/Contents/PkgInfo
 	cp RMAExpress RMAExpress.app/Contents/MacOS/RMAExpress
 	cp macosx/RMAExpress/RMAExpress.icns RMAExpress.app/Contents/Resources/
+	
+RMADataConv.app: macosx/RMADataConv/Info.plist RMADataConv macosx/RMADataConv/RMADataConv.icns  
+	mkdir RMADataConv.app
+	mkdir RMADataConv.app/Contents
+	mkdir RMADataConv.app/Contents/MacOS
+	mkdir RMADataConv.app/Contents/Resources
+	cp macosx/RMADataConv/Info.plist RMADataConv.app/Contents/
+	echo -n 'APPL????' > RMADataConv.app/Contents/PkgInfo
+	cp RMADataConv RMADataConv.app/Contents/MacOS/RMADataConv
+	cp macosx/RMADataConv/RMADataConv.icns RMADataConv.app/Contents/Resources/
