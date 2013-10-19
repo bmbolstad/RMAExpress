@@ -189,7 +189,7 @@ int MyGetFileName(wchar_t const *temppath, wchar_t *templat)
 
 
 
-BufferedMatrix::BufferedMatrix(int max_rows,int max_cols,char *prefix){
+BufferedMatrix::BufferedMatrix(int max_rows,int max_cols,const char *prefix){
 
   char endprefix[7] = "XXXXXX";
   char *tmp;

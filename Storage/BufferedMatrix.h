@@ -6,7 +6,7 @@
 class BufferedMatrix
 {
  public:
-  BufferedMatrix(int max_cols=40, int max_rows=1000,char *prefix="bufmat");
+  BufferedMatrix(int max_cols=40, int max_rows=1000, const char *prefix="bufmat");
   void SetRows(int);
   void SetPrefix(char *prefix);
   double &operator[](unsigned long i);

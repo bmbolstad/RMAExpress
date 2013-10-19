@@ -783,7 +783,7 @@ static void checkCelHeaders(const wxArrayString cel_paths){
       if ((ref_dim1 != cur_dim1) && (ref_dim2 != cur_dim2)){
 	free(cur_cdfName);
 	free(ref_cdfName);
-	wxString Error = wxT("The dimensions of ") + cel_paths[i] + wxT(" were ") << cur_dim1 << wxT(" by ") <<  cur_dim2 << wxT(" while ") << ref_dim1 << wxT(" by ") << ref_dim2 +wxT(" was expected.\n");
+	wxString Error = wxT("The dimensions of ") + cel_paths[i] + wxT(" were ") << cur_dim1 << wxT(" by ") <<  cur_dim2 << wxT(" while ") << ref_dim1 << wxT(" by ") << ref_dim2  << wxT(" was expected.\n");
 	throw Error;
       } 
       free(cur_cdfName);

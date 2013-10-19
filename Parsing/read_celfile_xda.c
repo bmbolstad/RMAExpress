@@ -809,7 +809,7 @@ int read_binarycel_file_intensities(const char *filename, double *intensity, int
 	free(cur_intensity);
 	return BINARY_INTENSITY_TRUNCATED;
       }   
-      if (cur_intensity->cur_intens < 0 || cur_intensity->cur_intens > 65536 || isnan(cur_intensity->cur_intens)){
+      if (cur_intensity->cur_intens < 0 || cur_intensity->cur_intens > 65536 || std::isnan(cur_intensity->cur_intens)){
         fclose(my_header->infile);
         delete_binary_header(my_header);
         free(cur_intensity);
