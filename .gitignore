@@ -1,3 +1,6 @@
 *.o 
 *.app/
 *.dSYM/
+RMAExpress
+RMAExpressConsole
+RMADataConv
