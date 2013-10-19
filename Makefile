@@ -259,7 +259,7 @@ Dump_CDFRME: Dump_CDFRME.cpp
 MacApps: CleanMacApps RMAExpress.app RMADataConv.app
 
 CleanMacApps:
-	rm -r RMAExpress.app RMADataConv.app
+	rm -rf RMAExpress.app RMADataConv.app
 	
 
 RMAExpress.app: macosx/RMAExpress/Info.plist RMAExpress macosx/RMAExpress/RMAExpress.icns  
