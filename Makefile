@@ -254,3 +254,14 @@ test: BufferedMatrix.cpp
 
 Dump_CDFRME: Dump_CDFRME.cpp
 	$(CC) $(COMPILERFLAGSBASE) Dump_CDFRME.cpp  $(WXBASEINCLUDE) $(WXBASELIB) -o Dump_CDFRME	
+
+
+RMAExpress.app: macosx/RMAExpress/Info.plist RMAExpress macosx/RMAExpress/RMAExpress.icns  
+	mkdir RMAExpress.app
+	mkdir RMAExpress.app/Contents
+	mkdir RMAExpress.app/Contents/MacOS
+	mkdir RMAExpress.app/Contents/Resources
+	cp macosx/RMAExpress/Info.plist RMAExpress.app/Contents/
+	echo -n 'APPL????' > RMAExpress.app/Contents/PkgInfo
+	cp RMAExpress RMAExpress.app/Contents/MacOS/RMAExpress
+	cp macosx/RMAExpress/RMAExpress.icns RMAExpress.app/Contents/Resources/
