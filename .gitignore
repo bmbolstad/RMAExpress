@@ -1,1 +1,3 @@
-*.o *.app *.dSYM
+*.o 
+*.app/
+*.dSYM/
