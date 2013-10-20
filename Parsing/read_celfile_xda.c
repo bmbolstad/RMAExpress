@@ -7,6 +7,16 @@
 
 #include <cmath>  /* for NAN */
 
+#ifdef HAVE_STD_ISNAN
+using std::isnan;
+#else 
+#include <float.h>
+inline int isnan(double x) {
+   return _isnan(x);
+}
+#endif
+
+
 #include <cstring>
 
 #include "../threestep_common.h"
@@ -763,9 +773,7 @@ int check_binary_cel_file(const char *filename, const char *ref_cdfName, int ref
 }
 
 
-//inline bool isnan(double x) {
-//	return __builtin_isnanf(x);
-//}
+
 
 
 /***************************************************************
@@ -809,7 +817,7 @@ int read_binarycel_file_intensities(const char *filename, double *intensity, int
 	free(cur_intensity);
 	return BINARY_INTENSITY_TRUNCATED;
       }   
-      if (cur_intensity->cur_intens < 0 || cur_intensity->cur_intens > 65536 || std::isnan(cur_intensity->cur_intens)){
+      if (cur_intensity->cur_intens < 0 || cur_intensity->cur_intens > 65536 || isnan(cur_intensity->cur_intens)){
         fclose(my_header->infile);
         delete_binary_header(my_header);
         free(cur_intensity);

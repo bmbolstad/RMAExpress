@@ -46,8 +46,9 @@
 
 using namespace std;
 
-
+#ifndef _MSC_VER
 #define finite(x) isfinite(x) 
+#endif
 
 /*****************************************************************************
  **
