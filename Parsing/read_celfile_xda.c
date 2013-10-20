@@ -7,7 +7,7 @@
 
 #include <cmath>  /* for NAN */
 
-#ifdef HAVE_STD_ISNAN
+#ifndef _MSC_VER
 using std::isnan;
 #else 
 #include <float.h>
