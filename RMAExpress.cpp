@@ -406,7 +406,7 @@ bool RMAExpress::OnInit()
 
   if (!wxDirExists(buffer_temppath)){
 #if _WIN32 
-    char temppath[512];
+    wchar_t temppath[512];
     if(GetTempPath(512,temppath)!=0){
       buffer_temppath = wxString(temppath);
     } else {

@@ -93,7 +93,7 @@
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="1"
-			CharacterSet="0"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -389,46 +389,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\preprocess\linpack\daxpy.c"
-				>
-			</File>
-			<File
-				RelativePath="..\preprocess\linpack\ddot.c"
-				>
-			</File>
-			<File
-				RelativePath="..\preprocess\linpack\dnrm2.c"
-				>
-			</File>
-			<File
-				RelativePath="..\preprocess\linpack\dpodi.c"
-				>
-			</File>
-			<File
-				RelativePath="..\preprocess\linpack\drot.c"
-				>
-			</File>
-			<File
-				RelativePath="..\preprocess\linpack\drotg.c"
-				>
-			</File>
-			<File
-				RelativePath="..\preprocess\linpack\dscal.c"
-				>
-			</File>
-			<File
-				RelativePath="..\preprocess\linpack\dsvdc.c"
-				>
-			</File>
-			<File
-				RelativePath="..\preprocess\linpack\dswap.c"
-				>
-			</File>
-			<File
-				RelativePath="..\Dump_CDFRME.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\expressionGroup.cpp"
 				>
 			</File>
@@ -562,10 +522,6 @@
 			</File>
 			<File
 				RelativePath="..\RMAExpressConsole.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\test_BufferedMatrix.cpp"
 				>
 			</File>
 			<File
