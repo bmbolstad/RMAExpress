@@ -5,3 +5,5 @@ RMAExpress
 RMAExpressConsole
 RMADataConv
 !vc.proj/RMAExpress
+vc.proj/debug
+vc.proj/Release
