@@ -126,13 +126,15 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)\include&quot;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw28u_core.lib wxbase28u.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib"
+				AdditionalDependencies="wxmsw30ud_core.lib wxbase30ud.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib"
+				OutputFile="$(OutDir)\RMAExpress.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;"
 				GenerateDebugInformation="true"
@@ -351,10 +353,6 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\RMADataConv.rc"
-				>
-			</File>
-			<File
 				RelativePath="..\RMAExpress.rc"
 				>
 			</File>
@@ -394,10 +392,6 @@
 			</File>
 			<File
 				RelativePath="..\parsing\fread_functions.c"
-				>
-			</File>
-			<File
-				RelativePath="..\graphing\GraphingTester.cpp"
 				>
 			</File>
 			<File
