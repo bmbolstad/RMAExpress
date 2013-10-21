@@ -74,8 +74,11 @@ class BufferedMatrix
 
   char **filenames; /* contains names of temporary files where data is stored  */
 
-  
+#if defined(_WIN32) && !defined(__CYGWIN32__) && !defined(__CYGWIN__) && defined(_UNICODE)
+	wchar_t *fileprefix;
+#else
   char *fileprefix;
+#endif
 
   bool rowcolclash;  /* referenced a cell location that is both in column and row buffer */
   int clash_row;     /* contains row index of potential clash */

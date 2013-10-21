@@ -193,6 +193,7 @@ BufferedMatrix::BufferedMatrix(int max_rows,int max_cols,const char *prefix){
 
   char endprefix[7] = "XXXXXX";
   char *tmp;
+  wchar_t *wtmp;
   this->rows =0;
   this->cols =0;
   this->max_rows = max_rows;
@@ -215,7 +216,13 @@ BufferedMatrix::BufferedMatrix(int max_rows,int max_cols,const char *prefix){
   strcat(tmp,endprefix);
 #endif
 
+#if defined(_WIN32) && !defined(__CYGWIN32__) && !defined(__CYGWIN__) && defined(_UNICODE)
+  wtmp = new wchar_t[strlen(prefix)+1];
+  mbstowcs(wtmp,prefix,strlen(prefix));
+  this->fileprefix = wtmp;
+#else
   this->fileprefix = tmp;
+#endif
   
   this->rowcolclash = false;
 
@@ -242,6 +249,7 @@ void BufferedMatrix::SetRows(int rows){
 void BufferedMatrix::SetPrefix(char *prefix){
   char endprefix[7] = "XXXXXX";
   char *tmp;
+  wchar_t *wtmp;
 
 #if _WIN32
   tmp = new char[strlen(prefix)+1];
@@ -255,7 +263,13 @@ void BufferedMatrix::SetPrefix(char *prefix){
   if (this->fileprefix != NULL){
     delete [] this->fileprefix;
   }
+#if defined(_WIN32) && !defined(__CYGWIN32__) && !defined(__CYGWIN__) && defined(_UNICODE)
+  wtmp = new wchar_t[strlen(prefix)+1];
+  mbstowcs(wtmp,prefix,strlen(prefix));
+  this->fileprefix = wtmp;
+#else
   this->fileprefix = tmp;
+#endif
 
 }
 
@@ -406,9 +420,14 @@ void BufferedMatrix::AddColumn(){
   fd = mkstemp(tmp);
 #endif
 
+#if defined(_WIN32) && !defined(__CYGWIN32__) && !defined(__CYGWIN__) && defined(_UNICODE)
+  temp_filenames[cols] = new char[wcslen(tmp)+1];
+  wcstombs (temp_filenames[cols], tmp, sizeof(temp_filenames[cols]) );
+  //temp_filenames[cols] = strcpy(temp_filenames[cols],tmp);
+#else
   temp_filenames[cols] = new char[strlen(tmp)+1];
-
   temp_filenames[cols] = strcpy(temp_filenames[cols],tmp);
+#endif
 
   filenames = temp_filenames;
 
