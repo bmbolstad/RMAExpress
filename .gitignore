@@ -7,3 +7,6 @@ RMADataConv
 !vc.proj/RMAExpress
 vc.proj/debug
 vc.proj/Release
+*.suo
+*.ncb
+*.user
