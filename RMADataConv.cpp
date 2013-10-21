@@ -245,7 +245,7 @@ RMADataConvDlg::RMADataConvDlg(const wxString& title, const wxPoint& pos, const 
   item0->Fit( this );
 
 #if defined(_WIN32) && defined(BUFFERED)
-  char temppath[512];
+  wchar_t temppath[512];
   if(GetTempPath(512,temppath)!=0){
     myprefs = new Preferences(25000,30,wxString(temppath));
   } else {
