@@ -113,7 +113,7 @@ void Convert_PGF_CLF_to_RME(const wxString &pgf_fname,
   clf_libset = clf_get_libsetname(clf);
     
   
-  if (pgf_libset.Cmp(clf_libset) != 0 || pgf_libver.Cmp(clf_libver) !=0){
+  if (pgf_libset.Cmp(clf_libset) != 0){   // || pgf_libver.Cmp(clf_libver) !=0){
     dealloc_pgf_file(pgf);
     dealloc_clf_file(clf);
     
