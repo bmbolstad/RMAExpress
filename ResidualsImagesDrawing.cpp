@@ -54,31 +54,31 @@
 
 #include <wx/image.h>
 
-char getBlue(double x){
+unsigned char getBlue(double x){
 
   if (x > 2.0){
     return 0;
   }  else if (x <= 0.05){
     return 255;
   } else {
-    return (char)(255 - x/2.5*255);
+    return (unsigned char)(255 - x/2.5*255);
   }
 }
 
 
-char getRed(double x){
+unsigned char getRed(double x){
 
   if (x < -2.0){
     return 0;
   } else if (x >= -0.05){
     return 255;
   } else {
-    return (char)(255 - x/-2.5*255);
+    return (unsigned char)(255 - x/-2.5*255);
   }
 }
 
 
-char getGreen(double x){
+unsigned char getGreen(double x){
 
   if (x > 0){
     return getBlue(x);
@@ -97,7 +97,7 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
 #else
   BufferedMatrix *thedata;
 #endif
-  char red,green,blue;
+  unsigned char red,green,blue;
   int whichchip;
 
   //cout << name << endl;
@@ -206,7 +206,7 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
 #else
   BufferedMatrix *thedata;
 #endif
-  char red,green,blue;
+  unsigned char red,green,blue;
   int whichchip;
   int wherestartx, wherestarty;
   int wherestopx, wherestopy;

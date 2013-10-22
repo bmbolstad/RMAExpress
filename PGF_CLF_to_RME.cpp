@@ -92,7 +92,7 @@ void Convert_PGF_CLF_to_RME(const wxString &pgf_fname,
 
   int x,y;
 
-  int i,j;
+  size_t i,j;
 
   //wxPrintf(_T("%s %s %s\n"),pgf_fname.c_str(), clf_fname.c_str(), (char *)pgf_cname);
     
@@ -267,7 +267,7 @@ void Convert_PGF_CLF_to_RME_with_PS(const wxString &pgf_fname,
 
   int x,y;
 
-  int i,j;
+  size_t i,j;
 
   //wxPrintf(_T("%s %s %s\n"),pgf_fname.c_str(), clf_fname.c_str(), (char *)pgf_cname);
 #ifdef RMA_GUI_APP
@@ -439,7 +439,7 @@ void Convert_PGF_CLF_to_RME_with_MPS(const wxString &pgf_fname,
 
   int x,y;
 
-  int i,j,k;
+  size_t i,j,k;
 
   //wxPrintf(_T("%s %s %s\n"),pgf_fname.c_str(), clf_fname.c_str(), (char *)pgf_cname);
 #ifdef RMA_GUI_APP

@@ -801,7 +801,7 @@ static void checkCDFCelAgreement(const wxArrayString &cel_paths, const wxArraySt
   char *cur_cdfName=NULL;
   int cur_dim1;
   int cur_dim2;
-  int j;
+  size_t j;
   int err_code = 0;
 
   for (int i =0; i < (int)cel_paths.GetCount(); i++){
@@ -1543,7 +1543,7 @@ wxArrayString DataGroup::GetArrayNames(){
 
 bool DataGroup::WriteBinaryCDF(wxString path){
 
-  int i,j;
+  size_t i,j;
   int numbercells;
   wxString currentName;
   LocMapItem *current_item;
@@ -1634,7 +1634,7 @@ bool DataGroup::WriteBinaryCDF(wxString path){
   store.Write32(CDF_descStr.GetCount());   // Number of Strings 
 
   for (j = 0; j < CDF_descStr.GetCount(); j++){
-    store.WriteString(CDF_descStr[i]);
+    store.WriteString(CDF_descStr[j]);
   }
   /* store.WriteString(wxString(_T("Created using RMADataConv ")) + version_number);
      
@@ -1714,7 +1714,7 @@ bool DataGroup::WriteBinaryCEL(wxString path){
 
 bool DataGroup::WriteBinaryCDF(wxString path, wxString restrictfname, wxArrayString restrictlist){
   
-  int i,j;
+  size_t i,j;
   
   wxString currentName;
   LocMapItem *current_item;
@@ -1812,12 +1812,12 @@ bool DataGroup::WriteBinaryCDF(wxString path, wxString restrictfname, wxArrayStr
   store.Write32(CDF_descStr.GetCount());   // Number of Strings 
 
   for (j = 0; j < CDF_descStr.GetCount(); j++){
-    store.WriteString(CDF_descStr[i]);
+    store.WriteString(CDF_descStr[j]);
   }
   store.Write32(array_rows);
   store.Write32(array_cols);
   store.Write32(n_probesets);
-  for (i = 0; i < (int)restrictlist.Count(); i++){
+  for (i = 0; i < restrictlist.Count(); i++){
     current_item = cdflocs.Find(restrictlist[i]);
     if (current_item == 0){
 
