@@ -391,7 +391,7 @@ int not_main(int argc, char **argv)
   int i;
   ResidualsDataGroup *myresids;
   Preferences *myprefs;
-  char wintemppath[512];
+  wchar_t wintemppath[512];
 
   int outputtype=0;
  
