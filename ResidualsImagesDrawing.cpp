@@ -254,13 +254,13 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
   }
 
 
-  if (startx+width > resids->nrows()){
+  if (startx+height > resids->nrows()){
     wherestopx = resids->nrows(); 
   } else {
-    wherestopx =  startx+width-20;
+    wherestopx =  startx+height-20;
   }
 
-  if (starty+width > resids->nrows()){
+  if (starty+width > resids->ncols()){
     wherestopy = resids->ncols(); 
   } else {
     wherestopy =  starty+width-20;
