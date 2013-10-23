@@ -11,3 +11,4 @@ vc.proj/Release
 *.ncb
 *.user
 *~
+*#*
