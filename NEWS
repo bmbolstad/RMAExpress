@@ -5,10 +5,23 @@ CHANGES IN 1.1.0
 ----------------
 
 
-General:
+General
+-------
+
 - Unified source code between windows, liunx and mac osx builds. Previously mac osx source code changes were not merged into the main code base.
+
 - Now building binaries against wxWidgets-3.0-rc1 for all platforms
 
-RMADataConv:
+
+RMAExpress
+----------
+- default format for saving residual images is now jpg
+
+
+RMADataConv
+------------
 - Remove strict checking of lib_set_version between pgf and clf files. It appears that there are a number of released pgf/clf file combinations that don't properly match (notably HuGene 2.0, MoGene 2.0)
+
 - clf file parser now forces order=row_major (which is consistent with file format documentation). Note that there do exist released versions of clf files for some array types which contain "order=col_major", but these are incorrect (ie are actually row_major). The effect of this change is that the parser now assumes order=row_major irrespective of what is in the clf file.
+
+- Better support for WTGene 2.0/2.1 and HTA array pgf/clf processing
