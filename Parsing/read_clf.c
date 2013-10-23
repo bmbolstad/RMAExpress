@@ -11,7 +11,7 @@
  ** History
  ** Dec 14, 2007 - Initial version
  ** Jun 24, 2008 - change char * to const char * where appropriate
- **
+ ** Oct 22, 2013 - Force "order" to always be interpreted as row_major
  **
  **
  ** 
@@ -615,9 +615,10 @@ void read_clf_header(FILE *cur_file, char *buffer, clf_headers *header){
 	strcpy(temp_str,get_token(cur_tokenset,1));
 	header->create_date = temp_str;
       } else if (strcmp(get_token(cur_tokenset,0), "order") == 0) {
-	temp_str = (char *)calloc(strlen(get_token(cur_tokenset,1)) + 1,sizeof(char));
-	strcpy(temp_str,get_token(cur_tokenset,1));
-	header->order = temp_str;
+	/* temp_str = (char *)calloc(strlen(get_token(cur_tokenset,1)) + 1,sizeof(char));
+	   strcpy(temp_str,get_token(cur_tokenset,1)); */
+
+	header->order = (char *)"row_major"; //temp_str;
       } else if (strcmp(get_token(cur_tokenset,0), "sequential") == 0) {
 	header->sequential = atoi(get_token(cur_tokenset,1));
       } else if (strcmp(get_token(cur_tokenset,0), "guid") == 0) {
@@ -730,10 +731,11 @@ void dealloc_clf_headers(clf_headers *header){
     free(header->header0_str);
     free(header->header0);
   }
-   
-  if (header->order != NULL){
-    free(header->order);
-  }
+  
+  // Not deallocing because forced to row_major
+  //if (header->order != NULL){
+  //  free(header->order);
+  //}
    
   if (header->create_date != NULL){
     free(header->create_date);
