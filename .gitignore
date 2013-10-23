@@ -10,3 +10,4 @@ vc.proj/Release
 *.suo
 *.ncb
 *.user
+*~
