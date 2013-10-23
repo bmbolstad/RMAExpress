@@ -37,6 +37,7 @@
  ** Sept 16. 2006 - fix potential compile problems on unicode builds of wxWidgets
  ** Feb 22, 2007 - add prev and next buttons
  ** Jan 4, 2007 - improve speed of drawing image to window
+ ** Oct 22, 2013 - Default to saving images as jpg
  **
  ***************************************************************************/
 
@@ -301,15 +302,14 @@ void ResidualImageDialog::SaveCurrentImage(wxCommandEvent &event){ //wxUpdateUIE
     defaultname += wxT("_resid");
   }
 
-
+  defaultname+= wxT(".jpg");
 
 
   wxString savefilename = wxFileSelector( wxT("Save Image"),
 					  wxT(""),
 					  defaultname,
-					  (const wxChar *)NULL,
-					  wxT("PNG files (*.png)|*.png|")
-					  wxT("JPEG files (*.jpg)|*.jpg|")
+					  wxT(".jpg"),
+					  wxT("PNG files (*.png)|*.png|JPEG files (*.jpg)|*.jpg")
 					  ,
 					  wxFD_SAVE);
 
@@ -352,14 +352,13 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){ //wxUpdate
 
   defaultname.Replace(_T(".cel"),_T(""));
 
- 
+  defaultname+= wxT(".jpg");
 
   wxString savefilename = wxFileSelector( wxT("Save Image"),
 					  wxT(""),
 					  defaultname,
-					  (const wxChar *)NULL,
-					  wxT("PNG files (*.png)|*.png|")
-					  wxT("JPEG files (*.jpg)|*.jpg|")
+					   wxT(".jpg"),
+					  wxT("PNG files (*.png)|*.png|JPEG files (*.jpg)|*.jpg")
 					  ,
 					  wxFD_SAVE);
 
@@ -509,15 +508,15 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){ //wxUpdateUIEven
 					    wxT(""),
 					    defaultname,
 					    (const wxChar *)NULL,
-					    wxT("PNG files (*.png)|*.png|")
-					    wxT("JPEG files (*.jpg)|*.jpg|")
+					    wxT("PNG files (*.png)|*.png")
+					    wxT("JPEG files (*.jpg)|*.jpg")
 					    ,
 					    wxSAVE);
     
     if ( savefilename.empty() )
     return; */
     
-    wxString extension = wxT("png"); //savefilename.AfterLast('.').Lower();
+    wxString extension = wxT("jpg"); //savefilename.AfterLast('.').Lower();
     
     long horizontalsize = (m_canvas->GiveMyResids()->ncols())+ 40;
     long verticalsize = m_canvas->GiveMyResids()->nrows() + 40;
