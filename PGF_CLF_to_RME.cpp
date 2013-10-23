@@ -22,6 +22,7 @@
  **
  ** May 18, 2008 - Fix number of probesets placed in CDFRME file using PGF/CLF conversion no PS or MPS file
  ** May 20, 2009 - fix MPS conversion issues
+ ** Oct 22, 2013 - remove strict checking of clf/pgf version number
  ** 
  ******************************************************************/
 

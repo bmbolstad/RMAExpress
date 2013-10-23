@@ -1,0 +1,13 @@
+NEWS FILE FOR RMAEXPRESS
+
+
+CHANGES IN 1.1.0
+----------------
+
+
+General:
+- Unified source code between windows, liunx and mac osx builds. Previously mac osx source code changes were not merged into the main code base.
+- Now building binaries against wxWidgets-3.0-rc1 for all platforms
+
+RMADataConv:
+- Remove strict checking of version number between pgf and clf files. It appears that there are a number of released pgf/clf file combinations that don't properly match (notably HuGene 2.0, MoGene 2.0).
