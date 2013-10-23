@@ -821,12 +821,12 @@ void clf_get_x_y(clf_file *clf, int probe_id, int *x, int *y){
 
     if (strcmp(clf->headers->order,"col_major") == 0){
       ind = (probe_id - clf->headers->sequential); 
-      *x = ind%clf->headers->cols;
-      *y = ind/clf->headers->cols;
+      *x = ind/clf->headers->cols;
+      *y = ind%clf->headers->cols;
     } else if (strcmp(clf->headers->order,"row_major") == 0){
       ind = (probe_id - clf->headers->sequential); 
-      *x = ind/clf->headers->rows;
-      *y = ind%clf->headers->rows;
+      *x = ind%clf->headers->rows;
+      *y = ind/clf->headers->rows;
     } else {
       *x = -1;  /* ie missing */
       *y = -1;
