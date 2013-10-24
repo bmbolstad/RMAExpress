@@ -90,9 +90,6 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   int x, y;
   int width, height;
 
-
-
-
   wxMemoryDC memdc;
   memdc.SelectObject(*my_bitmap);
   
@@ -116,9 +113,6 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   dc.Blit(x,y,width,height,&memdc,x,y);
  //  drawPseudoChipImage(&dc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids,y,x,width+y,height+x);
   
-  //wxPrintf(_T("In paint: %d %d %d %d\n"),x,y,height+x, width+y);
-
-
 }
 
 
@@ -141,11 +135,10 @@ void MyCanvas::PaintBackground(wxDC& dc){
 
 }
 
+
 void MyCanvas::OnEraseBackground(wxEraseEvent& event){
 
 }
-
-
 
 
 
@@ -163,7 +156,6 @@ void MyCanvas::SetScroll(){
 }
 
 
-
 MyCanvas::MyCanvas(ResidualImageDialog *Parent, ResidualsDataGroup *resids):wxScrolledWindow(Parent, -1, wxPoint(10,10), wxSize(600,600), wxHSCROLL|wxVSCROLL|wxSUNKEN_BORDER){
   my_parent = Parent;
   my_resids  = resids;
@@ -179,12 +171,6 @@ MyCanvas::MyCanvas(ResidualImageDialog *Parent, ResidualsDataGroup *resids):wxSc
   
   
 }
-
-
-
-
-
-
 
 
 void ResidualImageDialog::OnOk(wxCommandEvent &event ){
@@ -234,76 +220,23 @@ void  ResidualImageDialog::ClickPrevious(wxCommandEvent &event){
 
 
 
-
 void ResidualImageDialog::ChangeChip(wxCommandEvent &event){ //wxUpdateUIEvent &event){
-   
-/*  int x, y;
-  int width, height;
-
-  wxClientDC dc(m_canvas );
-  this->PrepareDC( dc );
-
-  dc.Clear();
-  m_canvas->SetScroll();
-  m_canvas->GetViewStart(&x, &y);
-  x = x*10;
-  y = y*10;
-  m_canvas->GetClientSize(&width, &height);
-
-  // wxPrintf(_T("Change Chip: %d %d %d %d\n"),x,y,height+x, width+y);
-  drawPseudoChipImage(&dc,whichchip->GetValue(),whichtype->GetStringSelection(),m_canvas->GiveMyResids(),y,x,width+y,height+x); */
-
- needtoredraw=true;
-  
-  m_canvas->Refresh();
-
-
+ 
+ needtoredraw=true; 
+ 
+ m_canvas->Refresh();
+ 
 }
   
 
 
 void ResidualImageDialog::ChangeImageType(wxCommandEvent &event){ //wxUpdateUIEvent &event){
   
-  /*  int x, y,xx,yy;
-  int width, height;
-
-  wxClientDC dc(m_canvas );
-  this->PrepareDC( dc );
-  
-  dc.Clear();
-  m_canvas->SetScroll();
-  m_canvas->GetViewStart(&x, &y);
-  // m_canvas->Scroll(x*10, y*10);
-  x = x*10;
-  y = y*10;
-
-  m_canvas->CalcScrolledPosition(x, y, &xx,  &yy);
-  m_canvas->GetClientSize(&width, &height);
- 
-  wxPrintf(_T("Change Image Type: %d %d %d %d %d %d\n"),x,y,height+x, width+y,xx,yy);
-  drawPseudoChipImage(&dc,whichchip->GetValue(),whichtype->GetStringSelection(),m_canvas->GiveMyResids(),y,x,width+y,height+x); */
-
-  /*  wxRect windowRect(wxPoint(0,0),GetClientSize());
-
-  m_canvas->CalcScrolledPosition(windowRect.x, windowRect.y, &windowRect.x, &windowRect.y);
-
-  m_canvas->RefreshRect(windowRect, true); */
   needtoredraw=true;
   
   m_canvas->Refresh();
 
-
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -489,12 +422,10 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){ //wxUpdate
   
   image = bitmap.ConvertToImage();
   image.SaveFile(savefilename); //,wxBITMAP_TYPE_PNG);
-
-
-
-
-
+  
 }
+
+
 
 void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){ //wxUpdateUIEvent &event){
 
@@ -597,6 +528,8 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){ //wxUpdateUIEven
   }
 
 }
+
+
 
 ResidualImageDialog::ResidualImageDialog(wxWindow* parent,ResidualsDataGroup *resids,
    wxWindowID id,
