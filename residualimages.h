@@ -50,6 +50,7 @@ class ResidualImageDialog: public wxDialog
 
   wxComboBox *whichchip;
   wxRadioBox *whichtype;
+  wxRadioBox *whichzoom;
   
   bool needtoredraw;
   

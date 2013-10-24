@@ -66,6 +66,7 @@
 #define ID_IMAGE 10003
 #define ID_WHICHCHIP 10004
 #define ID_WHICHTYPE 10005
+#define ID_WHICHZOOM 10006
 #define ID_SAVETHISIMAGE 10007
 #define ID_SAVETHISCHIP 10008
 #define ID_SAVEALLIMAGE 10009
@@ -584,8 +585,33 @@ ResidualImageDialog::ResidualImageDialog(wxWindow* parent,ResidualsDataGroup *re
 			    wxRadioBoxNameStr);
 
   sidebar->Add(whichtype, 0, wxALIGN_CENTER|wxALL, 10 );
+  
+  wxString whichzoomtitle = _T("Zoom level");
+  wxString whichzoomchoices[] =
+    {
+      wxT("25%"),
+      wxT("50%"),
+      wxT("100%"),
+      wxT("200%")
+    };  
 
-
+  whichzoom = new wxRadioBox(this, 
+			    ID_WHICHZOOM, 
+			    whichzoomtitle, 
+			    wxDefaultPosition,
+			    wxDefaultSize,
+			    4,
+			    whichzoomchoices,
+			    1,
+			    wxHORIZONTAL,
+			    wxDefaultValidator,
+			    wxRadioBoxNameStr);
+			    
+  whichzoom->SetSelection(2);
+  
+  sidebar->Add(whichzoom, 0, wxALIGN_CENTER|wxALL, 10 );
+  
+  
   wxButton *thisimage = new wxButton(this,ID_SAVETHISIMAGE,wxT("Save this image"), wxDefaultPosition, wxDefaultSize, 0 );
   wxButton *allthreeimages = new wxButton(this,ID_SAVETHISCHIP,wxT("Save all images for this chip"),wxDefaultPosition, wxDefaultSize, 0 );
   wxButton *allimages = new wxButton(this,ID_SAVEALLIMAGE,wxT("Save all images"),wxDefaultPosition, wxDefaultSize, 0 );
