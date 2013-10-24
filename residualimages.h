@@ -20,6 +20,8 @@ public:
  private: 
   ResidualsDataGroup *my_resids;
   ResidualImageDialog *my_parent;
+  wxBitmap* my_bitmap;
+  
   DECLARE_DYNAMIC_CLASS(MyCanvas)
     DECLARE_EVENT_TABLE()
 };
@@ -48,6 +50,9 @@ class ResidualImageDialog: public wxDialog
 
   wxComboBox *whichchip;
   wxRadioBox *whichtype;
+  
+  bool needtoredraw;
+  
  private:
   void OnOk( wxCommandEvent &event );
 

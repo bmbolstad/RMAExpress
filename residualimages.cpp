@@ -55,6 +55,7 @@
 #include <wx/dcmemory.h>
 #include <wx/filename.h>
 #include <wx/dcbuffer.h>
+#include <wx/bitmap.h>
 
 #include "residualimages.h"
 #include "ResidualsDataGroup.h"
@@ -89,8 +90,20 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   int x, y;
   int width, height;
 
+
+
+
+  wxMemoryDC memdc;
+  memdc.SelectObject(*my_bitmap);
   
+  if (my_parent->needtoredraw){
+  	PrepareDC( memdc );	
+  	memdc.Clear();
+  	drawPseudoChipImage(&memdc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
+  	my_parent->needtoredraw = false;
+  }
   wxBufferedPaintDC dc(this);
+  
   PrepareDC(dc);
   
   PaintBackground(dc);
@@ -100,8 +113,8 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   y = y*10;
   GetClientSize(&width, &height);
 
-
-  drawPseudoChipImage(&dc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids,y,x,width+y,height+x);
+  dc.Blit(x,y,width,height,&memdc,x,y);
+ //  drawPseudoChipImage(&dc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids,y,x,width+y,height+x);
   
   //wxPrintf(_T("In paint: %d %d %d %d\n"),x,y,height+x, width+y);
 
@@ -159,7 +172,11 @@ MyCanvas::MyCanvas(ResidualImageDialog *Parent, ResidualsDataGroup *resids):wxSc
   this->SetBackgroundColour(*wxWHITE );
   this->Refresh();
   
- 
+  long horizontalsize = my_resids->ncols()+ 40;
+  long verticalsize = my_resids->nrows() + 40;
+  
+  my_bitmap = new wxBitmap(horizontalsize,verticalsize);
+  
   
 }
 
@@ -220,7 +237,7 @@ void  ResidualImageDialog::ClickPrevious(wxCommandEvent &event){
 
 void ResidualImageDialog::ChangeChip(wxCommandEvent &event){ //wxUpdateUIEvent &event){
    
-  int x, y;
+/*  int x, y;
   int width, height;
 
   wxClientDC dc(m_canvas );
@@ -234,7 +251,11 @@ void ResidualImageDialog::ChangeChip(wxCommandEvent &event){ //wxUpdateUIEvent &
   m_canvas->GetClientSize(&width, &height);
 
   // wxPrintf(_T("Change Chip: %d %d %d %d\n"),x,y,height+x, width+y);
-  drawPseudoChipImage(&dc,whichchip->GetValue(),whichtype->GetStringSelection(),m_canvas->GiveMyResids(),y,x,width+y,height+x);
+  drawPseudoChipImage(&dc,whichchip->GetValue(),whichtype->GetStringSelection(),m_canvas->GiveMyResids(),y,x,width+y,height+x); */
+
+ needtoredraw=true;
+  
+  m_canvas->Refresh();
 
 
 }
@@ -267,7 +288,8 @@ void ResidualImageDialog::ChangeImageType(wxCommandEvent &event){ //wxUpdateUIEv
   m_canvas->CalcScrolledPosition(windowRect.x, windowRect.y, &windowRect.x, &windowRect.y);
 
   m_canvas->RefreshRect(windowRect, true); */
-
+  needtoredraw=true;
+  
   m_canvas->Refresh();
 
 
