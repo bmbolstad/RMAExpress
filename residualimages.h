@@ -23,7 +23,7 @@ public:
   wxBitmap* my_bitmap;
   
   DECLARE_DYNAMIC_CLASS(MyCanvas)
-    DECLARE_EVENT_TABLE()
+	DECLARE_EVENT_TABLE()
 };
 
 
@@ -38,11 +38,11 @@ class ResidualImageDialog: public wxDialog
 		      const wxPoint &position,
 		      const wxSize& size,
 		      long style); 
-  void ChangeChip(wxCommandEvent &event); //(wxUpdateUIEvent &event);
-  void ChangeImageType(wxCommandEvent &event); //(wxUpdateUIEvent &event);
-  void SaveCurrentImage(wxCommandEvent &event); //wxUpdateUIEvent &event);
-  void SaveCurrentImageAll(wxCommandEvent &event); //wxUpdateUIEvent &event);
-  void SaveAllImages(wxCommandEvent &event); //wxUpdateUIEvent &event);
+  void ChangeChip(wxCommandEvent &event); 
+  void ChangeImageType(wxCommandEvent &event); 
+  void SaveCurrentImage(wxCommandEvent &event); 
+  void SaveCurrentImageAll(wxCommandEvent &event); 
+  void SaveAllImages(wxCommandEvent &event); 
 
   void ClickNext(wxCommandEvent &event);
   void ClickPrevious(wxCommandEvent &event);
@@ -61,6 +61,6 @@ class ResidualImageDialog: public wxDialog
 
   DECLARE_DYNAMIC_CLASS(ResidualImageDialog)
   DECLARE_EVENT_TABLE()
-    };
+};
     
 
