@@ -40,6 +40,7 @@ class ResidualImageDialog: public wxDialog
 		      long style); 
   void ChangeChip(wxCommandEvent &event); 
   void ChangeImageType(wxCommandEvent &event); 
+  void ChangeZoom(wxCommandEvent &event); 
   void SaveCurrentImage(wxCommandEvent &event); 
   void SaveCurrentImageAll(wxCommandEvent &event); 
   void SaveAllImages(wxCommandEvent &event); 

@@ -100,8 +100,34 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   	drawPseudoChipImage(&memdc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
   	my_parent->needtoredraw = false;
   }
-  wxBufferedPaintDC dc(this);
   
+  if (my_parent->whichzoom->GetSelection() != 3){
+  		wxBitmap resize_bitmap(*my_bitmap);	
+  		int orig_width = resize_bitmap.GetWidth();
+  		int orig_height = resize_bitmap.GetHeight();
+  		
+  		wxImage resize_image = resize_bitmap.ConvertToImage();
+  	
+  	
+  		double rescale_fac;
+  		
+  		if (my_parent->whichzoom->GetSelection() == 0){
+  		  rescale_fac = 0.3162278;
+  		} else if (my_parent->whichzoom->GetSelection() == 1){
+  		   rescale_fac = 0.5;
+  		} else if (my_parent->whichzoom->GetSelection() == 2){
+  		   rescale_fac = 0.7071068;
+  		} else  if (my_parent->whichzoom->GetSelection() == 4){
+  		   rescale_fac = 1.414214;
+  		}
+  		resize_image.Rescale(orig_width*rescale_fac,orig_height*rescale_fac);
+  		
+  		resize_bitmap = resize_image;
+  		
+  		memdc.SelectObject(resize_bitmap);
+   }
+  
+  wxBufferedPaintDC dc(this);
   PrepareDC(dc);
   
   PaintBackground(dc);
@@ -168,7 +194,7 @@ MyCanvas::MyCanvas(ResidualImageDialog *Parent, ResidualsDataGroup *resids):wxSc
   long horizontalsize = my_resids->ncols()+ 40;
   long verticalsize = my_resids->nrows() + 40;
   
-  my_bitmap = new wxBitmap(horizontalsize,verticalsize);
+  my_bitmap = new wxBitmap(horizontalsize*2,verticalsize*2);
   
   
 }
@@ -186,6 +212,7 @@ BEGIN_EVENT_TABLE(ResidualImageDialog, wxDialog)
   EVT_BUTTON( wxID_OK, ResidualImageDialog::OnOk )
   EVT_COMBOBOX(ID_WHICHCHIP, ResidualImageDialog::ChangeChip)
   EVT_RADIOBOX(ID_WHICHTYPE, ResidualImageDialog::ChangeImageType)
+  EVT_RADIOBOX(ID_WHICHZOOM, ResidualImageDialog::ChangeZoom)
   EVT_BUTTON(ID_SAVETHISIMAGE,ResidualImageDialog::SaveCurrentImage)
   EVT_BUTTON(ID_SAVETHISCHIP,ResidualImageDialog::SaveCurrentImageAll)
   EVT_BUTTON(ID_SAVEALLIMAGE,ResidualImageDialog::SaveAllImages)
@@ -221,7 +248,7 @@ void  ResidualImageDialog::ClickPrevious(wxCommandEvent &event){
 
 
 
-void ResidualImageDialog::ChangeChip(wxCommandEvent &event){ //wxUpdateUIEvent &event){
+void ResidualImageDialog::ChangeChip(wxCommandEvent &event){ 
  
  needtoredraw=true; 
  
@@ -231,7 +258,7 @@ void ResidualImageDialog::ChangeChip(wxCommandEvent &event){ //wxUpdateUIEvent &
   
 
 
-void ResidualImageDialog::ChangeImageType(wxCommandEvent &event){ //wxUpdateUIEvent &event){
+void ResidualImageDialog::ChangeImageType(wxCommandEvent &event){ 
   
   needtoredraw=true;
   
@@ -240,8 +267,14 @@ void ResidualImageDialog::ChangeImageType(wxCommandEvent &event){ //wxUpdateUIEv
 }
 
 
+void ResidualImageDialog::ChangeZoom(wxCommandEvent &event){ 
+ 
+ m_canvas->Refresh();
+ 
+}
 
-void ResidualImageDialog::SaveCurrentImage(wxCommandEvent &event){ //wxUpdateUIEvent &event){
+
+void ResidualImageDialog::SaveCurrentImage(wxCommandEvent &event){ 
 
   wxString defaultname = whichchip->GetValue();
 
@@ -301,7 +334,7 @@ void ResidualImageDialog::SaveCurrentImage(wxCommandEvent &event){ //wxUpdateUIE
 }
 
 
-void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){ //wxUpdateUIEvent &event){
+void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){ 
 
   wxString defaultname = whichchip->GetValue();
 
@@ -428,7 +461,7 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){ //wxUpdate
 
 
 
-void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){ //wxUpdateUIEvent &event){
+void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){ 
 
   
   wxString defaultname;
@@ -589,6 +622,7 @@ ResidualImageDialog::ResidualImageDialog(wxWindow* parent,ResidualsDataGroup *re
   wxString whichzoomtitle = _T("Zoom level");
   wxString whichzoomchoices[] =
     {
+      wxT("10%"),
       wxT("25%"),
       wxT("50%"),
       wxT("100%"),
@@ -607,7 +641,7 @@ ResidualImageDialog::ResidualImageDialog(wxWindow* parent,ResidualsDataGroup *re
 			    wxDefaultValidator,
 			    wxRadioBoxNameStr);
 			    
-  whichzoom->SetSelection(2);
+  whichzoom->SetSelection(3);
   
   sidebar->Add(whichzoom, 0, wxALIGN_CENTER|wxALL, 10 );
   
