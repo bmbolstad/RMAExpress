@@ -337,9 +337,21 @@ void ResidualImageDialog::SaveCurrentImage(wxCommandEvent &event){
   wxMemoryDC memdc;
   memdc.SelectObject( bitmap );
   
-  PrepareDC( memdc );
+  PrepareDC( memdc );	
   memdc.Clear();
-  drawPseudoChipImage(&memdc,whichchip->GetValue(),whichtype->GetStringSelection(),m_canvas->GiveMyResids());
+  
+  wxImage tempimage = bitmap.ConvertToImage();
+  drawPseudoChipImage(&tempimage,whichchip->GetValue(),whichtype->GetStringSelection(),m_canvas->GiveMyResids());
+  	
+  bitmap = tempimage;	
+  	
+  memdc.SelectObject(bitmap);
+  annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
+  
+  
+  //PrepareDC( memdc );
+  //memdc.Clear();
+  //drawPseudoChipImage(&memdc,whichchip->GetValue(),whichtype->GetStringSelection(),m_canvas->GiveMyResids());
 
   wxImage image = bitmap.ConvertToImage();
   image.SaveFile(savefilename); //,wxBITMAP_TYPE_PNG);
@@ -371,14 +383,21 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){
   long horizontalsize = (m_canvas->GiveMyResids()->ncols())+ 40;
   long verticalsize = m_canvas->GiveMyResids()->nrows() + 40;
   
+  
   wxBitmap bitmap( horizontalsize,verticalsize );
   wxMemoryDC memdc;
   memdc.SelectObject( bitmap );
   
-  PrepareDC( memdc );
+  PrepareDC( memdc );	
   memdc.Clear();
-  drawPseudoChipImage(&memdc,whichchip->GetValue(),_T("Both"),m_canvas->GiveMyResids());
-
+  
+  wxImage tempimage = bitmap.ConvertToImage();
+  drawPseudoChipImage(&tempimage,whichchip->GetValue(),_T("Both"),m_canvas->GiveMyResids());
+  	
+  bitmap = tempimage;	
+  	
+  memdc.SelectObject(bitmap);
+  annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
   
   defaultname = savefilename.BeforeLast('.');
   savefilename = defaultname;
@@ -403,8 +422,15 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){
    
   PrepareDC( memdc );
   memdc.Clear();
-  drawPseudoChipImage(&memdc,whichchip->GetValue(),_T("Positive"),m_canvas->GiveMyResids());
-
+  
+  tempimage = bitmap.ConvertToImage();
+  drawPseudoChipImage(&tempimage,whichchip->GetValue(),_T("Positive"),m_canvas->GiveMyResids());
+  
+  bitmap = tempimage;	
+  	
+  memdc.SelectObject(bitmap);
+  annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
+  
   savefilename = defaultname;
   savefilename += wxT("_resid_pos.");
   savefilename+= extension;
@@ -426,8 +452,15 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){
 
   PrepareDC( memdc );
   memdc.Clear();
-  drawPseudoChipImage(&memdc,whichchip->GetValue(),_T("Negative"),m_canvas->GiveMyResids());
-
+  
+  tempimage = bitmap.ConvertToImage();
+  drawPseudoChipImage(&tempimage,whichchip->GetValue(),_T("Negative"),m_canvas->GiveMyResids());
+  
+  bitmap = tempimage;	
+  	
+  memdc.SelectObject(bitmap);
+  annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
+  
   savefilename = defaultname;
   savefilename += wxT("_resid_neg.");
   savefilename+= extension;
@@ -446,11 +479,17 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){
   image = bitmap.ConvertToImage();
   image.SaveFile(savefilename); //,wxBITMAP_TYPE_PNG);
 
-  
   PrepareDC( memdc );
   memdc.Clear();
-  drawPseudoChipImage(&memdc,whichchip->GetValue(),_T("Sign"),m_canvas->GiveMyResids());
-
+  
+  tempimage = bitmap.ConvertToImage();
+  drawPseudoChipImage(&tempimage,whichchip->GetValue(),_T("Sign"),m_canvas->GiveMyResids());
+  
+  bitmap = tempimage;	
+  	
+  memdc.SelectObject(bitmap);
+  annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
+  
   savefilename = defaultname;
   savefilename += wxT("_resid_sign.");
   savefilename+= extension;
@@ -502,34 +541,28 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){
     wxFileName currentPath(dir,currentname); 
     defaultname = currentPath.GetFullPath();
     defaultname.Replace(_T(".cel"),_T(""));
-    
-    /*    wxString savefilename = wxFileSelector( wxT("Save Image"),
-					    wxT(""),
-					    defaultname,
-					    (const wxChar *)NULL,
-					    wxT("PNG files (*.png)|*.png")
-					    wxT("JPEG files (*.jpg)|*.jpg")
-					    ,
-					    wxSAVE);
-    
-    if ( savefilename.empty() )
-    return; */
-    
-    wxString extension = wxT("jpg"); //savefilename.AfterLast('.').Lower();
+       
+    wxString extension = wxT("jpg"); 
     
     long horizontalsize = (m_canvas->GiveMyResids()->ncols())+ 40;
     long verticalsize = m_canvas->GiveMyResids()->nrows() + 40;
     
+    
     wxBitmap bitmap( horizontalsize,verticalsize );
     wxMemoryDC memdc;
-    memdc.SelectObject( bitmap );
+   	memdc.SelectObject( bitmap );
+  
+  	PrepareDC( memdc );	
+  	memdc.Clear();
+  
+  	wxImage tempimage = bitmap.ConvertToImage();
+  	drawPseudoChipImage(&tempimage,currentname,_T("Both"),m_canvas->GiveMyResids());
+  	
+  	bitmap = tempimage;	
+  	
+  	memdc.SelectObject(bitmap);
+  	annotatePseudoChipImage(&memdc,currentname,m_canvas->GiveMyResids());
     
-    PrepareDC( memdc );
-    memdc.Clear();
-    drawPseudoChipImage(&memdc,currentname,_T("Both"),m_canvas->GiveMyResids());
-    
-    
-    // defaultname = savefilename.BeforeLast('.');
     savefilename = defaultname;
     savefilename+= wxT("_resid.");
     savefilename+= extension;
@@ -540,7 +573,14 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){
     
     PrepareDC( memdc );
     memdc.Clear();
-    drawPseudoChipImage(&memdc,currentname,_T("Positive"),m_canvas->GiveMyResids());
+    
+    tempimage = bitmap.ConvertToImage();
+  	drawPseudoChipImage(&tempimage,currentname,_T("Positive"),m_canvas->GiveMyResids());
+  	
+  	bitmap = tempimage;	
+  	
+  	memdc.SelectObject(bitmap);
+  	annotatePseudoChipImage(&memdc,currentname,m_canvas->GiveMyResids());
     
     savefilename = defaultname;
     savefilename += wxT("_resid_pos.");
@@ -552,8 +592,15 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){
     
     PrepareDC( memdc );
     memdc.Clear();
-    drawPseudoChipImage(&memdc,currentname,_T("Negative"),m_canvas->GiveMyResids());
     
+    tempimage = bitmap.ConvertToImage();
+  	drawPseudoChipImage(&tempimage,currentname,_T("Negative"),m_canvas->GiveMyResids());
+  	
+  	bitmap = tempimage;	
+  	
+  	memdc.SelectObject(bitmap);
+  	annotatePseudoChipImage(&memdc,currentname,m_canvas->GiveMyResids());
+  
     savefilename = defaultname;
     savefilename += wxT("_resid_neg.");
     savefilename+= extension;
@@ -561,10 +608,18 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){
     image = bitmap.ConvertToImage();
     image.SaveFile(savefilename); //,wxBITMAP_TYPE_PNG); 
     
+  
     PrepareDC( memdc );
     memdc.Clear();
-    drawPseudoChipImage(&memdc,currentname,_T("Sign"),m_canvas->GiveMyResids());
     
+    tempimage = bitmap.ConvertToImage();
+  	drawPseudoChipImage(&tempimage,currentname,_T("Sign"),m_canvas->GiveMyResids());
+  	
+  	bitmap = tempimage;	
+  	
+  	memdc.SelectObject(bitmap);
+  	annotatePseudoChipImage(&memdc,currentname,m_canvas->GiveMyResids());
+  
     savefilename = defaultname;
     savefilename += wxT("_resid_sign.");
     savefilename+= extension;
