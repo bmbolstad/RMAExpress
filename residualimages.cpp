@@ -91,10 +91,13 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   int x, y;
   int width, height;
 
-  //wxMemoryDC memdc;
-  //memdc.SelectObject(*my_bitmap);
+  wxMemoryDC memdc;
+  memdc.SelectObject(*my_bitmap);
   
   if (my_parent->needtoredraw){
+  
+    PrepareDC( memdc );	
+  	memdc.Clear();
   
   	wxImage tempimage = my_bitmap->ConvertToImage();
   	drawPseudoChipImage(&tempimage,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
@@ -108,7 +111,7 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   	my_parent->needtoredraw = false;
   }
   
-   wxMemoryDC memdc;
+  //wxMemoryDC memdc;
   memdc.SelectObject(*my_bitmap);
  
   
