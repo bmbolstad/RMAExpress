@@ -293,13 +293,6 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
 
 void annotatePseudoChipImage(wxDC *dc,wxString name, ResidualsDataGroup *resids){
 
-#ifndef BUFFERED
-  Matrix *thedata;
-#else
-  BufferedMatrix *thedata;
-#endif
-  unsigned char red,green,blue;
-  int whichchip;
 
   if (name.Cmp(_T(""))==0){
     return;
@@ -322,7 +315,7 @@ void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, Residual
   BufferedMatrix *thedata;
 #endif
   int whichchip;
-  char red,green,blue;
+  unsigned char red,green,blue;
   int offset = 20;    // note the 20/40 in here is a hard coded constant
 
   if (name.Cmp(_T(""))==0){
