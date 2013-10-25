@@ -100,32 +100,18 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
   unsigned char red,green,blue;
   int whichchip;
 
-  //cout << name << endl;
-
   if (name.Cmp(_T(""))==0){
     return;
   }
 
-
-
-
-  
   dc->DrawText( name, 20, 5);
-  //dc->SetBrush( wxBrush( wxT("orange"), wxSOLID ) );
   dc->SetPen( *wxBLACK_PEN );
-  //dc->DrawRectangle( 150, 30, 100, 100 );
-  //dc->SetBrush( *wxWHITE_BRUSH );
-  //dc->DrawRectangle( 170, 50, 60, 60 );
   
   dc->DrawRectangle(19,19,resids->ncols()+2,resids->nrows()+2);
   thedata = resids->GetIntensities();
   
 
   whichchip = (resids->GetArrayNames()).Index(name);
-  
-
-  //whichchip = whichchip*(resids->ncols()*resids->nrows());
-
   
   // Note the flip for orientation purposes
   
@@ -198,8 +184,6 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
 
 void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGroup *resids,int startx, int starty, int width, int height){
 
-
-  
 #ifndef BUFFERED
   Matrix *thedata;
 #else
@@ -211,22 +195,14 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
   int wherestopx, wherestopy;
 
 
-  //cout << name << endl;
-  
   if (name.Cmp(_T(""))==0){
     return;
   }
 
-  
-   
   // will title and rebox every time (even if not visible)
  
   dc->DrawText( name, 20, 5);
-  //dc->SetBrush( wxBrush( wxT("orange"), wxSOLID ) );
   dc->SetPen( *wxBLACK_PEN );
-  //dc->DrawRectangle( 150, 30, 100, 100 );
-  //dc->SetBrush( *wxWHITE_BRUSH );
-  //dc->DrawRectangle( 170, 50, 60, 60 );
   
   dc->DrawRectangle(19,19,resids->ncols()+2,resids->nrows()+2);
 
@@ -235,11 +211,8 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
 
   // Check which chip we are drawing residuals image for
   whichchip = (resids->GetArrayNames()).Index(name);
-  
-
-  //  whichchip = whichchip*(resids->ncols()*resids->nrows());
-
-  if (startx < 20){
+ 
+   if (startx < 20){
     wherestartx = 0;
   } else {
     wherestartx = startx-20;
@@ -328,16 +301,10 @@ void annotatePseudoChipImage(wxDC *dc,wxString name, ResidualsDataGroup *resids)
   unsigned char red,green,blue;
   int whichchip;
 
-  //cout << name << endl;
-
   if (name.Cmp(_T(""))==0){
     return;
   }
 
-
-
-
-  
   dc->DrawText( name, 20, 5);
   dc->SetPen( *wxBLACK_PEN );
   dc->SetBrush( *wxTRANSPARENT_BRUSH);
