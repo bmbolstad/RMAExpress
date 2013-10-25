@@ -102,7 +102,7 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   	wxImage tempimage = my_bitmap->ConvertToImage();
   	drawPseudoChipImage(&tempimage,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
   	
-  	*my_bitmap = tempimage;	
+  	*my_bitmap = wxBitmap(tempimage);	
   	
   	//PrepareDC( memdc );	
   	//memdc.Clear();
@@ -134,7 +134,7 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   		}
   		resize_image.Rescale(orig_width*rescale_fac,orig_height*rescale_fac);
   		
-  		resize_bitmap = resize_image;
+  		resize_bitmap = wxBitmap(resize_image);
   		
   		memdc.SelectObject(resize_bitmap);
    }
@@ -343,7 +343,7 @@ void ResidualImageDialog::SaveCurrentImage(wxCommandEvent &event){
   wxImage tempimage = bitmap.ConvertToImage();
   drawPseudoChipImage(&tempimage,whichchip->GetValue(),whichtype->GetStringSelection(),m_canvas->GiveMyResids());
   	
-  bitmap = tempimage;	
+  bitmap = wxBitmap(tempimage);	
   	
   memdc.SelectObject(bitmap);
   annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
@@ -394,7 +394,7 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){
   wxImage tempimage = bitmap.ConvertToImage();
   drawPseudoChipImage(&tempimage,whichchip->GetValue(),_T("Both"),m_canvas->GiveMyResids());
   	
-  bitmap = tempimage;	
+  bitmap = wxBitmap(tempimage);	
   	
   memdc.SelectObject(bitmap);
   annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
@@ -426,7 +426,7 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){
   tempimage = bitmap.ConvertToImage();
   drawPseudoChipImage(&tempimage,whichchip->GetValue(),_T("Positive"),m_canvas->GiveMyResids());
   
-  bitmap = tempimage;	
+  bitmap = wxBitmap(tempimage);	
   	
   memdc.SelectObject(bitmap);
   annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
@@ -456,7 +456,7 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){
   tempimage = bitmap.ConvertToImage();
   drawPseudoChipImage(&tempimage,whichchip->GetValue(),_T("Negative"),m_canvas->GiveMyResids());
   
-  bitmap = tempimage;	
+  bitmap = wxBitmap(tempimage);	
   	
   memdc.SelectObject(bitmap);
   annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
@@ -485,7 +485,7 @@ void ResidualImageDialog::SaveCurrentImageAll(wxCommandEvent &event){
   tempimage = bitmap.ConvertToImage();
   drawPseudoChipImage(&tempimage,whichchip->GetValue(),_T("Sign"),m_canvas->GiveMyResids());
   
-  bitmap = tempimage;	
+  bitmap = wxBitmap(tempimage);	
   	
   memdc.SelectObject(bitmap);
   annotatePseudoChipImage(&memdc,whichchip->GetValue(),m_canvas->GiveMyResids());
@@ -558,7 +558,7 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){
   	wxImage tempimage = bitmap.ConvertToImage();
   	drawPseudoChipImage(&tempimage,currentname,_T("Both"),m_canvas->GiveMyResids());
   	
-  	bitmap = tempimage;	
+  	bitmap = wxBitmap(tempimage);	
   	
   	memdc.SelectObject(bitmap);
   	annotatePseudoChipImage(&memdc,currentname,m_canvas->GiveMyResids());
@@ -577,7 +577,7 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){
     tempimage = bitmap.ConvertToImage();
   	drawPseudoChipImage(&tempimage,currentname,_T("Positive"),m_canvas->GiveMyResids());
   	
-  	bitmap = tempimage;	
+  	bitmap = wxBitmap(tempimage);	
   	
   	memdc.SelectObject(bitmap);
   	annotatePseudoChipImage(&memdc,currentname,m_canvas->GiveMyResids());
@@ -596,7 +596,7 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){
     tempimage = bitmap.ConvertToImage();
   	drawPseudoChipImage(&tempimage,currentname,_T("Negative"),m_canvas->GiveMyResids());
   	
-  	bitmap = tempimage;	
+  	bitmap = wxBitmap(tempimage);	
   	
   	memdc.SelectObject(bitmap);
   	annotatePseudoChipImage(&memdc,currentname,m_canvas->GiveMyResids());
@@ -615,7 +615,7 @@ void ResidualImageDialog::SaveAllImages(wxCommandEvent &event){
     tempimage = bitmap.ConvertToImage();
   	drawPseudoChipImage(&tempimage,currentname,_T("Sign"),m_canvas->GiveMyResids());
   	
-  	bitmap = tempimage;	
+  	bitmap = wxBitmap(tempimage);	
   	
   	memdc.SelectObject(bitmap);
   	annotatePseudoChipImage(&memdc,currentname,m_canvas->GiveMyResids());
