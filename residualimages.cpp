@@ -91,15 +91,26 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   int x, y;
   int width, height;
 
-  wxMemoryDC memdc;
-  memdc.SelectObject(*my_bitmap);
+  //wxMemoryDC memdc;
+  //memdc.SelectObject(*my_bitmap);
   
   if (my_parent->needtoredraw){
-  	PrepareDC( memdc );	
-  	memdc.Clear();
-  	drawPseudoChipImage(&memdc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
+  
+  	wxImage tempimage = my_bitmap->ConvertToImage();
+  	drawPseudoChipImage(&tempimage,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
+  	
+  	*my_bitmap = tempimage;	
+  	//PrepareDC( memdc );	
+  	//memdc.Clear();
+  	//drawPseudoChipImage(&memdc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
+  	
+  	
   	my_parent->needtoredraw = false;
   }
+  
+   wxMemoryDC memdc;
+  memdc.SelectObject(*my_bitmap);
+ 
   
   if (my_parent->whichzoom->GetSelection() != 3){
   		wxBitmap resize_bitmap(*my_bitmap);	
@@ -178,7 +189,7 @@ ResidualsDataGroup *MyCanvas::GiveMyResids(){
 
 void MyCanvas::SetScroll(){
 
-  this->SetScrollbars( 10, 10, (my_resids->ncols()+50)/10, (my_resids->nrows()+50)/10, 0, 0 );
+  this->SetScrollbars( 10, 10, (my_resids->ncols()*2+50)/10, (my_resids->nrows()*2+50)/10, 0, 0 );
 
 }
 

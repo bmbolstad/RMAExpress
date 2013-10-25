@@ -316,7 +316,7 @@ void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGro
 
 
 
-#else
+#endif
 
 #include <wx/image.h>
 void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, ResidualsDataGroup *resids){
@@ -329,6 +329,11 @@ void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, Residual
   char red,green,blue;
   int offset = 20;    // note the 20/40 in here is a hard coded constant
 
+  if (name.Cmp(_T(""))==0){
+    return;
+  }
+
+
   wxImage subimage;
 
   unsigned char *imagedata;
@@ -338,9 +343,6 @@ void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, Residual
 
   thedata = resids->GetIntensities();
 
-
-
-  
   imagedata =  Image->GetData();
 
 
@@ -355,14 +357,6 @@ void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, Residual
   for (int i =offset-4; i >= offset-3*39; i--){
     imagedata[i] = 255;
   }
-
-
-
-
-
-
-
-
 
   // Note the flip for orientation purposes
   for (int i =0; i < resids->nrows(); i++){
@@ -443,4 +437,4 @@ void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, Residual
 
 
 
-#endif
+
