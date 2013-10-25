@@ -103,10 +103,10 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   	drawPseudoChipImage(&tempimage,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
   	
   	*my_bitmap = tempimage;	
+  	
   	//PrepareDC( memdc );	
   	//memdc.Clear();
   	//drawPseudoChipImage(&memdc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
-  	
   	
   	my_parent->needtoredraw = false;
   }
@@ -208,7 +208,7 @@ MyCanvas::MyCanvas(ResidualImageDialog *Parent, ResidualsDataGroup *resids):wxSc
   long horizontalsize = my_resids->ncols()+ 40;
   long verticalsize = my_resids->nrows() + 40;
   
-  my_bitmap = new wxBitmap(horizontalsize*2,verticalsize*2);
+  my_bitmap = new wxBitmap(horizontalsize,verticalsize);
   
   
 }
