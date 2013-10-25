@@ -17,7 +17,9 @@ RMAExpress
 ----------
 - default format for saving residual images is now jpg
 
-- improved screen redraw speed when scrolling or resizing residual images window.
+- improved screen redraw speed when scrolling or resizing residual images window
+
+- residuals window supports zooming from 10%-200%
 
 
 RMADataConv

@@ -634,7 +634,7 @@ ResidualImageDialog::ResidualImageDialog(wxWindow* parent,ResidualsDataGroup *re
 			    whichzoomtitle, 
 			    wxDefaultPosition,
 			    wxDefaultSize,
-			    4,
+			    5,
 			    whichzoomchoices,
 			    1,
 			    wxHORIZONTAL,
