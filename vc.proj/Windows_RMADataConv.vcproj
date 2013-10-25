@@ -124,6 +124,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(WXWIN)/include"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
