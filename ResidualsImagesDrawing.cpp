@@ -362,43 +362,43 @@ void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, Residual
   for (int i =0; i < resids->nrows(); i++){
     for (int j=0; j < resids->ncols(); j++){  
       if (type.Cmp(_T("Positive")) == 0){
-	if ((*thedata)(i*resids->ncols() + j,whichchip) > 0){
-	  red = getRed((*thedata)(i*resids->ncols() + j,whichchip));
-	  blue = getBlue((*thedata)(i*resids->ncols() + j,whichchip));
-	  green =getGreen((*thedata)(i*resids->ncols() + j,whichchip));
-	} else {
-	  red = 255;
-	  blue = 255;
-	  green = 255;
-	}
+		if ((*thedata)(i*resids->ncols() + j,whichchip) > 0){
+	  		red = getRed((*thedata)(i*resids->ncols() + j,whichchip));
+	  		blue = getBlue((*thedata)(i*resids->ncols() + j,whichchip));
+	  		green =getGreen((*thedata)(i*resids->ncols() + j,whichchip));
+		} else {
+	  		red = 255;
+	  		blue = 255;
+	  		green = 255;
+		}
       } else if (type.Cmp(_T("Negative")) ==0){
-	if ((*thedata)(i*resids->ncols() + j,whichchip) < 0){
-	  red = getRed((*thedata)(i*resids->ncols() + j,whichchip));
-	  blue = getBlue((*thedata)(i*resids->ncols() + j,whichchip));
-	  green = getGreen((*thedata)(i*resids->ncols() + j,whichchip));
-	} else {
-	  red = 255;
-	  blue = 255;
-	  green = 255;
-	}
+		if ((*thedata)(i*resids->ncols() + j,whichchip) < 0){
+	  			red = getRed((*thedata)(i*resids->ncols() + j,whichchip));
+	  			blue = getBlue((*thedata)(i*resids->ncols() + j,whichchip));
+	  			green = getGreen((*thedata)(i*resids->ncols() + j,whichchip));
+		} else {
+	  		red = 255;
+	  		blue = 255;
+	  		green = 255;
+		}
       } else if (type.Cmp(_T("Sign")) ==0){
-	if ((*thedata)(i*resids->ncols() + j,whichchip) > 0){
-	  red = 255;
-	  blue = 0;
-	  green = 0;
-	} else if ((*thedata)(i*resids->ncols() + j,whichchip) < 0){
-	  red = 0;
-	  blue = 255;
-	  green = 0;
-	} else {
-	  red = 255;
-	  blue = 255;
-	  green = 255;
-	}
+		if ((*thedata)(i*resids->ncols() + j,whichchip) > 0){
+	  		red = 255;
+	  		blue = 0;
+	  		green = 0;
+		} else if ((*thedata)(i*resids->ncols() + j,whichchip) < 0){
+	  		red = 0;
+	  		blue = 255;
+	  		green = 0;
+		} else {
+	  		red = 255;
+	  		blue = 255;
+	  		green = 255;
+		}
       } else {
-	red = getRed((*thedata)(i*resids->ncols() + j,whichchip));
-	blue = getBlue((*thedata)(i*resids->ncols() + j,whichchip));
-	green = getGreen((*thedata)(i*resids->ncols() + j,whichchip));
+		red = getRed((*thedata)(i*resids->ncols() + j,whichchip));
+		blue = getBlue((*thedata)(i*resids->ncols() + j,whichchip));
+		green = getGreen((*thedata)(i*resids->ncols() + j,whichchip));
       }
       //  dc->SetPen(wxPen(wxColor(red,green,blue) ,1,wxSOLID));
       //dc->DrawPoint(20+j,20+i);
@@ -427,12 +427,6 @@ void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, Residual
   for (int i =offset+3; i < offset+3*20 + (20-1)*3*((resids->ncols())+40); i++){
     imagedata[i] = 255;
   }
-
-
-
-
-
-
 }
 
 
