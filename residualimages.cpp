@@ -109,12 +109,10 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   	//drawPseudoChipImage(&memdc,my_parent->whichchip->GetValue(),my_parent->whichtype->GetStringSelection(),my_resids);
   	
   	my_parent->needtoredraw = false;
+  	memdc.SelectObject(*my_bitmap);
+    annotatePseudoChipImage(&memdc,my_parent->whichchip->GetValue(),my_resids);
   }
-  
-  //wxMemoryDC memdc;
-  memdc.SelectObject(*my_bitmap);
- 
-  
+   
   if (my_parent->whichzoom->GetSelection() != 3){
   		wxBitmap resize_bitmap(*my_bitmap);	
   		int orig_width = resize_bitmap.GetWidth();

@@ -22,8 +22,9 @@
 
 
 #if RMA_GUI_APP
-void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGroup *resids);
-void drawPseudoChipImage(wxDC *dc,wxString name, wxString type, ResidualsDataGroup *resids,int startx, int starty, int width, int height);
+void drawPseudoChipImage(wxDC *dc, wxString name, wxString type, ResidualsDataGroup *resids);
+void drawPseudoChipImage(wxDC *dc, wxString name, wxString type, ResidualsDataGroup *resids,int startx, int starty, int width, int height);
+void annotatePseudoChipImage(wxDC *dc, wxString name, ResidualsDataGroup *resids);
 #endif
 void drawPseudoChipImage( wxImage *Image, wxString name, wxString type, ResidualsDataGroup *resids);
 
