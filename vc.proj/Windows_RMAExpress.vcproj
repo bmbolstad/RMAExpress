@@ -20,7 +20,7 @@
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="1"
-			CharacterSet="0"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -40,28 +40,33 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(WXWIN)\include\msvc&quot;;&quot;$(WXWIN)\include&quot;"
-				PreprocessorDefinitions="WIN32;WINVER=0x0400;__wxMSW__;_WINDOWS;wxUSE_GUI=1;_UNICODE;_DEBUG"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)\include&quot;;&quot;$(WXWIN)\include\msvc&quot;"
+				PreprocessorDefinitions="WIN32;WINVER=0x0400;__wxMSW__;_WINDOWS;wxUSE_GUI=1;_UNICODE;_DEBUG;__WXDEBUG__;_CRT_SECURE_NO_DEPRECATE;BUFFERED;RMA_GUI_APP"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="0"
+				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="4"
+				CompileAs="2"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)\include&quot;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="wxmsw30ud_core.lib wxbase30ud.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib"
+				OutputFile="$(OutDir)\$RMAExpress.exe"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -133,7 +138,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_core.lib wxbase30ud.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib"
+				AdditionalDependencies="wxmsw30u_core.lib wxbase30u.lib comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib"
 				OutputFile="$(OutDir)\RMAExpress.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;"
@@ -223,10 +228,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\PGF_CLF_to_RME.h"
-				>
-			</File>
-			<File
 				RelativePath="..\PMProbeBatch.h"
 				>
 			</File>
@@ -275,23 +276,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\parsing\read_clf.h"
-				>
-			</File>
-			<File
 				RelativePath="..\parsing\read_generic.h"
-				>
-			</File>
-			<File
-				RelativePath="..\parsing\read_mps.h"
-				>
-			</File>
-			<File
-				RelativePath="..\parsing\read_pgf.h"
-				>
-			</File>
-			<File
-				RelativePath="..\parsing\read_ps.h"
 				>
 			</File>
 			<File
@@ -411,10 +396,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\PGF_CLF_to_RME.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\PMProbeBatch.cpp"
 				>
 			</File>
@@ -459,23 +440,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\parsing\read_clf.c"
-				>
-			</File>
-			<File
 				RelativePath="..\parsing\read_generic.c"
-				>
-			</File>
-			<File
-				RelativePath="..\parsing\read_mps.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\parsing\read_pgf.c"
-				>
-			</File>
-			<File
-				RelativePath="..\parsing\read_ps.cpp"
 				>
 			</File>
 			<File
