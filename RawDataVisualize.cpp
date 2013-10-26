@@ -633,7 +633,8 @@ void RawDataVisualizeDrawingWindow::OnEraseBackground(wxEraseEvent &WXUNUSED(eve
 
 void RawDataVisualizeDrawingWindow::OnClick(wxMouseEvent& event){
 
-  myParent->SetFocus();
+  //myParent->SetFocus();
+  this->SetFocus();
 
 }
 
