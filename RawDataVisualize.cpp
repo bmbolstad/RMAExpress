@@ -80,8 +80,6 @@ BEGIN_EVENT_TABLE(RawDataVisualizeFrame,wxFrame)
   EVT_MENU(ID_SAVE_CURRENT,RawDataVisualizeFrame::OnSaveCurrent)
 //  EVT_KEY_DOWN(RawDataVisualizeFrame::OnKeyDown)
 //  EVT_KEY_UP(RawDataVisualizeFrame::OnKeyUp)
-
-
 //  EVT_CHAR(RawDataVisualizeFrame::OnKeyPress)
 END_EVENT_TABLE()
 
@@ -588,33 +586,27 @@ void RawDataVisualizeFrame::OnKeyUp(wxKeyEvent& event){
 
 
 void RawDataVisualizeFrame::OnVisualizeRawDensityPlot(wxCommandEvent& event){
-//  wxPaintDC dc(MyWindow);
-  GenerateDensityPlotStatistics();
-//  DrawRawDensityPlot(dc);
-  currentplot = 2;
-  this->Refresh();
+	
+	GenerateDensityPlotStatistics();
+	currentplot = 2;
+	this->Refresh();
+
 }
-
-
-
-
 
 void RawDataVisualizeFrame::OnVisualizeRawBoxplot(wxCommandEvent& event){
 
- // wxPaintDC dc(MyWindow);
-  GenerateBoxplotStatistics();
-//  DrawRawBoxplot(dc);
-  currentplot = 1;
-  this->Refresh();
+	GenerateBoxplotStatistics();
+	currentplot = 1;
+	this->Refresh();
+
 }
 
 void RawDataVisualizeFrame::OnVisualizeIndividualRawDensityPlot(wxCommandEvent& event){
-//  wxPaintDC dc(MyWindow);
-  GenerateDensityPlotStatistics();
-//  DrawIndividualRawDensityPlot(dc);
-  currentplot = 3;
-  this->Refresh();
-  this->SetFocus();
+
+	GenerateDensityPlotStatistics();
+	currentplot = 3;
+	this->Refresh();
+	this->SetFocus();
 
 }
 
@@ -630,8 +622,6 @@ BEGIN_EVENT_TABLE(RawDataVisualizeDrawingWindow,wxWindow)
   EVT_MOUSE_EVENTS(RawDataVisualizeDrawingWindow::OnClick)
   EVT_KEY_DOWN(RawDataVisualizeDrawingWindow::OnKeyDown)
   EVT_KEY_UP(RawDataVisualizeDrawingWindow::OnKeyUp)
-
-
   EVT_CHAR(RawDataVisualizeDrawingWindow::OnKeyPress)
 END_EVENT_TABLE()
 
@@ -643,20 +633,17 @@ void RawDataVisualizeDrawingWindow::OnEraseBackground(wxEraseEvent &WXUNUSED(eve
 
 void RawDataVisualizeDrawingWindow::OnClick(wxMouseEvent& event){
 
-
   myParent->SetFocus();
-
 
 }
 
 
 
 void RawDataVisualizeDrawingWindow::OnKeyPress(wxKeyEvent& event){
-	
-	
+		
 	myParent->OnKeyPress(event);
-};
 
+};
 
 
 void RawDataVisualizeDrawingWindow::OnKeyDown(wxKeyEvent& event){
