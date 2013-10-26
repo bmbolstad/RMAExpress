@@ -681,23 +681,22 @@ void RawDataVisualizeDrawingWindow::OnKeyUp(wxKeyEvent& event){
 
 
 void RawDataVisualizeDrawingWindow::OnPaint(wxPaintEvent &WXUNUSED(event)){
- 
-  //wxPrintf(_T("Paint Event\n"));  
 
   wxPaintDC dc(this);
   this->SetBackgroundColour(*wxWHITE );
-  //this->ClearBackground();  
-	PrepareDC(dc);
-	myParent->PrepareDC(dc);
+  
+  PrepareDC(dc);
+  myParent->PrepareDC(dc);
 	
   if (myParent->currentplot == 1){
+    dc.Clear();
     myParent->DrawRawBoxplot(dc);
   } else if (myParent->currentplot == 2){
     myParent->DrawRawDensityPlot(dc);
   } else if (myParent->currentplot ==3){
     myParent->DrawIndividualRawDensityPlot(dc);
-  } else {
-//    this->ClearBackground();  
+  } else { 
+	dc.Clear();
   }
   
 }
