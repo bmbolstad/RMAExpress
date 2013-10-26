@@ -117,8 +117,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(WXWIN)\include\msvc&quot;;&quot;$(WXWIN)\include&quot;"
-				PreprocessorDefinitions="WIN32;WINVER=0x0400;__wxMSW__;_WINDOWS;wxUSE_GUI=1;_UNICODE;_DEBUG;_CRT_SECURE_NO_WARNINGS;RMA_GUI_APP;BUFFERED"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)\include&quot;;&quot;$(WXWIN)\include\msvc&quot;"
+				PreprocessorDefinitions="WIN32;WINVER=0x0400;__wxMSW__;_WINDOWS;wxUSE_GUI=1;_UNICODE;_CRT_SECURE_NO_DEPRECATE;RMA_GUI_APP;BUFFERED"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
