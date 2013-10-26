@@ -107,10 +107,10 @@ void ReadRMECDF(const wxString cdf_path,
       MMLoc = new int[current_n_probes];
       
       for (j = 0; j < current_n_probes; j++){
-	PMLoc[j] = store.Read32();
+		PMLoc[j] = store.Read32();
       }
       for (j = 0; j < current_n_probes; j++){
-	MMLoc[j] = store.Read32();
+		MMLoc[j] = store.Read32();
       }
       
       currentitem = new LocMapItem(current_probeset_name,current_n_probes,current_n_probes,PMLoc,MMLoc); 
@@ -126,50 +126,50 @@ void ReadRMECDF(const wxString cdf_path,
       header->n_probes+= current_n_probes_pm;
       //    wxPrintf(_T("%s %d\n"),current_probeset_name.c_str(),current_n_probes_pm); 
       if (current_n_probes_pm > 0){
-	PMLoc = new int[current_n_probes_pm];
-	for (j = 0; j < current_n_probes_pm; j++){
-	  PMLoc[j] = store.Read32();
-	}
+		PMLoc = new int[current_n_probes_pm];
+		for (j = 0; j < current_n_probes_pm; j++){
+			PMLoc[j] = store.Read32();
+		}
       } else {
-	PMLoc = NULL;
-      }
+		PMLoc = NULL;
+	  }
       current_n_probes_mm = store.Read32();
       if (current_n_probes_mm > 0){
-	MMLoc = new int[current_n_probes_mm];
-	for (j = 0; j < current_n_probes_mm; j++){
-	  MMLoc[j] = store.Read32();
-	}
+		MMLoc = new int[current_n_probes_mm];
+		for (j = 0; j < current_n_probes_mm; j++){
+			MMLoc[j] = store.Read32();
+		}
       } else {
-	MMLoc = NULL;
+		MMLoc = NULL;
       }
       currentitem = new LocMapItem(current_probeset_name,current_n_probes_pm,current_n_probes_mm,PMLoc,MMLoc); 
       cdflocs->Insert(currentitem);
     }
   } else if (versionnumber ==3){
-      header->probeset_names.Alloc(header->n_probesets);
+	header->probeset_names.Alloc(header->n_probesets);
 
-    for (i =0; i < header->n_probesets; i++){
+	for (i =0; i < header->n_probesets; i++){
       current_probeset_name = store.ReadString();
       header->probeset_names.Add(current_probeset_name);   // ProbesetName;
       current_n_probes_pm = store.Read32(); // number of PM probes
       header->n_probes+= current_n_probes_pm;
       //    wxPrintf(_T("%s %d\n"),current_probeset_name.c_str(),current_n_probes_pm); 
       if (current_n_probes_pm > 0){
-	PMLoc = new int[current_n_probes_pm];
-	for (j = 0; j < current_n_probes_pm; j++){
-	  PMLoc[j] = store.Read32();
-	}
+		PMLoc = new int[current_n_probes_pm];
+		for (j = 0; j < current_n_probes_pm; j++){
+			PMLoc[j] = store.Read32();
+		}
       } else {
-	PMLoc = NULL;
+		PMLoc = NULL;
       }
       current_n_probes_mm = store.Read32();
       if (current_n_probes_mm > 0){
-	MMLoc = new int[current_n_probes_mm];
-	for (j = 0; j < current_n_probes_mm; j++){
-	  MMLoc[j] = store.Read32();
-	}
+		MMLoc = new int[current_n_probes_mm];
+		for (j = 0; j < current_n_probes_mm; j++){
+			MMLoc[j] = store.Read32();
+		}
       } else {
-	MMLoc = NULL;
+		MMLoc = NULL;
       }
       currentitem = new LocMapItem(current_probeset_name,current_n_probes_pm,current_n_probes_mm,PMLoc,MMLoc); 
       cdflocs->Insert(currentitem);
