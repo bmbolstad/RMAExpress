@@ -2942,6 +2942,7 @@ void QCStatsVisualizeDrawingWindow::OnPaint(wxPaintEvent &WXUNUSED(event)){
     myParent->DrawMultivariateControlChart(dc);
   } else {
     //this->ClearBackground();  
+	  dc.Clear();
   }
 
 
