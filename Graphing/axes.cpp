@@ -487,27 +487,12 @@ void labeledplotAxes::Draw(wxDC &dc){
     dc.GetTextExtent(m_y_axis_label,&text_width,&text_height);
     if (m_y_tick_labels.GetCount() > 0){
 		if (m_bottom_to_top){
-#ifdef __WXMSW__
-			dc.DrawRotatedText(m_y_axis_label,m_origin_location.x - (int)((double)90*(double)(dc.GetPPI().x)/(double)72),cur_point.y+text_width/2,90.0);
-#else
-			dc.DrawRotatedText(m_y_axis_label,m_origin_location.x - (int)((double)74*(double)(dc.GetPPI().x)/(double)72),h-((int)(m_origin_location.y +m_axes_length.y/2-(double)1.0/2.0*text_width)),90.0);
-#endif
-			
+			dc.DrawRotatedText(m_y_axis_label,m_origin_location.x - (int)((double)74*(double)(dc.GetPPI().x)/(double)72),h-((int)(m_origin_location.y +m_axes_length.y/2-(double)1.0/2.0*text_width)),90.0);	
 		} else {
-#ifdef __WXMSW__
-			dc.DrawRotatedText(m_y_axis_label,m_origin_location.x - (int)((double)90*(double)(dc.GetPPI().x)/(double)72),cur_point.y-text_width/2,90.0);
-#else
 			dc.DrawRotatedText(m_y_axis_label,m_origin_location.x - (int)((double)74*(double)(dc.GetPPI().x)/(double)72),(int)(m_origin_location.y +m_axes_length.y/2+(double)3/2.0*text_width),90.0);
-#endif
 		}
-    } else {
-#ifdef __WXMSW__
-      dc.DrawRotatedText(m_y_axis_label,m_origin_location.x - (int)((double)35*(double)(dc.GetPPI().x)/(double)72),cur_point.y-text_width/2,90.0);
-#else
-      //dc.DrawRotatedText(m_y_axis_label,m_origin_location.x - (int)((double)74*(double)(dc.GetPPI().x)/(double)72),(int)(cur_point.y+(double)3/2.0*text_width),90.0);
-      
+    } else {    
       dc.DrawRotatedText(m_y_axis_label,m_origin_location.x - (int)((double)37*(double)(dc.GetPPI().x)/(double)72),(int)(m_origin_location.y +m_axes_length.y/2+(double)1.0/2.0*text_width),90.0);
-#endif
     }
 
   }
