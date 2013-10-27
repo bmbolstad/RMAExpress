@@ -56,7 +56,7 @@ void ReadRMECDF(const wxString cdf_path,
   LocMapItem *currentitem;
 
   
-  wxFileInputStream input(cdf_path);
+  wxFFileInputStream input(cdf_path);
   wxDataInputStream store(input);
    
   wxString Error;

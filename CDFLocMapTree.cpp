@@ -196,8 +196,8 @@ long CDFLocMapTree::avlRightGrew(CDFLocMapNode **ptr){
 
 long CDFLocMapTree::InsertNode(CDFLocMapNode **ptr, const LocMapItem *value){
   
-  wxString CurrentName;
-  wxString CompareName;
+  //wxString CurrentName;
+  //wxString CompareName;
   
   long tmp;
 
@@ -205,9 +205,9 @@ long CDFLocMapTree::InsertNode(CDFLocMapNode **ptr, const LocMapItem *value){
     *ptr = new CDFLocMapNode(value);
     return 1;
   } else {
-    CurrentName = ((*ptr)->data)->GetName();
-    CompareName = (value->GetName());
-    if (CurrentName.Cmp(CompareName)   < 0){
+   // CurrentName = ((*ptr)->data)->GetName();
+   // CompareName = (value->GetName());
+    if (((*ptr)->data)->GetName().Cmp(value->GetName()) < 0){
       tmp = InsertNode(&((*ptr)->Left),value);
       if (tmp){
 	return avlLeftGrew(ptr);
