@@ -326,10 +326,6 @@ bool RMAExpress::OnInit()
   wxImage::AddHandler( new wxJPEGHandler );
   wxImage::AddHandler( new wxTIFFHandler );
 
-  //  wxXmlResource::Get()->InitAllHandlers();
-  //wxXmlResource::Get()->Load("rc/interfaces.xrc"); 
-
-
   mysettings = new wxConfig(wxT("RMAExpress"),wxT("Bolstad"));
   g_mysettings = mysettings;
 
@@ -338,6 +334,12 @@ bool RMAExpress::OnInit()
     mysettings->Read(wxT("ypos"),&ypos);
     mysettings->Read(wxT("width"),&width);
     mysettings->Read(wxT("height"),&height);
+	if (width < 200){
+		width = 200;
+	}
+	if (height < 200){
+		height = 200;
+	}
   } else {
     xpos=50;
     mysettings->Write(wxT("xpos"),xpos);
