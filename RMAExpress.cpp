@@ -948,12 +948,11 @@ void RMAExpressFrame::OnAbout (wxCommandEvent & event)
   aboutDialog2.SetDescription(t);
   aboutDialog2.SetName(_T("RMAExpress"));
   aboutDialog2.SetWebSite(_T("http://RMAExpress.bmbolstad.com"));
+#ifndef _WIN32
   aboutDialog2.SetIcon(wxIcon(RMAExpress_64_xpm));
-	
+#endif
+
   wxAboutBox(aboutDialog2);
-
-  
-
 }
 
 void RMAExpressFrame::OnExit (wxCommandEvent & event)
