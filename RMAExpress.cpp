@@ -940,23 +940,15 @@ void RMAExpressFrame::OnAbout (wxCommandEvent & event)
 { 
   wxString t = _T("RMAExpress");
 
-  // t.append( _T("\n\nCopyright (C) 2003-2008 B. M. Bolstad\n\nbmb@bmbolstad.com\n"));
-  // t.append( _T("Version "));
-  // t.append(version_number);
-  // wxMessageDialog
-  //  aboutDialog
-  //   ( this, t, _T("About RMAExpress"), wxOK);
-  // aboutDialog.ShowModal();
-
-
   wxAboutDialogInfo aboutDialog2;
 
   
   aboutDialog2.SetVersion(version_number);
-  aboutDialog2.SetCopyright(_T("2003-2010 B. M. Bolstad\n\nbmb@bmbolstad.com\n"));
+  aboutDialog2.SetCopyright(copyright_notice);
   aboutDialog2.SetDescription(t);
   aboutDialog2.SetName(_T("RMAExpress"));
   aboutDialog2.SetWebSite(_T("http://RMAExpress.bmbolstad.com"));
+  aboutDialog2.SetIcon(wxIcon(RMAExpress_64_xpm));
 	
   wxAboutBox(aboutDialog2);
 

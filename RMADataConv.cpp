@@ -281,10 +281,12 @@ void RMADataConvDlg::OnAbout(wxCommandEvent& WXUNUSED(event))
 
   
   aboutDialog2.SetVersion(version_number);
-  aboutDialog2.SetCopyright(_T("2003-2010 B. M. Bolstad\n\nbmb@bmbolstad.com\n"));
+  aboutDialog2.SetCopyright(copyright_notice);
   aboutDialog2.SetDescription(t);
   aboutDialog2.SetName(_T("RMADataConv"));
   aboutDialog2.SetWebSite(_T("http://RMAExpress.bmbolstad.com"));
+  aboutDialog2.SetIcon(wxIcon(RMADataConv_64_xpm));
+  
 
   wxAboutBox(aboutDialog2);
 }  
