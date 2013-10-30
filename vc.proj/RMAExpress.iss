@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=RMAExpress
-AppVerName=RMAExpress 1.0.5 Release
+AppVerName=RMAExpress 1.1.0 In Development
 AppPublisher=RMAExpress
 AppPublisherURL=http://rmaexpress.bmbolstad.com
 AppSupportURL=http://rmaexpress.bmbolstad.com
@@ -14,16 +14,16 @@ WizardImageStretch=no
 WizardImageFile="\\Bmbbox\tmp\RMAExpress\RMAExpress_MasterLOGO_Installer.bmp"
 WizardSmallImageFile="\\Bmbbox\tmp\RMAExpress\RMAExpress_MasterLOGOSmall.bmp"
 WizardImageBackColor=clWhite
-AppCopyright=Copyright (C) 2003-2009 B. M. Bolstad.
+AppCopyright=Copyright (C) 2003-2013 B. M. Bolstad.
 BackSolid=yes
 
 [Tasks]
 Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
 
 [Files]
-Source: "\\Bmbbox\tmp\RMAExpress\RMAExpress.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "\\Bmbbox\tmp\RMAExpress\RMADataConv.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "\\Bmbbox\tmp\RMAExpress\RMAExpressConsole.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMAExpress.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMADataConv.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMAExpressConsole.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "\\Bmbbox\tmp\RMAExpress\RMAExpress_UsersGuide.pdf";  DestDir: "{app}"; Flags: ignoreversion
 Source: "\\Bmbbox\tmp\RMAExpress\vcredist_x86.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
