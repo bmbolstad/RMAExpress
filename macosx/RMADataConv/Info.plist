@@ -21,15 +21,15 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.5</string>
+	<string>1.1.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.5</string>
+	<string>1.1.0</string>
 	<key>CFBundleGetInfoString</key>
-	<string>RMADataConv version 1.0.5, (c) 2004-2011 B. M. Bolstad</string>
+	<string>RMADataConv version 1.0.5, (c) 2004-2013 B. M. Bolstad</string>
 	<key>CFBundleLongVersionString</key>
-	<string>1.0.5, (c) 2004-2011 B. M. Bolstad</string>
+	<string>1.1.0, (c) 2004-2013 B. M. Bolstad</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2004-2011 B. M. Bolstad</string>
+	<string>Copyright 2004-2013 B. M. Bolstad</string>
 	<key>LSRequiresCarbon</key>
 	<true/>
 	<key>CSResourcesFileMapped</key>
