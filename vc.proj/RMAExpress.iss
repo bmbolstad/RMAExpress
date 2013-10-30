@@ -24,14 +24,14 @@ Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "A
 Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMAExpress.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMADataConv.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMAExpressConsole.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "\\Bmbbox\tmp\RMAExpress\RMAExpress_UsersGuide.pdf";  DestDir: "{app}"; Flags: ignoreversion
-Source: "\\Bmbbox\tmp\RMAExpress\vcredist_x86.exe"; DestDir: "{app}"; Flags: ignoreversion
+;Source: "\\Bmbbox\tmp\RMAExpress\RMAExpress_UsersGuide.pdf";  DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\bmb\Downloads\vcredist_x86.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\RMAExpress"; Filename: "{app}\RMAExpress.exe"
 Name: "{group}\RMADataConv"; Filename: "{app}\RMADataConv.exe"
-Name: "{group}\RMAExpress Users Guide"; Filename: "{app}\RMAExpress_UsersGuide.pdf"
+;Name: "{group}\RMAExpress Users Guide"; Filename: "{app}\RMAExpress_UsersGuide.pdf"
 Name: "{userdesktop}\RMAExpress"; Filename: "{app}\RMAExpress.exe"; Tasks: desktopicon
 Name: "{userdesktop}\RMADataConv"; Filename: "{app}\RMADataConv.exe"; Tasks: desktopicon
 
