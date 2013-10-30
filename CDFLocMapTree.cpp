@@ -159,16 +159,15 @@ long CDFLocMapTree::avlRightGrew(CDFLocMapNode **ptr){
       (*ptr)->skew = (*ptr)->Right->skew = 0;
       avlRotLeft(ptr);
     } else {
-
       if ((*ptr)->Right->Left->skew == 1){
-	(*ptr)->skew = -1;
-	(*ptr)->Right->skew = 0;
+		(*ptr)->skew = -1;
+		(*ptr)->Right->skew = 0;
       } else if ((*ptr)->Right->Left->skew == -1){
-	(*ptr)->skew = 0;
-	(*ptr)->Right->skew = 1;
+		(*ptr)->skew = 0;
+		(*ptr)->Right->skew = 1;
       } else {
-	(*ptr)->skew = 0;
-	(*ptr)->Right->skew = 0;
+		(*ptr)->skew = 0;
+		(*ptr)->Right->skew = 0;
       }
       (*ptr)->Right->Left->skew = 0;
       avlRotRight(& (*ptr)->Right);
@@ -196,8 +195,8 @@ long CDFLocMapTree::avlRightGrew(CDFLocMapNode **ptr){
 
 long CDFLocMapTree::InsertNode(CDFLocMapNode **ptr, const LocMapItem *value){
   
-  wxString CurrentName;
-  wxString CompareName;
+  //wxString CurrentName;
+  //wxString CompareName;
   
   long tmp;
 
@@ -205,9 +204,9 @@ long CDFLocMapTree::InsertNode(CDFLocMapNode **ptr, const LocMapItem *value){
     *ptr = new CDFLocMapNode(value);
     return 1;
   } else {
-    CurrentName = ((*ptr)->data)->GetName();
-    CompareName = (value->GetName());
-    if (CurrentName.Cmp(CompareName)   < 0){
+   // CurrentName = ((*ptr)->data)->GetName();
+   // CompareName = (value->GetName());
+    if (((*ptr)->data)->GetName().Cmp(value->GetName()) < 0){
       tmp = InsertNode(&((*ptr)->Left),value);
       if (tmp){
 	return avlLeftGrew(ptr);
@@ -225,13 +224,9 @@ long CDFLocMapTree::InsertNode(CDFLocMapNode **ptr, const LocMapItem *value){
 
 }
 
-
-
 void CDFLocMapTree::Insert(const LocMapItem *value){
   InsertNode(&root,value);
 }
-
-
 
 CDFLocMapNode::CDFLocMapNode(const LocMapItem *dataitem){
 
@@ -240,7 +235,6 @@ CDFLocMapNode::CDFLocMapNode(const LocMapItem *dataitem){
   Left = 0;
   Right = 0;
 }
-
 
 CDFLocMapNode::~CDFLocMapNode(){
   if (Left != 0){
@@ -255,11 +249,6 @@ CDFLocMapNode::~CDFLocMapNode(){
 long CDFLocMapNode::getSkew(){
   return skew;
 }
-
-
-
-
-
 
 LocMapItem::LocMapItem(){
 
@@ -320,7 +309,6 @@ LocMapItem *CDFLocMapTree::FindNode(CDFLocMapNode **ptr, const wxString &x){
     result = NULL;
   } else {
     CurrentName = ((*ptr)->data)->GetName();
-    //cout << "Looking for " << x << " at " <<CurrentName << endl;
     if (CurrentName.Cmp(x)   < 0){
       result = FindNode(&((*ptr)->Left),x);
     } else if (CurrentName.Cmp(x)   >  0){

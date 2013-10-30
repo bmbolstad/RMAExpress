@@ -398,7 +398,7 @@ int not_main(int argc, char **argv)
   // Application starting messages
 
   wxPrintf(AppName+ version_number + _T("\n"));
-  wxPrintf(AppAuthor + _T("\n"));
+  wxPrintf(copyright_notice + _T("\n"));
 
   
   // Check that two setting files have been supplied

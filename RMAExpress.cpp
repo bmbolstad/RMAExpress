@@ -326,10 +326,6 @@ bool RMAExpress::OnInit()
   wxImage::AddHandler( new wxJPEGHandler );
   wxImage::AddHandler( new wxTIFFHandler );
 
-  //  wxXmlResource::Get()->InitAllHandlers();
-  //wxXmlResource::Get()->Load("rc/interfaces.xrc"); 
-
-
   mysettings = new wxConfig(wxT("RMAExpress"),wxT("Bolstad"));
   g_mysettings = mysettings;
 
@@ -338,6 +334,12 @@ bool RMAExpress::OnInit()
     mysettings->Read(wxT("ypos"),&ypos);
     mysettings->Read(wxT("width"),&width);
     mysettings->Read(wxT("height"),&height);
+	if (width < 200){
+		width = 200;
+	}
+	if (height < 200){
+		height = 200;
+	}
   } else {
     xpos=50;
     mysettings->Write(wxT("xpos"),xpos);
@@ -940,28 +942,19 @@ void RMAExpressFrame::OnAbout (wxCommandEvent & event)
 { 
   wxString t = _T("RMAExpress");
 
-  // t.append( _T("\n\nCopyright (C) 2003-2008 B. M. Bolstad\n\nbmb@bmbolstad.com\n"));
-  // t.append( _T("Version "));
-  // t.append(version_number);
-  // wxMessageDialog
-  //  aboutDialog
-  //   ( this, t, _T("About RMAExpress"), wxOK);
-  // aboutDialog.ShowModal();
-
-
   wxAboutDialogInfo aboutDialog2;
 
   
   aboutDialog2.SetVersion(version_number);
-  aboutDialog2.SetCopyright(_T("2003-2010 B. M. Bolstad\n\nbmb@bmbolstad.com\n"));
+  aboutDialog2.SetCopyright(copyright_notice);
   aboutDialog2.SetDescription(t);
   aboutDialog2.SetName(_T("RMAExpress"));
   aboutDialog2.SetWebSite(_T("http://RMAExpress.bmbolstad.com"));
-	
+#ifndef _WIN32
+  aboutDialog2.SetIcon(wxIcon(RMAExpress_64_xpm));
+#endif
+
   wxAboutBox(aboutDialog2);
-
-  
-
 }
 
 void RMAExpressFrame::OnExit (wxCommandEvent & event)
