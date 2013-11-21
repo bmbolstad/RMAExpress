@@ -15,3 +15,5 @@ vc.proj/Release
 Dump_CDFRME
 *.tmp
 *.exe
+doc/Manual/RMAExpress_UsersGuide.*
+!doc/Manual/RMAExpress_UsersGuide.tex
