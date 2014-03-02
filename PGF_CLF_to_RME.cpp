@@ -558,14 +558,14 @@ void Convert_PGF_CLF_to_RME_with_MPS(const wxString &pgf_fname,
 
   vector<int> currentProbesets;
 
-  int curProbeset_id;
+  wxString curProbeset_id;
   int curNumberProbes;
   for (k = 0; k < mps_get_number_probesets(mps); k++){
     curProbeset_id = mps_get_probeset_id(mps,k);
     curNumberProbes = mps_get_probe_count(mps,k);
     currentProbesets = mps_get_probeset_list(mps,k);
     // wxPrintf(_T("%d %d %d\n"),curProbeset_id,curNumberProbes,currentProbesets.size());
-    store.WriteString(wxString::Format(wxT("%d"), (int)curProbeset_id));
+    store.WriteString(curProbeset_id);
 
     // check that curNumberofProbes can actually be found
     int curCount=0;
@@ -576,7 +576,7 @@ void Convert_PGF_CLF_to_RME_with_MPS(const wxString &pgf_fname,
     if (curCount == curNumberProbes){
       store.Write32(curNumberProbes);
     } else {
-      wxPrintf(_T("Warning MPS %d should have %d probes, but found only %d\n"),(int)curProbeset_id,curNumberProbes,curCount);
+      wxPrintf(_T("Warning MPS %s should have %d probes, but found only %d\n"),curProbeset_id,curNumberProbes,curCount);
       store.Write32(curCount);
     }
     for (j = 0; j < currentProbesets.size(); j++){

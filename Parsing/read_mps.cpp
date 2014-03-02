@@ -12,6 +12,7 @@
  ** Mar 17, 2008 - Initial version
  ** June 24, 2008 - change char * to const char * where appropriate 
  ** May 19, 2009 - Fix how level0 lines are parsed
+ ** Mar 1, 2014 - Probeset_id and Transcript ID may be character strings (and not just integers)
  ** 
  ** 
  ******************************************************************/
@@ -111,8 +112,8 @@ typedef struct{
  *******************************************************************/
 
 typedef struct{
-  std::vector<int> probeset_id;
-  std::vector<int> transcript_cluster_id;
+  std::vector<wxString> probeset_id;
+  std::vector<wxString> transcript_cluster_id;
   std::vector<std::vector<int> > probeset_list;   
   std::vector<int> probe_count;
 } mps_data;
@@ -745,8 +746,8 @@ void insert_level0(char *buffer, mps_data *probesets, header_0 *header0){
   //wxPrintf(_T("%d \n"),tokenset_size(cur_tokenset));
   
   if (tokenset_size(cur_tokenset) == 4){
-    probesets->probeset_id.push_back(atoi(get_token(cur_tokenset,header0->probeset_id)));
-    probesets->transcript_cluster_id.push_back(atoi(get_token(cur_tokenset,header0->transcript_cluster_id)));
+    probesets->probeset_id.push_back(wxString(get_token(cur_tokenset,header0->probeset_id)));
+    probesets->transcript_cluster_id.push_back(wxString(get_token(cur_tokenset,header0->transcript_cluster_id)));
     probesets->probe_count.push_back(atoi(get_token(cur_tokenset,header0->probe_count)));
   
     // wxPrintf(_T("%d %d %d\n"), atoi(get_token(cur_tokenset,header0->probeset_id)),
@@ -845,7 +846,7 @@ int mps_get_number_probesets(mps_file *my_mps){
 
 }
 
-int mps_get_probeset_id(mps_file *my_mps,int index){
+wxString mps_get_probeset_id(mps_file *my_mps,int index){
   return my_mps->probesets->probeset_id[index];
 }
 
