@@ -144,7 +144,7 @@ void Convert_PGF_CLF_to_RME(const wxString &pgf_fname,
   ProbesetTypes.Insert(wxString("normgene->intron",wxConvUTF8),1);
   ProbesetTypes.Insert(wxString("normgene->exon:main",wxConvUTF8),2);
   ProbesetTypes.Insert(wxString("normgene->exon",wxConvUTF8),3);
-  ProbesetTypes.SetCount(4); 
+  ProbesetTypes.SetCount(3); 
   for (i =0;  i < numberOfTypes; i++){
     if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("main"))) == 0){
       ProbeSetCount+=pgf_probe_types[i].count;
@@ -499,7 +499,8 @@ void Convert_PGF_CLF_to_RME_with_MPS(const wxString &pgf_fname,
   ProbesetTypes.Insert(wxString("normgene->intron",wxConvUTF8),1);
   ProbesetTypes.Insert(wxString("normgene->exon:main",wxConvUTF8),2);
   ProbesetTypes.Insert(wxString("main:normgene->exon",wxConvUTF8),3);
-  ProbesetTypes.SetCount(4);
+  ProbesetTypes.Insert(wxString("normgene->exon",wxConvUTF8),4);
+  ProbesetTypes.SetCount(5);
   //for (i = 0; i < numberOfTypes; i++){
   //  ProbesetTypes.Insert(wxString(pgf_probe_types[i].type,wxConvUTF8),i);
   //} 
