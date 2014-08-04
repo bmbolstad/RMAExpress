@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C6CE1DD2-4507-4D5F-BEE5-04BEA6825D13}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WINVER=0x0400;__WXMSW__;_WINDOWS;_DEBUG;__WXDEBUG__;_CRT_SECURE_NO_DEPRECATE;wxUSE_GUI=1;RMA_GUI_APP;BUFFERED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw30ud_core.lib;wxbase30ud.lib;comctl32.lib;rpcrt4.lib;winmm.lib;advapi32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)RMADataConv.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WINVER=0x0400;__WXMSW__;_WINDOWS;wxUSE_GUI=1;_UNICODE;_CRT_SECURE_NO_WARNINGS;RMA_GUI_APP;BUFFERED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw30u_core.lib;wxbase30u.lib;comctl32.lib;rpcrt4.lib;winmm.lib;advapi32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)RMADataConv.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Storage\BufferedMatrix.h" />
+    <ClInclude Include="..\CDFLocMapTree.h" />
+    <ClInclude Include="..\DataGroup.h" />
+    <ClInclude Include="..\Parsing\fread_functions.h" />
+    <ClInclude Include="..\Storage\Matrix.h" />
+    <ClInclude Include="..\PGF_CLF_to_RME.h" />
+    <ClInclude Include="..\PreferencesDialog.h" />
+    <ClInclude Include="..\Parsing\read_cdf_xda.h" />
+    <ClInclude Include="..\Parsing\read_cel_structures.h" />
+    <ClInclude Include="..\Parsing\read_celfile_generic.h" />
+    <ClInclude Include="..\Parsing\read_celfile_text.h" />
+    <ClInclude Include="..\Parsing\read_celfile_xda.h" />
+    <ClInclude Include="..\Parsing\read_clf.h" />
+    <ClInclude Include="..\Parsing\read_generic.h" />
+    <ClInclude Include="..\Parsing\read_mps.h" />
+    <ClInclude Include="..\Parsing\read_pgf.h" />
+    <ClInclude Include="..\Parsing\read_ps.h" />
+    <ClInclude Include="..\Parsing\read_rme_cdf.h" />
+    <ClInclude Include="..\rma_common.h" />
+    <ClInclude Include="..\RMADataConv.h" />
+    <ClInclude Include="..\Parsing\stdint.h" />
+    <ClInclude Include="..\threestep_common.h" />
+    <ClInclude Include="..\version_number.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\RMADataConv.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Storage\BufferedMatrix.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\CDFLocMapTree.cpp" />
+    <ClCompile Include="..\DataGroup.cpp" />
+    <ClCompile Include="..\Parsing\fread_functions.c" />
+    <ClCompile Include="..\Storage\Matrix.cpp" />
+    <ClCompile Include="..\PGF_CLF_to_RME.cpp" />
+    <ClCompile Include="..\PreferencesDialog.cpp" />
+    <ClCompile Include="..\Parsing\read_cdf_xda.c" />
+    <ClCompile Include="..\Parsing\read_celfile_generic.c" />
+    <ClCompile Include="..\Parsing\read_celfile_text.c" />
+    <ClCompile Include="..\Parsing\read_celfile_xda.c" />
+    <ClCompile Include="..\Parsing\read_clf.c" />
+    <ClCompile Include="..\Parsing\read_generic.c" />
+    <ClCompile Include="..\Parsing\read_mps.cpp" />
+    <ClCompile Include="..\Parsing\read_pgf.c" />
+    <ClCompile Include="..\Parsing\read_ps.cpp" />
+    <ClCompile Include="..\Parsing\read_rme_cdf.cpp" />
+    <ClCompile Include="..\rma_common.c" />
+    <ClCompile Include="..\RMADataConv.cpp" />
+    <ClCompile Include="..\threestep_common.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
