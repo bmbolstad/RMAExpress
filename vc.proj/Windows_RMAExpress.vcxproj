@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4F4B2F2B-C9B8-4477-AC89-128859021B68}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WINVER=0x0400;__wxMSW__;_WINDOWS;wxUSE_GUI=1;_UNICODE;_DEBUG;__WXDEBUG__;_CRT_SECURE_NO_DEPRECATE;BUFFERED;RMA_GUI_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw30ud_core.lib;wxbase30ud.lib;comctl32.lib;rpcrt4.lib;winmm.lib;advapi32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$RMAExpress.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <Profile>false</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WINVER=0x0400;__wxMSW__;_WINDOWS;wxUSE_GUI=1;_UNICODE;_CRT_SECURE_NO_DEPRECATE;RMA_GUI_APP;BUFFERED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw30u_core.lib;wxbase30u.lib;comctl32.lib;rpcrt4.lib;winmm.lib;advapi32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)RMAExpress.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\graphing\axes.h" />
+    <ClInclude Include="..\BitmapSettingDialog.h" />
+    <ClInclude Include="..\graphing\boxplot.h" />
+    <ClInclude Include="..\storage\BufferedMatrix.h" />
+    <ClInclude Include="..\CDFLocMapTree.h" />
+    <ClInclude Include="..\DataGroup.h" />
+    <ClInclude Include="..\expressionGroup.h" />
+    <ClInclude Include="..\parsing\fread_functions.h" />
+    <ClInclude Include="..\GlobalPrintSettings.h" />
+    <ClInclude Include="..\storage\Matrix.h" />
+    <ClInclude Include="..\preprocess\matrix_functions.h" />
+    <ClInclude Include="..\preprocess\medianpolish.h" />
+    <ClInclude Include="..\PMProbeBatch.h" />
+    <ClInclude Include="..\preprocess\pnorm.h" />
+    <ClInclude Include="..\PreferencesDialog.h" />
+    <ClInclude Include="..\preprocess\psi_fns.h" />
+    <ClInclude Include="..\QCStatsVisualize.h" />
+    <ClInclude Include="..\preprocess\qnorm.h" />
+    <ClInclude Include="..\RawDataVisualize.h" />
+    <ClInclude Include="..\parsing\read_cdf_xda.h" />
+    <ClInclude Include="..\parsing\read_cel_structures.h" />
+    <ClInclude Include="..\parsing\read_celfile_generic.h" />
+    <ClInclude Include="..\parsing\read_celfile_text.h" />
+    <ClInclude Include="..\parsing\read_celfile_xda.h" />
+    <ClInclude Include="..\parsing\read_generic.h" />
+    <ClInclude Include="..\parsing\read_rme_cdf.h" />
+    <ClInclude Include="..\residualimages.h" />
+    <ClInclude Include="..\ResidualsDataGroup.h" />
+    <ClInclude Include="..\ResidualsImagesDrawing.h" />
+    <ClInclude Include="..\preprocess\rlm_anova.h" />
+    <ClInclude Include="..\preprocess\rma_background3.h" />
+    <ClInclude Include="..\rma_common.h" />
+    <ClInclude Include="..\RMADataConv.h" />
+    <ClInclude Include="..\RMAExpress.h" />
+    <ClInclude Include="..\parsing\stdint.h" />
+    <ClInclude Include="..\threestep_common.h" />
+    <ClInclude Include="..\version_number.h" />
+    <ClInclude Include="..\preprocess\weightedkerneldensity.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\RMAExpress.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\graphing\axes.cpp" />
+    <ClCompile Include="..\BitmapSettingDialog.cpp" />
+    <ClCompile Include="..\graphing\boxplot.cpp" />
+    <ClCompile Include="..\storage\BufferedMatrix.cpp" />
+    <ClCompile Include="..\CDFLocMapTree.cpp" />
+    <ClCompile Include="..\DataGroup.cpp" />
+    <ClCompile Include="..\expressionGroup.cpp" />
+    <ClCompile Include="..\parsing\fread_functions.c" />
+    <ClCompile Include="..\preprocess\linpack\linpack.c" />
+    <ClCompile Include="..\storage\Matrix.cpp" />
+    <ClCompile Include="..\preprocess\matrix_functions.c" />
+    <ClCompile Include="..\preprocess\medianpolish.c" />
+    <ClCompile Include="..\PMProbeBatch.cpp" />
+    <ClCompile Include="..\preprocess\pnorm.c" />
+    <ClCompile Include="..\PreferencesDialog.cpp" />
+    <ClCompile Include="..\preprocess\psi_fns.c" />
+    <ClCompile Include="..\QCStatsVisualize.cpp" />
+    <ClCompile Include="..\preprocess\qnorm.c" />
+    <ClCompile Include="..\RawDataVisualize.cpp" />
+    <ClCompile Include="..\parsing\read_cdf_xda.c" />
+    <ClCompile Include="..\parsing\read_celfile_generic.c" />
+    <ClCompile Include="..\parsing\read_celfile_text.c" />
+    <ClCompile Include="..\parsing\read_celfile_xda.c" />
+    <ClCompile Include="..\parsing\read_generic.c" />
+    <ClCompile Include="..\parsing\read_rme_cdf.cpp" />
+    <ClCompile Include="..\residualimages.cpp" />
+    <ClCompile Include="..\ResidualsDataGroup.cpp" />
+    <ClCompile Include="..\ResidualsImagesDrawing.cpp" />
+    <ClCompile Include="..\preprocess\rlm_anova.c" />
+    <ClCompile Include="..\preprocess\rma_background3.c" />
+    <ClCompile Include="..\rma_common.c" />
+    <ClCompile Include="..\RMAExpress.cpp" />
+    <ClCompile Include="..\threestep_common.c" />
+    <ClCompile Include="..\preprocess\weightedkerneldensity.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

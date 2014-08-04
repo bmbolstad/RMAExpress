@@ -17,3 +17,6 @@ Dump_CDFRME
 *.exe
 doc/Manual/RMAExpress_UsersGuide.*
 !doc/Manual/RMAExpress_UsersGuide.tex
+vc.proj/UpgradeLog.htm
+vc.proj/Windows_RMAExpress.opensdf
+vc.proj/Windows_RMAExpress.sdf

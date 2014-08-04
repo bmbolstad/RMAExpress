@@ -46,7 +46,7 @@ static inline double trunc(double d)
   return((d < 0? floor(-d): floor(d)));
 }
 
-static double log1p(double x)
+/*static double log1p(double x)
 {
     double u;
 
@@ -55,7 +55,7 @@ static double log1p(double x)
       return (x);
     else
       return (log(u) * (x / (u - 1.0)));
-}
+}*/
 #endif
 #endif
 
