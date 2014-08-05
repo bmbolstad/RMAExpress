@@ -4,7 +4,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 
-\newcommand{\curversion}{1.0.5 Release }
+\newcommand{\curversion}{1.1.0 Release }
 
 
 
@@ -19,11 +19,11 @@
 
 \chapter{Introduction}
 
-This document is intended as a introductory guide to the RMAExpress \curversion applications. It does not give great details on the underlying algorithms or their implementations. For such materials, the reader is referred to the publications at the conclusion of this document. Although RMAExpress is written to be cross platform, this documentation will concentrate on the Microsoft Windows binaries. The appearance of windows and menus shown in this document may be different on your operating system.
+This document is intended as a introductory guide to the RMAExpress \curversion applications. It does not give great details on the underlying algorithms or their implementations. For such materials, the reader is referred to the publications at the conclusion of this document. Although RMAExpress is written to be cross platform, this documentation will concentrate mostly on the Microsoft Windows binaries. Prebuilt binaries of RMAExpress and the associated family of programs are availablee at the website \url{http://rmaexpress.bmbolstad.com} for both Microsoft Windows and Apple OS X. Additionally source code may be used to build the application on Linux operating systems.  The appearance of windows and menus shown in this document may be different on your operating system.
 
 \section{What is RMAExpress?}
 
-RMAExpress is a cross-platform program which provides methods for producing RMA expression values from Affymetrix CEL files. It's focus is on arrays used for expression analysis. In particular, 3' IVT expression arrays, Exon arrays and the WT Gene arrays can all be processed by RMAExpress.
+RMAExpress is a cross-platform program which provides methods for producing RMA expression values from Affymetrix CEL files. It has a focus on arrays used for expression analysis. In particular, 3' IVT expression arrays, Exon arrays and the WT Gene arrays can all be processed by RMAExpress.
 
 There are three main applications making up this software package
 \begin{itemize}
@@ -38,12 +38,10 @@ It should be noted that RMAExpress is open source software distributed under the
 
 \section{Installing the software}
 
+\subsection{Installing the Software on Microsoft Windows}
 To install this software onto a Microsoft Windows operating system first download the installer from the website. Double clicking on the installer binary should open the installer. Installation proceeds as follows:
 \begin{enumerate}
-\item The first dialog presented to you should resemble the following:\\ \\
-\begin{center}
-\includegraphics[scale=0.75]{install0}
-\end{center}
+\item Depending on your Windows operating system and UAC settings you may get a dialog asking if you wish to allow a program to make changes to your computer.
 
 You should click {\it Yes} on this dialog. Answering {\it No} will close the installer and RMAExpress will not be installed. 
 
@@ -86,6 +84,9 @@ At this point installation is completed. If you have chosen to install icons the
 
 
 \end{enumerate}
+
+\subsection{Installing the Software on Apple OS X}
+
 
 \chapter{RMAExpress: the main application} \label{chap:RMAExpress}
 
@@ -353,7 +354,7 @@ RMADataConv is an application for converting CDF and CEL files to an intermediat
 
 The data converter is a dialog based application. When you launch RMADataConv you are presented with this main dialog box: 
 \begin{center}
-\includegraphics[scale=0.45]{dataconvertor}
+\includegraphics[scale=0.45]{DataConvertor.png}
 \end{center}
 
 There are two main groupings of fields, corresponding to the two main file conversion processes. These are for
