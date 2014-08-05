@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=RMAExpress
-AppVerName=RMAExpress 1.1.0 In Development
+AppVerName=RMAExpress 1.1.0
 AppPublisher=RMAExpress
 AppPublisherURL=http://rmaexpress.bmbolstad.com
 AppSupportURL=http://rmaexpress.bmbolstad.com
@@ -14,7 +14,7 @@ WizardImageStretch=no
 WizardImageFile="C:\Users\bmb\Development\RMAExpress\RMAExpress_MasterLOGO_Installer.bmp"
 WizardSmallImageFile="C:\Users\bmb\Development\RMAExpress\RMAExpress_MasterLOGOSmall.bmp"
 WizardImageBackColor=clWhite
-AppCopyright=Copyright (C) 2003-2013 B. M. Bolstad.
+AppCopyright=Copyright (C) 2003-2014 B. M. Bolstad.
 BackSolid=yes
 
 [Tasks]
@@ -25,7 +25,7 @@ Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMAExpress.exe"; De
 Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMADataConv.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\bmb\Development\RMAExpress\vc.proj\Release\RMAExpressConsole.exe"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "\\Bmbbox\tmp\RMAExpress\RMAExpress_UsersGuide.pdf";  DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\bmb\Downloads\vcredist_x86.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\bmb\Development\vcredist_x86.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -36,5 +36,5 @@ Name: "{userdesktop}\RMAExpress"; Filename: "{app}\RMAExpress.exe"; Tasks: deskt
 Name: "{userdesktop}\RMADataConv"; Filename: "{app}\RMADataConv.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\vcredist_x86.exe";  Parameters: "/q:a"; Flags:
+Filename: "{app}\vcredist_x86.exe";  Parameters: "/quiet"; Flags:
 Filename: "{app}\RMAExpress.exe"; Description: "Launch RMAExpress"; Flags: nowait postinstall skipifsilent
