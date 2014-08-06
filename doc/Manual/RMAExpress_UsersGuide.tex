@@ -396,23 +396,9 @@ Note that typically only some of these fields need to be filled for a conversion
 \item {\it Quit}: For quiting RMADataConv
 \end{itemize}
 
-\section{Converting a set of CEL or a CDF file to RME format}
+\section{Turning PGF and CLF files into CDFRME files}
 
-The simplest procedure for which you might use RMADataConv is to convert CEL and CDF files to RME format. Note that normally you would not want to do this, since RMAExpress can read CEL and CDF files directly. However, if it happens that you expect to have to re-read in your CDF and CEL files repeatedly into RMAExpress you may find that RME files can be read into RMAExpress faster than CEL and CDF files. The speed gains are most impressive when your CDF and CEL files are in text format.
-
-To carry out the conversion you should specify a directory containing all your CEL files in the {\it CEL File Directory} field and the full path, including file name, to the CDF file in the {\it CDF File} field. The {\it Output directory} field should specify the location to store the processed RME files. The other two fields may be left blank. Clicking {\it Convert} will start the conversion process. When it finishes you should find a number of .RME files in the location specified. 
-
-RMADataConv can also convert CEL files or a CDF file alone to RME format. Just leave the other field blank.
-
-\section{Restricting the set of probesets used}
-
-Sometimes you may have a reason to remove some probesets from your dataset, since you do not wish to have them included when RMA does the quantile normalization and you do not require expression values for these probesets. 
-
-To do this you need a text file containing only the names of the probesets which should be kept in the dataset. There should be one name per line in this file. Specify the full path to this file in the {\it Restrict File} field. You should  specify a directory containing all your CEL files in the {\it Cel File Directory} field and the full path, including file name, to the CDF file in the {\it CDF File} field. It is also recommended that you specify a new name for the RME format CDF file, so as to not confuse it with the original file. A recommended nomenclature would be {\it CDFNAME}restrict. So suppose that you were dealing with HG\_U133A chips then you would put the string {\tt HGU\_133Arestrict} in the  {\it Force CDF Name} field. Finally, the {\it Output directory} field should specify the location to store the processed RME files.  Clicking {\it Convert} will start the conversion process. When it finishes you should find the .RME files in the specified output location. 
-
-\section{Turning PGF and CLF files into CDFRME files for Exon Array Analysis}
-
-Affymetrix provides unsupported CDF files for the Exon arrays (at the time at which this manual was written). While RMAExpress may work with these CDF files, they are also to be considered unsupported (ie use at your own risk). Instead, the PGF and CLF files should be used and converted into an appropriate CDFRME file. The RMADataConv application is designed to handle this process. In particular, you should specify the PGF and CLF files in the appropriate fields. The {\it Output directory} field should specify the location to store the output CDFRME file. Clicking {\it Convert} will start the conversion process. When it finishes you should find the CDFRME files in the location specified. A CDFRME file may be used interchangeably with a CDF file in the main RMAExpress application.
+For some array types there are no CDF files supplied by Affymetrix. Primarily these are Exon and WT Gene array (including HTA arrays). For these array types the PGF and CLF files should be used and converted into an appropriate CDFRME file. The RMADataConv application is designed to handle this process. In particular, you should specify the PGF and CLF files in the appropriate fields. The {\it Output directory} field should specify the location to store the output CDFRME file. Clicking {\it Convert} will start the conversion process. When it finishes you should find the CDFRME files in the location specified. A CDFRME file may be used interchangeably with a CDF file in the main RMAExpress application.
 
 The naming convention for the CDFRME file that is produced is as follows: 
 \begin{verbatim}
@@ -423,6 +409,7 @@ so for example
 HuEx-1_0-st.r2_pgfclf.CDFRME
 \end{verbatim}
 
+Affymetrix provides unsupported CDF files for the Exon arrays (at the time at which this manual was written). While RMAExpress may work with these CDF files, they are also to be considered unsupported (ie use at your own risk).
 
 
 \subsection{Using PS files}
@@ -451,15 +438,19 @@ so for example
 HuEx-1_0-st.r2_mps_HuEx-1_0-st-v2.r2.dt1.hg18.extended.CDFRME
 \end{verbatim}
 
-\section{Merging MG\_U74A and MG\_U74Av2 datasets}
+\section{Converting a set of CEL or a CDF file to RME format}
 
-Sometimes there are two very closely related versions of the same chip. In particular if the majority of the probesets are in common between the two chips, in terms of both location and sequence, then RMADataConv can be used to create hybrid CDF and CEL files in the RME format. At the time of writing the only two types of chips for which this is possible are  MG\_U74A and MG\_U74Av2  or HG\_U95A and  HG\_U95Av2. It is not recommended that you try to merge any other chip types. In these instructions we will assume that the user wants to merge together MG\_U74A and MG\_U74Av2 data.
+The simplest procedure for which you might use RMADataConv is to convert CEL and CDF files to RME format. Note that normally you would not want to do this, since RMAExpress can read CEL and CDF files directly. However, if it happens that you expect to have to re-read in your CDF and CEL files repeatedly into RMAExpress you may find that RME files can be read into RMAExpress faster than CEL and CDF files. The speed gains are most impressive when your CDF and CEL files are in text format.
 
-The conversion happens in two steps. First all the version 1 chips are converted, then all the version 2 chips are converted. 
+To carry out the conversion you should specify a directory containing all your CEL files in the {\it CEL File Directory} field and the full path, including file name, to the CDF file in the {\it CDF File} field. The {\it Output directory} field should specify the location to store the processed RME files. The other two fields may be left blank. Clicking {\it Convert} will start the conversion process. When it finishes you should find a number of .RME files in the location specified. 
 
-To start, set the path to all your version 1 cel files in the {\it Cel File Directory} field (only MG\_U74A CEL files should be in this directory) and the full path, including file name, to the MG\_U74A CDF file in the {\it CDF File} field. In the {\it Restrict File} field  you want a text file which contains the names of the probesets that are to be conserved. For MG\_U74A/Av2 datasets you can get this from \url{http://bmbolstad.com/misc/mixtureCDF/MGU74Aoverlap.txt}. To be sure that the hybrid data is not confused with the original data you should put a string in the {\it Force CDF Name} field, in this case the recommended name would be {\tt MGU74Amix}. Last, set the {\it Output directory} field to specify where the processed RME files will be stored. Click {\it Convert} to start the conversion process. When it finishes you should find the .RME files for your MG\_U74A arrays in the specified output location. 
+RMADataConv can also convert CEL files or a CDF file alone to RME format. Just leave the other field blank.
 
-Now you will need to repeat the process with the MG\_U74Av2 CEL files. So now set the path to all your version 2 cel files in the {\it Cel File Directory} field and the full path, including file name, to the MG\_U74Av2 CDF file in the {\it CDF File} field. The {\it Restrict File},  {\it Force CDF Name} and  {\it Output directory} fields should be kept the same as before. Click {\it Convert} to start the conversion process. When it finishes you should now also find the .RME files for your MG\_U74Av2 arrays in the specified output location. You should now be able to load your hybrid dataset into RMAExpress using the {\it Read Processed files} option in the {\it File} menu.
+\section{Restricting the set of probesets used}
+
+Sometimes you may have a reason to remove some probesets from your dataset, since you do not wish to have them included when RMA does the quantile normalization and you do not require expression values for these probesets. 
+
+To do this you need a text file containing only the names of the probesets which should be kept in the dataset. There should be one name per line in this file. Specify the full path to this file in the {\it Restrict File} field. You should  specify a directory containing all your CEL files in the {\it Cel File Directory} field and the full path, including file name, to the CDF file in the {\it CDF File} field. It is also recommended that you specify a new name for the RME format CDF file, so as to not confuse it with the original file. A recommended nomenclature would be {\it CDFNAME}restrict. So suppose that you were dealing with HG\_U133A chips then you would put the string {\tt HGU\_133Arestrict} in the  {\it Force CDF Name} field. Finally, the {\it Output directory} field should specify the location to store the processed RME files.  Clicking {\it Convert} will start the conversion process. When it finishes you should find the .RME files in the specified output location. 
 
 
 \chapter{RMAExpressConsole: the console application} \label{chap:RMAExpressConsole}
@@ -479,38 +470,6 @@ For \underline{version 2}: the second line should contain the name of the file t
 For \underline{version 3}: (introduced at 0.5 alpha 3) the second line should contain the name of the file to store the RMA expression values (including full path if not current directory). The third line should be one of {\it text} or {\it binary} which will control whether the outputted expression values are written as text or in the binary format. The fourth line should give a path location for storing temporary files, if needed. The fifth line states what sort of images should be produced. This can be any of {\it residuals},  {\it pos.resids}, {\it neg.resids}, {\it sign.resids}, {\it all.resids} and {\it none}. These images will be stored in the same directory as the RMA expression values. Subsequent lines could be one of: {\tt no\_background} or {\tt no\_normalization}, to turn off some of the pre-processing stages. However, it is not recommended you turn off these off. As of version 1.0 beta 1 you may also use the {\tt plm\_summarize} term here. This will cause the PLM summarization method to be used instead of the default median polish summarization. Additionally using this option will cause the console application to compute RLE and NUSE summary values and return these in separate text file outputs. Note that the {\tt plm\_summarize} option will be slower than the default median polish.
 
 For \underline{version 4}: (introduced at 1.0 beta 7) the second line should contain the name of the file to store the RMA expression values (including full path if not current directory). The third line should be one of {\it text} or {\it binary} which will control whether the outputted expression values are written as text or in the binary format. The fourth line should give a path location for storing temporary files, if needed. The fifth line states what sort of images should be produced. This can be any of {\it residuals},  {\it pos.resids}, {\it neg.resids}, {\it sign.resids}, {\it all.resids} and {\it none}. These images will be stored in the same directory as the RMA expression values. The sixth line should be the number of rows (probes) to keep in the memory buffer and should be an positive integer value. The seventh line should be the the number of columns (arrays) to keep in the column buffer and should be a positive integer value.  Subsequent lines could be one of: {\tt no\_background} or {\tt no\_normalization}, to turn off some of the pre-processing stages. Another option is {\tt plm\_summarize} to use PLM summarization rather than median polish (the default).
-
-
-
-\section{How long will it take?}
-
-
-\begin{figure}
-\centering
-\includegraphics[width=4in,height=4in]{Runtimes.pdf}
-\caption{Running times using RMAExpressConsole 1.0 Release} \label{timingtest}
-\end{figure}
-
-The amount of time it will take to process a set of CEL files and process them to RMA expression values depends on a number of factors including:
-\begin{itemize}
-\item Number of probes and probesets on the chip
-\item Number of CEL files
-\item Configuration of computer including processor speed, amount of RAM, operating system.
-\item Configuration of RMAExpress (or RMAExpressConsole)
-\end{itemize}
-
-A set of timing tests were run using RMAExpressConsole 0.4b1 on a machine with the following basic configuration:
-\begin{itemize}
-\item Version: RMAExpressConsole 0.4b1 with version 2 output file but no output of plots
-\item OS: Fedora Core 9 x86\_64 Linux running kernel 2.6.25.6-55.fc9.x86\_64
-\item Processor: AMD Athlon X2 5600+ 
-\item RAM: 8 GB DDR2 PC6400
-\item Chip type: HGU-133A Plus 2.0
-\item Number of CEL files: Varied from 10 to 2500
-\item Buffer size: 1 arrays, 25000 probes 
-\item Timing: done using the shell command time and the output ``Real''.
-\end{itemize}
-with the results shown in Figure \ref{timingtest}. It can be seen from this plot that, at least for this range of the number of CEL files, the processing time is roughly linear. The largest dataset run was 2500 CEL files and had a total running of approximately 163 minutes. This highlights the relative efficiency of RMAExpress and its ability to handle extremely large datasets.
 
 
 
@@ -592,7 +551,9 @@ The PLM methodology is described in:
 Quality assessment using the PLM methodology is described in:
 \begin{itemize}
 \item Bolstad BM, Collin F, Brettschneider J, Simpson K, Cope L, Irizarry RA, and Speed TP. (2005) Quality Assessment of Affymetrix GeneChip Data in Bioinformatics and Computational Biology Solutions Using R and Bioconductor. Gentleman R, Carey V, Huber W, Irizarry R, and  Dudoit S. (Eds.), Springer, 2005.
-\item Brettschneider, J, Collin, F, Bolstad, BM, and Speed, TP (2008) Quality assessment for short oligonucleotide microarray data. To appear in Technometrics.
+\item Brettschneider J, Collin F, Bolstad BM, and Speed TP. (2008) Quality Assessment for Short Oligonucleotide Microarray Data Technometrics 50(3):241-264
+\item Brettschneider J, Collin F, Bolstad BM, and Speed TP. (2008) Rejoinder for "Quality Assessment for Short Oligonucleotide Microarray Data" Technometrics 50(3):279-283 
+
 \end{itemize}
 
 
@@ -803,6 +764,53 @@ Probeset names &  int - length of string & Number of probesets \\
 Expression values & double - stored in column order & Number of arrays by\\
                   &                                 & number of probesets \\ \hline
 \end{tabular}
+
+
+\chapter{Miscellaneous}
+
+This appendix contains information that is largely outdated and/or not relevant to many users.
+
+\section{Merging MG\_U74A and MG\_U74Av2 datasets}
+
+Sometimes there are two very closely related versions of the same chip. In particular if the majority of the probesets are in common between the two chips, in terms of both location and sequence, then RMADataConv can be used to create hybrid CDF and CEL files in the RME format. At the time of writing the only two types of chips for which this is possible are  MG\_U74A and MG\_U74Av2  or HG\_U95A and  HG\_U95Av2. It is not recommended that you try to merge any other chip types. In these instructions we will assume that the user wants to merge together MG\_U74A and MG\_U74Av2 data.
+
+The conversion happens in two steps. First all the version 1 chips are converted, then all the version 2 chips are converted. 
+
+To start, set the path to all your version 1 cel files in the {\it Cel File Directory} field (only MG\_U74A CEL files should be in this directory) and the full path, including file name, to the MG\_U74A CDF file in the {\it CDF File} field. In the {\it Restrict File} field  you want a text file which contains the names of the probesets that are to be conserved. For MG\_U74A/Av2 datasets you can get this from \url{http://bmbolstad.com/misc/mixtureCDF/MGU74Aoverlap.txt}. To be sure that the hybrid data is not confused with the original data you should put a string in the {\it Force CDF Name} field, in this case the recommended name would be {\tt MGU74Amix}. Last, set the {\it Output directory} field to specify where the processed RME files will be stored. Click {\it Convert} to start the conversion process. When it finishes you should find the .RME files for your MG\_U74A arrays in the specified output location. 
+
+Now you will need to repeat the process with the MG\_U74Av2 CEL files. So now set the path to all your version 2 cel files in the {\it Cel File Directory} field and the full path, including file name, to the MG\_U74Av2 CDF file in the {\it CDF File} field. The {\it Restrict File},  {\it Force CDF Name} and  {\it Output directory} fields should be kept the same as before. Click {\it Convert} to start the conversion process. When it finishes you should now also find the .RME files for your MG\_U74Av2 arrays in the specified output location. You should now be able to load your hybrid dataset into RMAExpress using the {\it Read Processed files} option in the {\it File} menu.
+
+
+
+\section{How long will it take?}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=4in,height=4in]{Runtimes.pdf}
+\caption{Running times using RMAExpressConsole 1.0 Release} \label{timingtest}
+\end{figure}
+
+The amount of time it will take to process a set of CEL files and process them to RMA expression values depends on a number of factors including:
+\begin{itemize}
+\item Number of probes and probesets on the chip
+\item Number of CEL files
+\item Configuration of computer including processor speed, amount of RAM, operating system.
+\item Configuration of RMAExpress (or RMAExpressConsole)
+\end{itemize}
+
+A set of timing tests were run using RMAExpressConsole 1.0 on a machine with the following basic configuration:
+\begin{itemize}
+\item Version: RMAExpressConsole 1.0 with version 2 output file but no output of plots
+\item OS: Fedora Core 9 x86\_64 Linux running kernel 2.6.25.6-55.fc9.x86\_64
+\item Processor: AMD Athlon X2 5600+ 
+\item RAM: 8 GB DDR2 PC6400
+\item Chip type: HGU-133A Plus 2.0
+\item Number of CEL files: Varied from 10 to 2500
+\item Buffer size: 1 arrays, 25000 probes 
+\item Timing: done using the shell command time and the output ``Real''.
+\end{itemize}
+with the results shown in Figure \ref{timingtest}. It can be seen from this plot that, at least for this range of the number of CEL files, the processing time is roughly linear. The largest dataset run was 2500 CEL files and had a total running of approximately 163 minutes. This highlights the relative efficiency of RMAExpress and its ability to handle extremely large datasets.
 
 
   
