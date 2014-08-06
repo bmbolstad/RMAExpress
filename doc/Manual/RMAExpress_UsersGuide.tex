@@ -559,86 +559,27 @@ Quality assessment using the PLM methodology is described in:
 
 \chapter{Building RMAExpress from source code} \label{chap:building}
 
-This section describes how to build RMAExpress from source code. Most users will not need to do this and instead should just use the pre-built binaries supplied on the website. {\bf Warning}: do no try to built the application from source code unless you think you have a good reason to. Since RMAExpress uses wxWidgets (formerly known as wxWindows) you will need to install that before you can compile the source code. wxWidgets can be downloaded from \url{http://www.wxwidgets.org/}. Source code for RMAExpress can be downloaded from the website. Note that RMAExpress is licensed under the GPL version 2. Note that as of RMAExpress 1.0 Release it is built against wxWidgets 2.8.7.
+This section describes how to build RMAExpress from source code. Most users will not need to do this and instead should just use the pre-built binaries supplied on the website. {\bf Warning}: do no try to built the application from source code unless you think you have a good reason to. Since RMAExpress uses wxWidgets  you will need to install that before you can compile the source code. wxWidgets can be downloaded from \url{http://www.wxwidgets.org/}. Source code for RMAExpress can be downloaded from the website. Note that RMAExpress is licensed under the GPL version 2. Note that as of RMAExpress 1.1 Release it is built against wxWidgets 3.0.1 on three platforms (Microsoft Windows, Apple OS X, Linux)..
 
 \section{Building native binaries for Linux}
 
 How you install wxWidgets depends very much on your distribution of Linux. For some distributions there is pre-built packages, while for others you will need to install it from source code. This user guide assumes that you have already have wxWidgets installed. To built native Linux binaries using the source code you should do the following
 \begin{verbatim}
-      cp Makefile.unx Makefile
       make
+      make console
+\end{verbatim}
+
+\section{Building native binaries for OS X}
+
+It is recommended you use your own wxwidgets installation, rather than one which may be supplied by your version of OS X. You will need to have X code and the command line utilities installed to be able to build RMAExpress.This user guide assumes that you have already have wxWidgets installed. To built native Linux binaries using the source code you should do the following
+\begin{verbatim}
+      make MacApps
       make console
 \end{verbatim}
 
 \section{Building native binaries for Windows}
 
-Beginning with 1.0beta6 the Windows builds have been made using Visual C++ Express Edition 2008 and wxWidgets 2.8.7. Visual C++ project and solution files are provided with the source distribution, but users who wish to build their own binaries via this methodology are unsupported.
-
-\section{How to install a cross-compiler on a Linux machine to produce RMAExpress Windows binaries.}
-These are the instructions for using a Linux machine to compile the source code and produce binaries that will be executable. This is the method that is to build the binaries that are currently supplied on the website. At the time of writing this manual, this workflow is know not to produce binaries that function correctly on Windows Vista operating systems. This is the method that was used to build the windows binaries up until 1.0 beta 3. 
-\begin{enumerate}
-\item The first step is to install a cross-compiler on your machine. To make it easy use the shell script provided on the website. You might have to change some of the version numbers for some of the files in the script.
-\\ \\
-      Use {\tt build-cross.sh} to download, configure, build and install the cross-compiler and requisite tools on your machine
-\\ \\
-      Next you should download and put these scripts somewhere in your path (eg {\tt /usr/local/bin} or {\tt ~/bin})
-\begin{verbatim}
-      cross-configure.sh
-      cross-make.sh
-\end{verbatim}
-\item The next step is to download and install wxWindows into the cross-compiled environment.
-\\ \\
-      First download wxAll-2.8.4.tar.gz. Next extract and build the library.
-\begin{verbatim}
-      tar xzvf wxAll-2.8.4.tar.gz
-      cd wxWidgets-2.8.4
-      cross-configure.sh --prefix=/usr/local/cross-tools --enable-unicode
-      cross-make.sh
-      cross-make.sh install
-\end{verbatim}
-\item Finally you'll want to actually build the RMAExpress applications. So change to the location where you placed the source code for RMAExpress then
-\begin{verbatim}
-      cp Makefile.dos Makefile
-      make all
-      make console 
-\end{verbatim}
-\end{enumerate}
-
-\section{How to build RMAExpress on a Windows machine using MinGW}
-
-These are instructions for installing requisite software on to a Windows machine so that you have a sufficient environment within which to compile the source code for RMAExpress. At the time of writing this manual, this workflow is know not to produce binaries that function correctly on Windows Vista operating systems. Note this procedure has not been fully tested in several years and the make files may not be completely synchronized.
-\begin{enumerate}
-\item From http://www.mingw.org/download.shtml download and install the following
-\begin{verbatim}
-      MinGW-3.1.0-1.exe
-      MSYS-1.0.10.exe
-      msysDTK-1.0.1.exe
-\end{verbatim}
-\item  Next we want to download the source code for wxWindows/wxWidgets and build it. In particular download
-\begin{verbatim}
-      wxAll-2.6.2.tar.gz
-\end{verbatim}
-\item      Uncompress the source code and put it somewhere. Then launch MSYS, navigate to where you uncompressed the source code for wxWidgets (eg cd /c/wxWidgets-2.6.2)
-\begin{verbatim}
-      configure
-      make
-      make install
-\end{verbatim}
-\item  Unpack the source code for RMAExpress and change (within MSYS) to the location where you stored the source code.
-\begin{verbatim}
-      cp Makefile.msw Makefile
-      make
-      make console
-\end{verbatim}
-\item Finally, you might want to test your compilation by running it. The first thing to do is put the /usr/local/lib directory in your path. Or copy the dlls to somewhere in your path.
-\begin{verbatim}
-      export PATH=$PATH:/usr/local/lib
-
-      Finally lets test it.
-      RMAExpress
-      RMAExpressConsole 
-\end{verbatim}
-\end{enumerate}
+Beginning with 1.1.0 Release the Windows builds have been made using Visual Studio Express Edition 2013 and wxWidgets 3.0.1. Visual C++ project and solution files are provided with the source distribution, but users who wish to build their own binaries via this methodology are unsupported.
 
 
 
