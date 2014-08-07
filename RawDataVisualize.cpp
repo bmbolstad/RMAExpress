@@ -768,9 +768,7 @@ void RawDataVisualizeFrame::OnSaveCurrent(wxCommandEvent& event){
 					  wxT(""),
 					  defaultname,
 					  (const wxChar *)NULL,
-					  wxT("PNG files (*.png)|*.png|")
-					  wxT("JPEG files (*.jpg)|*.jpg|")
-					  wxT("TIFF files (*.tif)|*.tif|")
+					  wxT("PNG files (*.png)|*.png|JPEG files (*.jpg)|*.jpg|TIFF files (*.tif)|*.tif")
 					  ,
 					  wxFD_SAVE);
 
