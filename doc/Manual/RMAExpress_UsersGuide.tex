@@ -591,6 +591,38 @@ Beginning with 1.1.0 Release the Windows builds have been made using Visual Stud
 
 \chapter{Brief changelog/history}
 
+
+\section{Changes in 1.1.0}
+
+
+\subsection{General}
+
+\begin{itemize}
+\item Unified source code between Windows, Linux and Mac OS X builds. Previously Apple Mac OSX source code changes were not merged into the main code base.
+\item Now building binaries against wxWidgets-3.0.1 for all platforms
+\end{itemize}
+
+\subsection{RMAExpress}
+
+\begin{itemize}
+\item default format for saving residual images is now jpg
+\item improved redraw speed when changing between arrays in residual images window
+\item improved screen redraw speed when scrolling or resizing residual images window
+\item residuals window supports zooming from 10% to 200%
+\end{itemize}
+
+\subsection{RMADataConv}
+
+\begin{itemize}
+\item Remove strict checking of lib\_set\_version between pgf and clf files. It appears that there are a number of released pgf/clf file combinations that don't properly match (notably HuGene 2.0, MoGene 2.0)
+\item clf file parser now forces order=row\_major (which is consistent with file format documentation). Note that there do exist released versions of clf files for some array types which contain "order=col\_major", but these are incorrect (ie are actually row\_major). The effect of this change is that the parser now assumes order=row\_major irrespective of what is in the clf file.
+\item Better support for WTGene 2.0/2.1 and HTA array pgf/clf processing
+\end{itemize}
+
+\clearpage
+
+\section{Changes Prior to 1.1.0}
+
 {\small \begin{tabular}{lll} \hline
 Version	& Date	 & Description \\\hline
 0.1 beta 1 &	Apr 25, 2003&	First Public version \\
