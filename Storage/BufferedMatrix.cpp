@@ -1213,7 +1213,7 @@ void BufferedMatrix::ReadOnlyMode(bool setting=false){
   */
 
 
-  if (!readonly & setting){
+  if (!readonly && setting){
     if (!colmode){
       if (rowcolclash){
 	ClearClash();
