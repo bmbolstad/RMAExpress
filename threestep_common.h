@@ -35,16 +35,16 @@ static const unsigned int nan[2] = {0xffffffff, 0x7fffffff};
 #ifdef _MSC_VER
 #define FUNCTIONS_FOR_VC
 
-static inline double round( double d)
+/*static inline double round( double d)
 {
   return floor( d + 0.5 );
-}
+}*/
 
 
-static inline double trunc(double d)
+/*static inline double trunc(double d)
 {
   return((d < 0? floor(-d): floor(d)));
-}
+} */
 
 /*static double log1p(double x)
 {
