@@ -1,6 +1,16 @@
 NEWS FILE FOR RMAEXPRESS
 
 
+
+CHANGES IN 1.1.1
+----------------
+
+RMADataConv
+------------
+- Remove strict checking of lib_set_version between pgf and clf files when used in combination with ps/mps files. It appears that there are a number of released pgf/clf file combinations that don't properly match (notably HuGene 2.0, MoGene 2.0)
+
+
+
 CHANGES IN 1.1.0
 ----------------
 
