@@ -295,7 +295,7 @@ void Convert_PGF_CLF_to_RME_with_PS(const wxString &pgf_fname,
   clf_libset = clf_get_libsetname(clf);
   ps_libset = ps_get_libsetname(ps);
   
-  if (pgf_libset.Cmp(clf_libset) != 0 || pgf_libver.Cmp(clf_libver) !=0 || pgf_libset.Cmp(ps_libset) != 0 || pgf_libver.Cmp(ps_libver) !=0 ){
+  if (pgf_libset.Cmp(clf_libset) != 0  || pgf_libset.Cmp(ps_libset) != 0  ){ // || pgf_libver.Cmp(clf_libver) !=0 || pgf_libver.Cmp(ps_libver) !=0
     dealloc_pgf_file(pgf);
     dealloc_clf_file(clf);
     dealloc_ps_file(ps);
@@ -467,7 +467,7 @@ void Convert_PGF_CLF_to_RME_with_MPS(const wxString &pgf_fname,
   clf_libset = clf_get_libsetname(clf);
   mps_libset = mps_get_libsetname(mps);
   
-  if (pgf_libset.Cmp(clf_libset) != 0 || pgf_libver.Cmp(clf_libver) !=0 || pgf_libset.Cmp(mps_libset) != 0 || pgf_libver.Cmp(mps_libver) !=0 ){
+  if (pgf_libset.Cmp(clf_libset) != 0  || pgf_libset.Cmp(mps_libset) != 0  ){ //  || pgf_libver.Cmp(mps_libver) !=0 || pgf_libver.Cmp(clf_libver) !=0
     dealloc_pgf_file(pgf);
     dealloc_clf_file(clf);
     dealloc_mps_file(mps);
