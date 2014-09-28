@@ -267,17 +267,24 @@ RMAExpress.app: macosx/RMAExpress/Info.plist RMAExpress macosx/RMAExpress/RMAExp
 	mkdir RMAExpress.app/Contents
 	mkdir RMAExpress.app/Contents/MacOS
 	mkdir RMAExpress.app/Contents/Resources
+	mkdir RMAExpress.app/Contents/libs
 	cp macosx/RMAExpress/Info.plist RMAExpress.app/Contents/
 	echo -n 'APPL????' > RMAExpress.app/Contents/PkgInfo
 	cp RMAExpress RMAExpress.app/Contents/MacOS/RMAExpress
 	cp macosx/RMAExpress/RMAExpress.icns RMAExpress.app/Contents/Resources/
+	cp /usr/lib/liblzma.5.dylib RMAExpress.app/Contents/libs
+	install_name_tool -change /usr/lib/liblzma.5.dylib @executable_path/../libs/liblzma.5.dylib RMAExpress.app/Contents/MacOS/RMAExpress 
+
 	
 RMADataConv.app: macosx/RMADataConv/Info.plist RMADataConv macosx/RMADataConv/RMADataConv.icns  
 	mkdir RMADataConv.app
 	mkdir RMADataConv.app/Contents
 	mkdir RMADataConv.app/Contents/MacOS
 	mkdir RMADataConv.app/Contents/Resources
+	mkdir RMADataConv.app/Contents/libs
 	cp macosx/RMADataConv/Info.plist RMADataConv.app/Contents/
 	echo -n 'APPL????' > RMADataConv.app/Contents/PkgInfo
 	cp RMADataConv RMADataConv.app/Contents/MacOS/RMADataConv
 	cp macosx/RMADataConv/RMADataConv.icns RMADataConv.app/Contents/Resources/
+	cp /usr/lib/liblzma.5.dylib RMADataConv.app/Contents/libs
+	install_name_tool -change /usr/lib/liblzma.5.dylib @executable_path/../libs/liblzma.5.dylib RMADataConv.app/Contents/MacOS/RMADataConv 
