@@ -212,7 +212,7 @@ RMADataConvDlg::RMADataConvDlg(const wxString& title, const wxPoint& pos, const 
   wxBoxSizer *item21 = new wxBoxSizer( wxHORIZONTAL );
   wxStaticText *item22 = new wxStaticText( this, ID_TEXT, wxT("Output directory"), wxDefaultPosition, wxSize(125,-1), 0 );
   item21->Add( item22, 0, wxALIGN_CENTER|wxALL, 5 );
-  wxTextCtrl *item23 = new wxTextCtrl( this, ID_TEXTCTRL, wxT(""), wxDefaultPosition, wxSize(225,-1), 0 );
+  wxTextCtrl *item23 = new wxTextCtrl( this, ID_TEXTCTRL, wxT(""), wxDefaultPosition, wxSize(750,-1), 0 );
   item21->Add( item23, 0, wxALIGN_CENTER|wxALL, 5 );
   OutputDirectory = item23;
   wxButton *item24 = new wxButton( this, OUTPUTBROWSE_BUTTON, wxT("Browse"), wxDefaultPosition, wxDefaultSize, 0 );

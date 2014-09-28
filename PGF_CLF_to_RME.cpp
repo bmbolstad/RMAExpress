@@ -139,11 +139,23 @@ void Convert_PGF_CLF_to_RME(const wxString &pgf_fname,
     
   ArrayTypes = pgf_get_arraytypes(pgf);
 
-  ProbesetTypes.Alloc(10);
+  ProbesetTypes.Alloc(13);
   ProbesetTypes.Insert(wxString("main",wxConvUTF8),0);
   ProbesetTypes.Insert(wxString("normgene->intron",wxConvUTF8),1);
   ProbesetTypes.Insert(wxString("normgene->exon:main",wxConvUTF8),2);
-  ProbesetTypes.Insert(wxString("normgene->exon",wxConvUTF8),3);
+  ProbesetTypes.Insert(wxString("main:normgene->exon",wxConvUTF8),3);
+  ProbesetTypes.Insert(wxString("normgene->exon",wxConvUTF8),4);
+  ProbesetTypes.Insert(wxString("control->affx->bac_spike",wxConvUTF8),5);
+  ProbesetTypes.Insert(wxString("control->affx->polya_spike",wxConvUTF8),6);
+  ProbesetTypes.Insert(wxString("reporter",wxConvUTF8),7);
+  ProbesetTypes.Insert(wxString("control->affx",wxConvUTF8),8);
+  ProbesetTypes.Insert(wxString("control->bgp->antigenomic",wxConvUTF8),9);
+  ProbesetTypes.Insert(wxString("control->affx->ercc_spike",wxConvUTF8),10);
+  ProbesetTypes.Insert(wxString("rescue->FLmRNA->unmapped",wxConvUTF8),11);
+  ProbesetTypes.Insert(wxString("rRNA",wxConvUTF8),12);
+  ProbesetTypes.SetCount(11);
+  
+  
   ProbesetTypes.SetCount(3); 
   for (i =0;  i < numberOfTypes; i++){
     if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("main"))) == 0){
@@ -152,7 +164,25 @@ void Convert_PGF_CLF_to_RME(const wxString &pgf_fname,
       ProbeSetCount+=pgf_probe_types[i].count;
     } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("normgene->exon:main"))) == 0){
       ProbeSetCount+=pgf_probe_types[i].count;
+    } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("main:normgene->exon"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
     } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("normgene->exon"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
+    } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("control->affx->bac_spike"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
+    } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("control->affx->polya_spike"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
+    } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("reporter"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
+    } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("control->affx"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
+    } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("control->bgp->antigenomic"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
+    } else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("control->affx->ercc_spike"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
+    }  else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("rescue->FLmRNA->unmapped"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;
+    }  else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("rRNA"))) == 0){
       ProbeSetCount+=pgf_probe_types[i].count;
     } 
   }
@@ -500,7 +530,16 @@ void Convert_PGF_CLF_to_RME_with_MPS(const wxString &pgf_fname,
   ProbesetTypes.Insert(wxString("normgene->exon:main",wxConvUTF8),2);
   ProbesetTypes.Insert(wxString("main:normgene->exon",wxConvUTF8),3);
   ProbesetTypes.Insert(wxString("normgene->exon",wxConvUTF8),4);
-  ProbesetTypes.SetCount(5);
+  ProbesetTypes.Insert(wxString("control->affx->bac_spike",wxConvUTF8),5);
+  ProbesetTypes.Insert(wxString("control->affx->polya_spike",wxConvUTF8),6);
+  ProbesetTypes.Insert(wxString("reporter",wxConvUTF8),7);
+  ProbesetTypes.Insert(wxString("control->affx",wxConvUTF8),8);
+  ProbesetTypes.Insert(wxString("control->bgp->antigenomic",wxConvUTF8),9);
+  ProbesetTypes.Insert(wxString("control->affx->ercc_spike",wxConvUTF8),10);
+  ProbesetTypes.Insert(wxString("rescue->FLmRNA->unmapped",wxConvUTF8),11);
+  ProbesetTypes.Insert(wxString("rRNA",wxConvUTF8),12);
+  
+  ProbesetTypes.SetCount(11);
   //for (i = 0; i < numberOfTypes; i++){
   //  ProbesetTypes.Insert(wxString(pgf_probe_types[i].type,wxConvUTF8),i);
   //} 
