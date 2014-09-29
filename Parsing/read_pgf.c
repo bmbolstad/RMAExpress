@@ -1536,10 +1536,10 @@ void pgf_get_cur_PM_probe_ids(pgf_file *my_pgf, wxArrayInt &result){
 	break;
       }
     }
-    if (i == cur_atom_node->probes->n_probes){
-      wxString error = _T("No PM probe found where expected\n") + wxString::Format(_T("%d"),my_pgf->probesets->current->probeset_id) + wxString(my_pgf->probesets->current->type,wxConvUTF8);
-      throw error;
-    }
+//    if (i == cur_atom_node->probes->n_probes){
+//      wxString error = _T("No PM probe found where expected\n") + wxString::Format(_T("%d"),my_pgf->probesets->current->probeset_id) + wxString(my_pgf->probesets->current->type,wxConvUTF8);
+//      throw error;
+//    }
     cur_atom_node = cur_atom_node->next;
   }
   

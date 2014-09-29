@@ -1,6 +1,18 @@
 NEWS FILE FOR RMAEXPRESS
 
 
+CHANGES IN 1.2.0
+-----------------
+
+RMADataConv
+------------
+- Remove strict checking of lib_set_version between pgf and clf files when using MPS/PS files. 
+
+- additional probeset types now supported in pgf/clf/MPS conversion
+
+
+
+
 CHANGES IN 1.1.0
 ----------------
 
