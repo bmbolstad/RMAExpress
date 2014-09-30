@@ -410,8 +410,8 @@ void Convert_PGF_CLF_to_RME_with_PS(const wxString &pgf_fname,
       store.Write32(CurrentIDs.GetCount());
       
       for (i = 0; i < CurrentIDs.GetCount(); i++){
-	clf_get_x_y(clf, CurrentIDs[i], &x, &y);
-	store.Write32(xy2i(x,y,clf_get_cols(clf)));
+		clf_get_x_y(clf, CurrentIDs[i], &x, &y);
+		store.Write32(xy2i(x,y,clf_get_cols(clf)));
       } 
       store.Write32(0);
     }
@@ -424,8 +424,8 @@ void Convert_PGF_CLF_to_RME_with_PS(const wxString &pgf_fname,
       store.Write32(CurrentIDs.GetCount());
       // wxPrintf(_T("%d %d\n"),CurrentIDs.GetCount(),CurrentIDs[0]);
       for (i = 0; i < CurrentIDs.GetCount(); i++){
-	clf_get_x_y(clf, CurrentIDs[i], &x, &y);
-	store.Write32(xy2i(x,y,clf_get_cols(clf)));
+		clf_get_x_y(clf, CurrentIDs[i], &x, &y);
+		store.Write32(xy2i(x,y,clf_get_cols(clf)));
       }
       store.Write32(0);
     }
@@ -627,8 +627,8 @@ void Convert_PGF_CLF_to_RME_with_MPS(const wxString &pgf_fname,
       it=pgf_map.find(currentProbesets[j]);
       //wxPrintf(_T("%d %d Size: %d\n"),curProbeset_id,currentProbesets[j],it->second.GetCount());
       for (i = 0; i < it->second.GetCount(); i++){
-	clf_get_x_y(clf, it->second.Item(i), &x, &y);
-	store.Write32(xy2i(x,y,clf_get_cols(clf)));
+		clf_get_x_y(clf, it->second.Item(i), &x, &y);
+		store.Write32(xy2i(x,y,clf_get_cols(clf)));
       } 
     }
     store.Write32(0); /* No MM type things */

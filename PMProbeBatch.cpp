@@ -117,7 +117,7 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
     //#endif
     for (j =0; j < current_n_probes; j++){
       for (k =0; k < n_arrays; k++){
-	intensity[k*n_probes + current_row] = x[k*x_length + current_PMLocs[j]];
+		intensity[k*n_probes + current_row] = x[k*x_length + current_PMLocs[j]];
       }
       current_row++;
     }
@@ -140,8 +140,6 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
 #endif
   }
   
-  
-
   // Make a vector containing indices of PM probes
   int *PMLocations = new int[ProbesetRowNames.GetCount()];
   for (i =0; i < n_probesets; i++){
@@ -155,11 +153,6 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
     if (current_n_probes == 0){
       n_remove++;
     }
-    //if (current_n_probes > 0){
-    //  wxPrintf(probeset_names[i]+" %d %d %d\n",current_n_probes,l,n_probes);
-    //}
-
-
   }
 #ifdef DEBUG
   wxPrintf(_T("ps: %d   p:%d\n"),n_probesets,n_probes);
@@ -173,7 +166,7 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
   for (k =0; k < n_arrays; k++){
     intensity->AddColumn();
     for (current_row=0; current_row < l; current_row++){
-      (*intensity)[k*n_probes + current_row] =  x(PMLocations[current_row],k);// x[k*x_length + PMLocations[current_row]];
+      (*intensity)[k*n_probes + current_row] =  x(PMLocations[current_row],k);
     }
 #if RMA_GUI_APP
     InitializeProgress.Update(k);

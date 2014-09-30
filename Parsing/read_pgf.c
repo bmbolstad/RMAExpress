@@ -1521,9 +1521,12 @@ void pgf_get_cur_PM_probe_ids(pgf_file *my_pgf, wxArrayInt &result){
 
   int i,j;
 
-  result.Empty();
-  result.Alloc(my_pgf->probesets->current->atoms->n_atoms);
-  result.SetCount(my_pgf->probesets->current->atoms->n_atoms);
+  wxArrayInt InternalResult;
+	
+
+  InternalResult.Empty();
+  InternalResult.Alloc(my_pgf->probesets->current->atoms->n_atoms);
+  InternalResult.SetCount(my_pgf->probesets->current->atoms->n_atoms,-1);   /* Setting the Default value to -1 */
   /* go through each atom and pick all the PM probes */
 
   cur_atom_node = my_pgf->probesets->current->atoms->first;
@@ -1532,18 +1535,24 @@ void pgf_get_cur_PM_probe_ids(pgf_file *my_pgf, wxArrayInt &result){
     cur_probe_node = cur_atom_node->probes->first;
     for (i = 0; i < cur_atom_node->probes->n_probes; i++){
       if (strncmp(cur_probe_node->type,"pm",2) == 0){
-	result[j] = cur_probe_node->probe_id;
-	break;
+	    InternalResult[j] = cur_probe_node->probe_id;
+		break;
       }
     }
-//    if (i == cur_atom_node->probes->n_probes){
-//      wxString error = _T("No PM probe found where expected\n") + wxString::Format(_T("%d"),my_pgf->probesets->current->probeset_id) + wxString(my_pgf->probesets->current->type,wxConvUTF8);
-//      throw error;
-//    }
     cur_atom_node = cur_atom_node->next;
   }
   
-   
+  /* Sometimes there are atoms with no PM's */
+  
+  result.Empty();
+  result.Alloc(my_pgf->probesets->current->atoms->n_atoms);
+  
+  i = 0;
+  for (j=0;  j < my_pgf->probesets->current->atoms->n_atoms; j++){
+  	if (InternalResult[j] > -1){
+	  	result.Add(InternalResult[j]);	
+  	}	
+  }
 }
 
 
