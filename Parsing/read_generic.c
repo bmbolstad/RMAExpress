@@ -45,6 +45,25 @@
 #include "read_generic.h"
 
 
+
+
+
+static void initialize_generic_data_set(generic_data_set *data_set){
+
+	data_set->file_pos_first = 0;
+	data_set->file_pos_last = 0;
+	data_set->n_name_type_value = 0;
+	data_set->name_type_value = NULL;
+	data_set->ncols = 0;
+	data_set->col_name_type_value = NULL;
+	data_set->nrows = 0;
+	data_set->Data = 0;
+
+
+
+
+}
+
 static void Free_ASTRING(ASTRING *string){
   free(string->value);
   string->len =0;
@@ -184,8 +203,8 @@ static int fread_nvt_triplet(nvt_triplet *destination, FILE *instream){
 
 static int fread_nvts_triplet(col_nvts_triplet *destination, FILE *instream){
 
-  if (!(fread_AWSTRING(&(destination->name),instream)) |
-      !(fread_be_uchar(&(destination->type), 1, instream)) |
+  if (!(fread_AWSTRING(&(destination->name),instream)) ||
+      !(fread_be_uchar(&(destination->type), 1, instream)) ||
       !(fread_be_int32(&(destination->size), 1, instream))){
     return 0;
   }
@@ -677,6 +696,9 @@ int read_generic_data_group(generic_data_group *data_group, FILE *instream){
 int read_generic_data_set(generic_data_set *data_set, FILE *instream){
 
   int i;
+
+  initialize_generic_data_set(data_set);
+
 
   if (!fread_be_uint32(&(data_set->file_pos_first),1,instream) ||
       !fread_be_uint32(&(data_set->file_pos_last),1,instream) ||
