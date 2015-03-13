@@ -121,7 +121,7 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   		wxImage resize_image = resize_bitmap.ConvertToImage();
   	
   	
-  		double rescale_fac;
+  		double rescale_fac=1.0;
   		
   		if (my_parent->whichzoom->GetSelection() == 0){
   		  rescale_fac = 0.3162278;

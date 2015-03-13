@@ -318,7 +318,7 @@ bool RMAExpress::OnInit()
 {   
 
   int xpos,ypos,width,height;
-  int buffer_narrays,buffer_nprobes;
+  int buffer_narrays=1,buffer_nprobes=10000;
 
   wxString buffer_temppath;
 
