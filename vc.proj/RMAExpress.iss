@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=RMAExpress
-AppVerName=RMAExpress 1.2.0 alpha (1.20.0)    
+AppVerName=RMAExpress 1.2.0 alpha 1 (1.20.0-alpha-1)    
 AppPublisher=RMAExpress
 AppPublisherURL=http://rmaexpress.bmbolstad.com
 AppSupportURL=http://rmaexpress.bmbolstad.com
@@ -14,7 +14,7 @@ WizardImageStretch=no
 WizardImageFile="C:\Users\bmb\Development\RMAExpress\RMAExpress_MasterLOGO_Installer.bmp"
 WizardSmallImageFile="C:\Users\bmb\Development\RMAExpress\RMAExpress_MasterLOGOSmall.bmp"
 WizardImageBackColor=clWhite
-AppCopyright=Copyright (C) 2003-2014 B. M. Bolstad.
+AppCopyright=Copyright (C) 2003-2015 B. M. Bolstad.
 BackSolid=yes
 
 [Tasks]
