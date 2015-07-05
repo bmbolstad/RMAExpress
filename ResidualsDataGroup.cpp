@@ -33,7 +33,7 @@
  **
  *****************************************************************************/
 
-
+#include <vector>
 
 #include <wx/wx.h>
 #include "CDFLocMapTree.h"
@@ -46,7 +46,7 @@
 #include "ResidualsDataGroup.h"
 
  
-
+using namespace std;
 
 
 ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences){
@@ -56,8 +56,6 @@ ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *origi
   wxArrayString ProbeNames;
   wxString CurrentName;
   LocMapItem *CurrentLocMapItem;
-
-  double *buffer;
 
   int *CurrentMMLocs;
   int *CurrentPMLocs;
@@ -90,9 +88,7 @@ ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *origi
 #endif
 
 
-
-  buffer = new double[n_arrays];
-
+  vector<double> buffer(n_arrays);
   
   intensitydata->SetRows(array_rows*array_cols);
 
@@ -136,8 +132,8 @@ ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *origi
 
   ProbeNames = residuals->GetRowNames();
   
-  int *PMLocations = new int[n_probes];
-  int *MMLocations = new int[n_probes];
+  vector<int> PMLocations(n_probes);
+  vector<int> MMLocations(n_probes);
   
   l=0;
   for (i=0; i < n_probesets; i++){
@@ -151,11 +147,11 @@ ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *origi
 
     if (CurrentLocMapItem->GetMMSize() == CurrentLocMapItem->GetPMSize()){
       for (j =0; j < CurrentLocMapItem->GetMMSize(); j++){
-	MMLocations[l+j] =  CurrentMMLocs[j];
+		MMLocations[l+j] =  CurrentMMLocs[j];
       }
     } else {
       for (j =0; j < CurrentLocMapItem->GetPMSize(); j++){
-	MMLocations[l+j] = -1;
+		MMLocations[l+j] = -1;
       }
     }
 
@@ -165,10 +161,10 @@ ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *origi
 
   for (k=0; k < n_arrays; k++){
     for (i=0; i < n_probes; i++){
-      residuals->GetValue(buffer,i,k);
+      residuals->GetValue(&buffer[0],i,k);
       (*intensitydata)(PMLocations[i],k) = buffer[0];
       if (MMLocations[i] != -1){
-	(*intensitydata)(MMLocations[i],k) = buffer[0];
+		(*intensitydata)(MMLocations[i],k) = buffer[0];
       }
 
     }   
@@ -183,13 +179,12 @@ ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *origi
 #endif
   }
   intensitydata->ReadOnlyMode(true);
-  delete [] PMLocations;
-  delete [] MMLocations;
+
 
 #endif
   //cdflocs = NULL;
 
-  delete [] buffer;
+ 
 
 }
 

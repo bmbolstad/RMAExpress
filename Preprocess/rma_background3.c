@@ -248,23 +248,19 @@ double max_density2(BufferedMatrix *z,int rows,int cols,int column){
 
   int i;
 
-  double *x;
-  double *dens_x;
-  double *dens_y;
-  double max_y,max_x;
-   
   int npts = 16384;
 
-  dens_x = (double *)calloc(npts,sizeof(double));
-  dens_y = (double *)calloc(npts,sizeof(double));
+  vector<double> x(rows);
+  vector<double> dens_x(npts);
+  vector<double> dens_y(npts);
 
-  x = (double *)calloc(rows,sizeof(double));
+  double max_y,max_x;
+   
+  z->GetFullColumn(column, &x[0]);
   
-  z->GetFullColumn(column, x);
-  
-  KernelDensity_lowmem(x,&rows,dens_y,dens_x,&npts);
+  KernelDensity_lowmem(&x[0],&rows,&dens_y[0],&dens_x[0],&npts);
 
-  max_y = find_max(dens_y,16384);
+  max_y = find_max(&dens_y[0],npts);
    
   i = 0;
   do {
@@ -275,10 +271,6 @@ double max_density2(BufferedMatrix *z,int rows,int cols,int column){
   } while(1);
    
   max_x = dens_x[i];
-
-  free(dens_x);
-  free(dens_y);
-  free(x);
   
   return max_x;
  
@@ -294,29 +286,21 @@ double max_density(double *z,int rows,int cols,int column){
 
   int i;
 
-  double *x;
-  double *dens_x;
-  double *dens_y;
-  double max_y,max_x;
-   
   int npts = 16384;
 
-  dens_x = (double *)calloc(npts,sizeof(double));
-  dens_y = (double *)calloc(npts,sizeof(double));
-
-
-  //  KernelDensity(double *x, int *nxxx, double *weights, double *output, double *xords, int *nout)
-    
-  x = (double *)calloc(rows,sizeof(double));
+  vector<double> x(rows);
+  vector<double> dens_x(npts);
+  vector<double> dens_y(npts);
+  
+  double max_y,max_x;
 
   for (i=0; i< rows; i++){
     x[i] = z[column*rows +i];
   }
   
-  
-  KernelDensity_lowmem(x,&rows,dens_y,dens_x,&npts);
+  KernelDensity_lowmem(&x[0],&rows,&dens_y[0],&dens_x[0],&npts);
 
-  max_y = find_max(dens_y,16384);
+  max_y = find_max(&dens_y[0],npts);
    
   i = 0;
   do {
@@ -328,10 +312,6 @@ double max_density(double *z,int rows,int cols,int column){
   } while(1);
    
   max_x = dens_x[i];
-
-  free(dens_x);
-  free(dens_y);
-  free(x);
 
   return max_x;
  
@@ -504,8 +484,8 @@ void bg_parameters2(BufferedMatrix *PM,BufferedMatrix *MM, double *param, int ro
   /* double MMmax; */
   double sd,alpha;
   int n_less=0,n_more=0;
-  double *tmp_less = (double *)malloc(rows*sizeof(double));
-  double *tmp_more = (double *)malloc(rows*sizeof(double));
+  vector<double> tmp_less(rows); 
+  vector<double> tmp_more(rows); 
   double tmp;
 
   PMmax = max_density2(PM,rows, cols, column);
@@ -519,7 +499,7 @@ void bg_parameters2(BufferedMatrix *PM,BufferedMatrix *MM, double *param, int ro
  
   }
  
-  PMmax = max_density(tmp_less,n_less,1,0);
+  PMmax = max_density(&tmp_less[0],n_less,1,0);
   sd = get_sd(PM,PMmax,rows,cols,column)*0.85;
  
   for (i=0; i < rows; i++){
@@ -531,7 +511,7 @@ void bg_parameters2(BufferedMatrix *PM,BufferedMatrix *MM, double *param, int ro
   }
  
   /* the 0.85 is to fix up constant in above */
-  alpha = get_alpha2(tmp_more,PMmax,n_more);
+  alpha = get_alpha2(&tmp_more[0],PMmax,n_more);
  
   param[0] = alpha;
   param[1] = PMmax;
@@ -539,10 +519,7 @@ void bg_parameters2(BufferedMatrix *PM,BufferedMatrix *MM, double *param, int ro
  
   /* printf("%f %f %f\n",param[0],param[1],param[2]); */
  
- 
-  free(tmp_less);
-  free(tmp_more);
-}
+ }
 #else
 void bg_parameters2(double *PM,double *MM, double *param, int rows, int cols, int column){
 

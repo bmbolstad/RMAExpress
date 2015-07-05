@@ -180,9 +180,9 @@ void get_ranks(double *rank, itemVect x,int n){
 #ifdef BUFFERED
 int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
   int i,j,ind;
-  double *row_mean = (double *)calloc((*rows),sizeof(double));
   
-  double *ranks = (double *)calloc((*rows),sizeof(double));
+  vector<double> row_mean(*rows);
+  vector<double> ranks(*rows);
   DoubleArray datvec;
   itemVect iv;
   dataitem di;
@@ -195,19 +195,19 @@ int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
 
     /* Low memory overhead normalization */
    
-    memset(row_mean, 0, *rows*sizeof(double));
+	memset(&row_mean[0], 0, *rows*sizeof(double));
 
     
     /* first find the normalizing distribution */
     for (j = 0; j < *cols; j++){
       datvec.reserve(*rows);
       for (i =0; i < *rows; i++){
-	datvec.push_back((*data)(i,j));
+		datvec.push_back((*data)(i,j));
       }
       sort(datvec.begin(), datvec.end());
 
       for (i =0; i < *rows; i++){
-	row_mean[i] += datvec[i]/((double)*cols);
+		row_mean[i] += datvec[i]/((double)*cols);
       }
       datvec.clear();
 #if RMA_GUI_APP
@@ -220,20 +220,20 @@ int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
     for (j = 0; j < *cols; j++){
       iv.reserve(*rows);
       for (i =0; i < *rows; i++){  
-	di.data = (*data)(i,j);
-	di.rank = i;
-	iv.push_back(di);
+		di.data = (*data)(i,j);
+		di.rank = i;
+		iv.push_back(di);
       }
       sort(iv.begin(), iv.end(), itemComp);
     
-      get_ranks(ranks,iv,*rows);
+      get_ranks(&ranks[0],iv,*rows);
       for (i =0; i < *rows; i++){
-	ind = iv[i].rank;
-	if (ranks[i] - floor(ranks[i]) > 0.4){
-	  (*data)(ind,j) = 0.5*(row_mean[(int)floor(ranks[i])-1] + row_mean[(int)floor(ranks[i])]);
-	} else { 
-	  (*data)(ind,j) = row_mean[(int)floor(ranks[i])-1];
-	}
+		ind = iv[i].rank;
+		if (ranks[i] - floor(ranks[i]) > 0.4){
+			(*data)(ind,j) = 0.5*(row_mean[(int)floor(ranks[i])-1] + row_mean[(int)floor(ranks[i])]);
+		} else { 
+			(*data)(ind,j) = row_mean[(int)floor(ranks[i])-1];
+		}
       }
       iv.clear();
 #if RMA_GUI_APP
@@ -241,8 +241,6 @@ int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
 #endif
     }
     
-    free(ranks);
-    free(row_mean);
     return 0;
 
 }
