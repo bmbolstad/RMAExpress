@@ -721,7 +721,7 @@ char *rmecel_get_header_info(wxString cel_path, int *cur_dim1, int *cur_dim2){
   const wxWX2MBbuf tmp_buf = wxConvCurrent->cWX2MB(ArrayType.c_str());
   cdfName = (char *)(const char*) tmp_buf;
  
-  curCDFName= (char *)calloc(strlen(cdfName)+1,sizeof(char));
+  curCDFName = new char[strlen(cdfName) + 1]; 
   
   strcpy(curCDFName,cdfName);
 
@@ -775,22 +775,22 @@ static void checkCelHeaders(const wxArrayString cel_paths){
       ref_cdfName = cur_cdfName;
     } else {
       if (strncmp(cur_cdfName,ref_cdfName,100) != 0){
-	wxString Error = wxString(cur_cdfName,wxConvUTF8) + wxT(" does not match ") + wxString(ref_cdfName,wxConvUTF8) + wxT(" for file ") +  cel_paths[i] + wxT("\n");
-	free(cur_cdfName);
-	free(ref_cdfName);
-	throw Error;
+		wxString Error = wxString(cur_cdfName,wxConvUTF8) + wxT(" does not match ") + wxString(ref_cdfName,wxConvUTF8) + wxT(" for file ") +  cel_paths[i] + wxT("\n");
+		delete [] cur_cdfName;
+		delete [] ref_cdfName;
+		throw Error;
       }
       if ((ref_dim1 != cur_dim1) && (ref_dim2 != cur_dim2)){
-	free(cur_cdfName);
-	free(ref_cdfName);
-	wxString Error = wxT("The dimensions of ") + cel_paths[i] + wxT(" were ") << cur_dim1 << wxT(" by ") <<  cur_dim2 << wxT(" while ") << ref_dim1 << wxT(" by ") << ref_dim2  << wxT(" was expected.\n");
-	throw Error;
+		delete [] cur_cdfName;
+		delete [] ref_cdfName;
+		wxString Error = wxT("The dimensions of ") + cel_paths[i] + wxT(" were ") << cur_dim1 << wxT(" by ") <<  cur_dim2 << wxT(" while ") << ref_dim1 << wxT(" by ") << ref_dim2  << wxT(" was expected.\n");
+		throw Error;
       } 
-      free(cur_cdfName);
+      delete [] cur_cdfName;
     }
   }
 
-  free(ref_cdfName);
+  delete [] ref_cdfName;
 }
 
 
