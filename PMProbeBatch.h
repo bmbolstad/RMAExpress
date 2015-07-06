@@ -2,10 +2,15 @@
 #define PMPROBEBATCH_H
  
 #include <wx/wx.h>
+#include <wx/string.h>  // wxString
+#include <utility>   // for pair
+#include <vector>
 #include "DataGroup.h"
 #include "expressionGroup.h"
 #include "Storage/BufferedMatrix.h"
 #include "PreferencesDialog.h"
+
+using namespace std;
 
 class PMProbeBatch
 {
@@ -44,6 +49,11 @@ class PMProbeBatch
   wxArrayString ArrayTypeName;
   
 
+  std::vector<std::pair<wxString, int>> ProbesetRowNames_count;
+
+#if RMA_GUI_APP
+ // wxProgressDialog *PreprocessDialog;
+#endif
 
 
 };

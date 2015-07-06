@@ -8,6 +8,9 @@ RMAExpress
 ----------
 - Fix a bug that resulted in crash when reading some types of CEL files
 
+- Improve memory overhead in Compute Expression Measure
+
+- In PLM Summarization falls back to median polish for probesets which have more than 100 probes (for speed). Was previosuly 500.
 
 
 RMADataConv

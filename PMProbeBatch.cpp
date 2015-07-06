@@ -129,20 +129,29 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
 #if RMA_GUI_APP  
   wxProgressDialog  InitializeProgress(_T("Preparing"),_T("Preparing Data Structures"),n_arrays,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
 #endif
+
+
+  ProbesetRowNames_count.reserve(n_probesets);	
+
   int l = 0;
 
   for (i =0; i < n_probesets; i++){ 
     current_item =  x.FindLocMapItem(probeset_names[i]);
     current_name = current_item->GetName();
     current_n_probes = current_item->GetPMSize();
-    ProbesetRowNames.Add(current_name,current_n_probes);
+   // ProbesetRowNames.Add(current_name,current_n_probes);
+	ProbesetRowNames_count[i] = make_pair(current_name, current_n_probes);
+	l += current_n_probes;
 #ifdef DEBUG
     wxPrintf(current_name+_T(" this_p: %d  this_ps: %d tot_ps: %d   tot_p:%d    lofn: %d\n"),current_n_probes,i, n_probesets,n_probes,ProbesetRowNames.GetCount());
 #endif
   }
+
   
   // Make a vector containing indices of PM probes
-  std::vector<int> PMLocations(ProbesetRowNames.GetCount()); 
+  std::vector<int> PMLocations(l); // ProbesetRowNames.GetCount());
+
+  l = 0;
   for (i =0; i < n_probesets; i++){
     current_item =  x.FindLocMapItem(probeset_names[i]);
     current_n_probes = current_item->GetPMSize();
@@ -247,81 +256,67 @@ void PMProbeBatch::background_adjust(){
 
 expressionGroup *PMProbeBatch::summarize(){
 
-  expressionGroup *myexprs = new expressionGroup(n_probesets, n_arrays,ArrayNames,ArrayTypeName[0],false);
+	expressionGroup *myexprs = new expressionGroup(n_probesets, n_arrays, ArrayNames, ArrayTypeName[0], false);
 
-  long i=0,j=0,k=0;
+	long i = 0, j = 0, k = 0;
 
-  wxString CurrentName;
+	wxString CurrentName;
 
-  int first_ind;
-  int max_nrows = 1000;
-  /* buffers of size 1000 should be enough. */
+	int max_nrows = 1000;
+	/* buffers of size 1000 should be enough. */
 
-  vector<int> cur_rows(max_nrows);
-  int cur_nprobes=0;
-  vector<double> cur_exprs(n_arrays);
+	vector<int> cur_rows(max_nrows);
+	int cur_nprobes = 0;
+	vector<double> cur_exprs(n_arrays);
 
 #if RMA_GUI_APP
-  wxProgressDialog SummarizeProgress(_T("Summarization"),_T("Summarization"),n_probesets,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
+	wxProgressDialog SummarizeProgress(_T("Summarization"), _T("Summarization"), n_probesets, NULL, wxPD_AUTO_HIDE | wxPD_APP_MODAL);
 #endif
 
 #ifdef BUFFERED
-  intensity->RowMode();
+	intensity->RowMode();
 #endif
 
-  CurrentName = ProbesetRowNames.Item(0);
-  i = 0;     /* indexes current probeset */
-  j = 0;    /* indexes current row in PM matrix */
-  k = 0;    /* indexes current probe in probeset */
-  while ( j < n_probes){
-    if (CurrentName.Cmp(ProbesetRowNames[j]) == 0){
-      if (k >= max_nrows){
-		max_nrows = 2*max_nrows;
-		cur_rows.resize(max_nrows); 
-      }
-      cur_rows[k] = j;
-      k++;
-      j++;
-      
-    } else {
-      cur_nprobes = k;
+	// ProbesetRowNames.Item(0);
+	i = 0;     /* indexes current probeset */
+	j = 0;    /* indexes current row in PM matrix */
+	k = 0;    /* indexes current probe in probeset */
+	while (i < n_probesets){
+		CurrentName = ProbesetRowNames_count[i].first;
+		cur_nprobes = ProbesetRowNames_count[i].second;
+
+		if (cur_nprobes >= max_nrows){
+			max_nrows = 2 * max_nrows;
+			cur_rows.resize(max_nrows);
+		}
+		for (k = 0; k < cur_nprobes; k++){
+			cur_rows[k] = j;
+			j++;
+		}
+
+
 #ifdef DEBUG
-      wxPrintf(CurrentName+_T("\n"));
+		wxPrintf(CurrentName+_T("\n"));
 #endif      
 #ifdef BUFFERED
-      median_polish(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], cur_nprobes);
+		median_polish(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], cur_nprobes);
 #else
-      median_polish(intensity, n_probes, n_arrays, cur_rows, cur_exprs, cur_nprobes);
+		median_polish(intensity, n_probes, n_arrays, cur_rows, cur_exprs, cur_nprobes);
 #endif
-      for (k =0; k < n_arrays; k++){
-		(*myexprs)[k*n_probesets + i] = cur_exprs[k];
-      } 
-       myexprs->AddName(CurrentName);
-      CurrentName = ProbesetRowNames[j];
-      i++;
-      k = 0;
-    }
+		for (k = 0; k < n_arrays; k++){
+			(*myexprs)[k*n_probesets + i] = cur_exprs[k];
+		}
+		myexprs->AddName(CurrentName);
+
+		i++;
+
 #if RMA_GUI_APP
-    if (i%1000 == 0){
-      SummarizeProgress.Update(i);
-    }
+		if (i % 1000 == 0){
+			SummarizeProgress.Update(i);
+		}
 #endif
-  }
-  cur_nprobes = k;
-#ifdef DEBUG
-  wxPrintf(CurrentName+_T("\n"));
-#endif      
-#ifdef BUFFERED
-  median_polish(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], cur_nprobes);
-#else
-  median_polish(intensity, n_probes, n_arrays, cur_rows, cur_exprs, cur_nprobes);
-#endif
+	}
 
-  for (k =0; k < n_arrays; k++){
-    (*myexprs)[k*n_probesets + i] = cur_exprs[k];
-  } 
-  myexprs->AddName(CurrentName);
-  
  
 #ifdef BUFFERED
   intensity->ColMode();
@@ -343,7 +338,6 @@ expressionGroup *PMProbeBatch::summarize_PLM(){
 
   wxString CurrentName;
 
-  int first_ind;
   int max_nrows = 1000;
   /* buffers of size 1000 should be enough. */
 
@@ -362,116 +356,65 @@ expressionGroup *PMProbeBatch::summarize_PLM(){
   intensity->RowMode();
 #endif
 
-  CurrentName = ProbesetRowNames.Item(0);
   i = 0;     /* indexes current probeset */
   j = 0;    /* indexes current row in PM matrix */
   k = 0;    /* indexes current probe in probeset */
-  while ( j < n_probes){
-    if (CurrentName.Cmp(ProbesetRowNames[j]) == 0){
-      if (k >= max_nrows){
-		max_nrows = 2*max_nrows;
-		cur_rows.resize(max_nrows);
+  while (i < n_probesets){
+	  CurrentName = ProbesetRowNames_count[i].first;
+	  cur_nprobes = ProbesetRowNames_count[i].second;
+
+	  if (cur_nprobes >= max_nrows){
+		  max_nrows = 2 * max_nrows;
+		  cur_rows.resize(max_nrows);
 	  }
-      cur_rows[k] = j;
-      k++;
-      j++;
-      
-    } else {
-      cur_nprobes = k;
-      //#ifdef DEBUG_PLM
-      ///if (cur_nprobes ==1){
-      //wxPrintf(CurrentName+wxT(" %d\t %d \t %d \t %d\n"),  cur_nprobes,i,j,n_probes);
-      //}
-      //#endif      
+	  for (k = 0; k < cur_nprobes; k++){
+		  cur_rows[k] = j;
+		  j++;
+	  }
+
 #ifdef BUFFERED
-	if (cur_nprobes < 500){
-		PLM_summarize(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], &cur_se_exprs[0], cur_nprobes);
-	} else {
-		median_polish(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], cur_nprobes);
-	   for (k =0; k < n_arrays; k++){
-	     cur_se_exprs[k] = 1.0;
-	   }
-	}
+	  if (cur_nprobes <= 100){
+		  PLM_summarize(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], &cur_se_exprs[0], cur_nprobes);
+	  }
+	  else {
+		  median_polish(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], cur_nprobes);
+		  for (k = 0; k < n_arrays; k++){
+			  cur_se_exprs[k] = 1.0;
+		  }
+	  }
 
-	//Ugly Hackery. TO BE FIXED
-	if (cur_nprobes == 1){
-	  for (k =0; k < n_arrays; k++){
-	    cur_se_exprs[k] = -1.0;  // Really should be NA
-	  }	
+	  //Ugly Hackery. TO BE FIXED
+	  if (cur_nprobes == 1){
+		  for (k = 0; k < n_arrays; k++){
+			  cur_se_exprs[k] = -1.0;  // Really should be NA
+		  }
+	  }
 
-	}
-	
 
 #endif
-      
+
+	  for (k = 0; k < n_arrays; k++){
+		  (*myexprs)[k*n_probesets + i] = cur_exprs[k];
+		  myexprs->SE(k*n_probesets + i) = cur_se_exprs[k];
+	  }
 
 
-      for (k =0; k < n_arrays; k++){
-		(*myexprs)[k*n_probesets + i] = cur_exprs[k];
-		myexprs->SE(k*n_probesets + i) = cur_se_exprs[k];
-      } 
-       myexprs->AddName(CurrentName);
-      CurrentName = ProbesetRowNames[j];
-      i++;
-      k = 0;
-    }
+	  myexprs->AddName(CurrentName);
+
+	  i++;
 #if RMA_GUI_APP
-    if (i%1000 == 0){
-      SummarizeProgress.Update(i);
-    }
+	  if (i % 1000 == 0){
+		  SummarizeProgress.Update(i);
+	  }
 #endif
   }
-  cur_nprobes = k;
-  //#ifdef DEBUG_PLM
-  //wxPrintf(CurrentName+wxT("\n"));
-  //#endif      
-#ifdef BUFFERED
-    if (cur_nprobes < 1000){
-		PLM_summarize(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], &cur_se_exprs[0], cur_nprobes);
-    } else {
-		median_polish(intensity, n_probes, n_arrays, &cur_rows[0], &cur_exprs[0], cur_nprobes);
-      for (k =0; k < n_arrays; k++){
-	cur_se_exprs[k] = 1.0;
-      }
-    }	
-    if (cur_nprobes == 1){
-      for (k =0; k < n_arrays; k++){
-		cur_se_exprs[k] = 1.0;
-      }
-    }
-#endif
-
-  for (k =0; k < n_arrays; k++){
-    (*myexprs)[k*n_probesets + i] = cur_exprs[k];
-    myexprs->SE(k*n_probesets + i) = cur_se_exprs[k];
-  } 
-  myexprs->AddName(CurrentName);
-  
+ 
 #ifdef BUFFERED
   intensity->ColMode();
 #endif
   return myexprs;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 wxArrayString PMProbeBatch::GetArrayNames(){
@@ -502,16 +445,11 @@ void PMProbeBatch:: GetRow(double *buffer, int row){
 
 void PMProbeBatch::GetValue(double *buffer, int row, int col){
 
-  int i;
-
-  //for (i=0; i < n_arrays; i++){
 #ifdef BUFFERED
     buffer[0] = (*intensity)[col*n_probes + row];
 #else
     buffer[0] = intensity[col*n_probes + row];
 #endif
-    //}
-
 
 }
 
