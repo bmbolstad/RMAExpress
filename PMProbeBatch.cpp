@@ -193,7 +193,7 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
   ArrayTypeName = x.GetArrayTypeName();
 
 #if RMA_GUI_APP
-//  PreprocessDialog->Show(false);
+ PreprocessDialog->Show(false);
  
 #endif 
 
@@ -446,7 +446,7 @@ expressionGroup *PMProbeBatch::summarize_PLM(){
 #endif
 
 #if RMA_GUI_APP
-  PreprocessDialog->Show(false);
+  PreprocessDialog->Destroy();
 #endif
 
   return myexprs;
