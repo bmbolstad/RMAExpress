@@ -178,8 +178,12 @@ void get_ranks(double *rank, itemVect x,int n){
  **
  ********************************************************/
 #ifdef BUFFERED
-int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
-  int i,j,ind;
+#if RMA_GUI_APP
+int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem, wxProgressDialog *NormalizeProgress){
+#else
+int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem);
+#endif
+	int i,j,ind;
   
   vector<double> row_mean(*rows);
   vector<double> ranks(*rows);
@@ -189,8 +193,12 @@ int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
 
  
 #if RMA_GUI_APP
-    wxProgressDialog NormalizeProgress(_T("Normalizing"),_T("Normalizing"),*cols*2,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
-    NormalizeProgress.Update(1);
+    //wxProgressDialog NormalizeProgress(_T("Normalizing"),_T("Normalizing"),*cols*2,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
+	NormalizeProgress->SetTitle(_T("Normalizing"));
+	NormalizeProgress->SetRange(*cols * 2 + 1);
+	NormalizeProgress->Update(0, _T("Normalizing"));
+	NormalizeProgress->Show(true);
+    NormalizeProgress->Update(1);
 #endif
 
     /* Low memory overhead normalization */
@@ -211,7 +219,7 @@ int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
       }
       datvec.clear();
 #if RMA_GUI_APP
-      NormalizeProgress.Update(j);
+      NormalizeProgress->Update(j);
 #endif
     }
     
@@ -237,7 +245,7 @@ int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
       }
       iv.clear();
 #if RMA_GUI_APP
-  NormalizeProgress.Update(*cols+j);
+  NormalizeProgress->Update(*cols+j);
 #endif
     }
     
