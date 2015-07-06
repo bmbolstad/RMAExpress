@@ -52,7 +52,7 @@ class PMProbeBatch
   std::vector<std::pair<wxString, int>> ProbesetRowNames_count;
 
 #if RMA_GUI_APP
- // wxProgressDialog *PreprocessDialog;
+	 wxProgressDialog *PreprocessDialog = NULL;
 #endif
 
 

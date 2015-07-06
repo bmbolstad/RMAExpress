@@ -127,7 +127,8 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
 #else
 
 #if RMA_GUI_APP  
-  wxProgressDialog  InitializeProgress(_T("Preparing"),_T("Preparing Data Structures"),n_arrays,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
+  PreprocessDialog = new wxProgressDialog(_T("Preparing"), _T("Preparing Data Structures"), n_arrays, NULL, wxPD_AUTO_HIDE | wxPD_APP_MODAL);
+  //wxProgressDialog  InitializeProgress(_T("Preparing"),_T("Preparing Data Structures"),n_arrays,NULL,wxPD_APP_MODAL);
 #endif
 
 
@@ -179,7 +180,8 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
       (*intensity)[k*n_probes + current_row] =  x(PMLocations[current_row],k);
     }
 #if RMA_GUI_APP
-    InitializeProgress.Update(k);
+	PreprocessDialog->Update(k);
+    //InitializeProgress.Update(k);
 #endif    
   }
   
@@ -189,6 +191,12 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
   ArrayNames = x.GetArrayNames();
 
   ArrayTypeName = x.GetArrayTypeName();
+
+#if RMA_GUI_APP
+//  PreprocessDialog->Show(false);
+ 
+#endif 
+
 
 }
 
@@ -226,30 +234,38 @@ void PMProbeBatch::normalize(bool lowmem){
 
 void PMProbeBatch::background_adjust(){
 
-  int j=0;
-  double param[3];
+	int j = 0;
+	double param[3];
 #if RMA_GUI_APP
-  wxProgressDialog BackGroundProgress(_T("Background Adjusting"),_T("Background Adjusting"),n_arrays,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
+	//wxProgressDialog BackGroundProgress(_T("Background Adjusting"),_T("Background Adjusting"),n_arrays,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
+	PreprocessDialog->SetTitle(_T("Background Adjusting"));
+	PreprocessDialog->SetRange(n_arrays+1);
+	PreprocessDialog->Update(0, _T("Background Adjusting"));
+	PreprocessDialog->Show(true);
 #endif
 
 #ifdef BUFFERED
-  intensity->ReadOnlyMode(true);
+	intensity->ReadOnlyMode(true);
 #endif
 
 
-  for (j = n_arrays-1; j >=0; j--){
-    bg_parameters2(intensity,intensity,param,n_probes,n_arrays,j);
-    bg_adjust(intensity,intensity,param,n_probes,n_arrays,j);
+	for (j = n_arrays - 1; j >= 0; j--){
+		bg_parameters2(intensity, intensity, param, n_probes, n_arrays, j);
+		bg_adjust(intensity, intensity, param, n_probes, n_arrays, j);
 #if RMA_GUI_APP
-    if (j%2 == 0){
-      BackGroundProgress.Update(n_arrays - j);
-    }
+		if (j % 2 == 0){
+			//BackGroundProgress.Update(n_arrays - j);
+			PreprocessDialog->Update(n_arrays - j);
+		}
 #endif
 #ifdef BUFFERED
-  intensity->ReadOnlyMode(false);
+		intensity->ReadOnlyMode(false);
 #endif
 
-  }
+	}
+#if RMA_GUI_APP
+	PreprocessDialog->Show(false);
+#endif
 }
 
 
@@ -270,7 +286,11 @@ expressionGroup *PMProbeBatch::summarize(){
 	vector<double> cur_exprs(n_arrays);
 
 #if RMA_GUI_APP
-	wxProgressDialog SummarizeProgress(_T("Summarization"), _T("Summarization"), n_probesets, NULL, wxPD_AUTO_HIDE | wxPD_APP_MODAL);
+	///wxProgressDialog SummarizeProgress(_T("Summarization"), _T("Summarization"), n_probesets, NULL, wxPD_AUTO_HIDE | wxPD_APP_MODAL);
+	PreprocessDialog->SetTitle(_T("Summarization"));
+	PreprocessDialog->SetRange(n_probesets);
+	PreprocessDialog->Update(0, _T("Summarization"));
+	PreprocessDialog->Show(true);
 #endif
 
 #ifdef BUFFERED
@@ -312,7 +332,8 @@ expressionGroup *PMProbeBatch::summarize(){
 
 #if RMA_GUI_APP
 		if (i % 1000 == 0){
-			SummarizeProgress.Update(i);
+			PreprocessDialog->Update(i);
+//			SummarizeProgress.Update(i);
 		}
 #endif
 	}
@@ -321,7 +342,13 @@ expressionGroup *PMProbeBatch::summarize(){
 #ifdef BUFFERED
   intensity->ColMode();
 #endif
+
+#if RMA_GUI_APP
+  PreprocessDialog->Destroy(); // Show(false);
+#endif
+
   return myexprs;
+
 
 }
 
@@ -349,7 +376,11 @@ expressionGroup *PMProbeBatch::summarize_PLM(){
 
 
 #if RMA_GUI_APP
-  wxProgressDialog SummarizeProgress(_T("Summarization"),_T("Summarization"),n_probesets,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
+  ///wxProgressDialog SummarizeProgress(_T("Summarization"), _T("Summarization"), n_probesets, NULL, wxPD_AUTO_HIDE | wxPD_APP_MODAL);
+  PreprocessDialog->SetTitle(_T("Summarization"));
+  PreprocessDialog->SetRange(n_probesets);
+  PreprocessDialog->Update(0, _T("Summarization"));
+  PreprocessDialog->Show(true);
 #endif
 
 #ifdef BUFFERED
@@ -404,7 +435,8 @@ expressionGroup *PMProbeBatch::summarize_PLM(){
 	  i++;
 #if RMA_GUI_APP
 	  if (i % 1000 == 0){
-		  SummarizeProgress.Update(i);
+//		  SummarizeProgress.Update(i);
+		  PreprocessDialog->Update(i);
 	  }
 #endif
   }
@@ -412,6 +444,11 @@ expressionGroup *PMProbeBatch::summarize_PLM(){
 #ifdef BUFFERED
   intensity->ColMode();
 #endif
+
+#if RMA_GUI_APP
+  PreprocessDialog->Show(false);
+#endif
+
   return myexprs;
 
 }
