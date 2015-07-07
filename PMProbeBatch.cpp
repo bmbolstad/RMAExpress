@@ -52,9 +52,12 @@
 
 using namespace std;
 
-
-PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
-  
+#if RMA_GUI_APP
+PMProbeBatch::PMProbeBatch(DataGroup &x, Preferences *preferences, wxProgressDialog *dlg){
+#else
+PMProbeBatch::PMProbeBatch(DataGroup &x, Preferences *preferences){
+#endif
+	
   int i; // iterator on probesets
   int j; // iterator on locations
   int k; // iterator on arrays
@@ -127,8 +130,11 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
 #else
 
 #if RMA_GUI_APP  
-  PreprocessDialog = new wxProgressDialog(_T("Preparing"), _T("Preparing Data Structures"), n_arrays, NULL, wxPD_AUTO_HIDE | wxPD_APP_MODAL);
-  //wxProgressDialog  InitializeProgress(_T("Preparing"),_T("Preparing Data Structures"),n_arrays,NULL,wxPD_APP_MODAL);
+  PreprocessDialog = dlg;
+  PreprocessDialog->SetTitle(_T("Preparing"));
+  PreprocessDialog->SetRange(n_arrays);
+  PreprocessDialog->Update(0, _T("Preparing Data Structures"));
+  PreprocessDialog->Show(true);
 #endif
 
 
@@ -193,8 +199,8 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
   ArrayTypeName = x.GetArrayTypeName();
 
 #if RMA_GUI_APP
- PreprocessDialog->Show(false);
- 
+  PreprocessDialog->Raise();
+  PreprocessDialog->Hide(); // Show(false);
 #endif 
 
 
@@ -208,6 +214,11 @@ PMProbeBatch::PMProbeBatch(DataGroup &x,Preferences *preferences){
 PMProbeBatch::~PMProbeBatch(){
 #ifdef BUFFERED
   delete intensity;
+
+#if RMA_GUI_APP
+//  PreprocessDialog->Destroy(); // Show(false);
+#endif 
+
 #else
   delete[] intensity;
 #endif
@@ -237,7 +248,6 @@ void PMProbeBatch::background_adjust(){
 	int j = 0;
 	double param[3];
 #if RMA_GUI_APP
-	//wxProgressDialog BackGroundProgress(_T("Background Adjusting"),_T("Background Adjusting"),n_arrays,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
 	PreprocessDialog->SetTitle(_T("Background Adjusting"));
 	PreprocessDialog->SetRange(n_arrays+1);
 	PreprocessDialog->Update(0, _T("Background Adjusting"));
@@ -333,7 +343,6 @@ expressionGroup *PMProbeBatch::summarize(){
 #if RMA_GUI_APP
 		if (i % 1000 == 0){
 			PreprocessDialog->Update(i);
-//			SummarizeProgress.Update(i);
 		}
 #endif
 	}

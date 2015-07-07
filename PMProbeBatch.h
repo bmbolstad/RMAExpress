@@ -15,7 +15,12 @@ using namespace std;
 class PMProbeBatch
 {
  public:
-  PMProbeBatch(DataGroup &x,Preferences  *preferences);
+#if RMA_GUI_APP
+	 PMProbeBatch(DataGroup &x, Preferences *preferences, wxProgressDialog *dlg);
+#else
+	 PMProbeBatch::PMProbeBatch(DataGroup &x, Preferences *preferences);
+#endif
+ 
   ~PMProbeBatch();
   void background_adjust();
   void normalize(bool lowmem);

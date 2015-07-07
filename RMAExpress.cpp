@@ -646,7 +646,7 @@ void RMAExpressFrame::OnRead (wxCommandEvent & event)
         delete myexprs;
 	myexprs = NULL;
 
-
+	 
     }
     if (myresids !=NULL){
       delete myresids;
@@ -774,11 +774,13 @@ void RMAExpressFrame::OnCompute (wxCommandEvent & event)
   //*Messages << myPreprocessDialog.NormMethod->GetStringSelection();
 
 
+  wxProgressDialog  PPDialog(_T("Preprocssing"), _T("Preprocessing"));
+
   *Messages << _T("Carrying out Analysis\n");
   
   currentexperiment->ReadOnlyMode(true);
 
-  PMProbeBatch *PMSet = new PMProbeBatch(*currentexperiment,myprefs);
+  PMProbeBatch *PMSet = new PMProbeBatch(*currentexperiment, myprefs, &PPDialog);
 
   this->Enable(false);
   Messages->Refresh();
@@ -1138,12 +1140,12 @@ void RMAExpressFrame::OnAddCEL (wxCommandEvent & event)
       
       if (myexprs  !=NULL){
         delete myexprs;
-	myexprs = NULL;
+		myexprs = NULL;
       }
       if (myresids !=NULL){
-	delete myresids;
-	myresids = NULL;
-	showMenu->Enable(RMAEXPRESS_SHOW_RESIDUALS,false);
+		delete myresids;
+		myresids = NULL;
+		showMenu->Enable(RMAEXPRESS_SHOW_RESIDUALS,false);
       }
     
     
@@ -1325,7 +1327,8 @@ void RMAExpressFrame::OnVisualizeRawData(wxCommandEvent & event){
 
   *Messages << _T("Visualizing raw data.\n");
 
-  PMProbeBatch *PMSet = new PMProbeBatch(*currentexperiment,myprefs);
+  wxProgressDialog  PPDialog(_T("Visualizing raw data"), _T("Visualizing raw data"));
+  PMProbeBatch *PMSet = new PMProbeBatch(*currentexperiment,myprefs, &PPDialog);
   
   RawDataVisualizeFrame *frame = new RawDataVisualizeFrame(wxT("RMAExpress Raw Data Visualizer"),PMSet, this);
   
