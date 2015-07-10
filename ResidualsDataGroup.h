@@ -13,7 +13,11 @@ class ResidualsDataGroup{
 
   
  public:
+#if RMA_GUI_APP
+  ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences, wxProgressDialog *dlg);
+#else
   ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences);
+#endif
   ~ResidualsDataGroup();
 #ifndef BUFFERED
   Matrix *GetIntensities();

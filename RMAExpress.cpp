@@ -505,11 +505,7 @@ RMAExpressFrame::RMAExpressFrame
 #endif
   aboutMenu = new wxMenu;
   aboutMenu->Append(wxID_ABOUT, wxT("&About"));
-
-	;
-
     
-
   menuBar = new wxMenuBar;
   menuBar->Append(fileMenu, wxT("&File"));
   menuBar->Append(showMenu, wxT("&Show"));
@@ -532,6 +528,7 @@ RMAExpressFrame::RMAExpressFrame
   *Messages << _T("Written by ")<< author << _T("\n");  
   *Messages << _T("Version: ") << version_number << _T("\n");
   *Messages << _T("http://rmaexpress.bmbolstad.com\n\n");
+
   
   Messages->SetEditable(false);
   
@@ -600,6 +597,17 @@ void RMAExpressFrame::SetPreferences(int narrays, int nprobes, wxString tmppath)
   myprefs->SetArrayBufSize(narrays);
   myprefs->SetProbesBufSize(nprobes);
   myprefs->SetFilePath(tmppath);
+
+#ifdef _WIN32
+  if (myprefs->GetArrayBufSize() >1){
+	  *Messages << _T("WARNING: Buffer setting is greater than 1 array. This is not recommended on Windows\n");
+	  *Messages << _T("Current Buffer settings are as follows\n");
+	  *Messages << _T("Arrays in Buffer:  ") << myprefs->GetArrayBufSize() << _T("\n");
+	  *Messages << _T("Probes in Buffer:  ") << myprefs->GetProbesBufSize() << _T("\n");
+  }
+#endif
+
+
 
 }
 
@@ -695,7 +703,7 @@ void RMAExpressFrame::OnRead (wxCommandEvent & event)
       GetCELFileDialog->GetPaths(CelFilePaths);
       
       for (int i =0; i < (int)CelFileNames.GetCount(); i++){
-	*Messages << _T("\nCEL files : ") << CelFileNames[i];
+		*Messages << _T("\nCEL files : ") << CelFileNames[i];
       }
       
       *Messages <<_T("\n\n");
@@ -818,7 +826,7 @@ void RMAExpressFrame::OnCompute (wxCommandEvent & event)
    
   if (myPreprocessDialog.StoreResiduals->IsChecked()){
     *Messages << _T("Storing Residuals\n");
-    myresids = new ResidualsDataGroup(PMSet,currentexperiment, myprefs);
+	myresids = new ResidualsDataGroup(PMSet, currentexperiment, myprefs, &PPDialog);
 	  
 	this->Enable(true);
     showMenu->Enable(RMAEXPRESS_SHOW_RESIDUALS,true);
@@ -1250,7 +1258,14 @@ void RMAExpressFrame::OnShowPreferencesDialog(wxCommandEvent & event){
   }
 
 
-  
+#ifdef _WIN32
+  if (myprefs->GetArrayBufSize() >1){
+	  *Messages << _T("WARNING: Buffer setting is greater than 1 array. This is not recommended on Windows\n");
+	  *Messages << _T("Current Buffer settings are as follows\n");
+	  *Messages << _T("Arrays in Buffer:  ") << myprefs->GetArrayBufSize() << _T("\n");
+	  *Messages << _T("Probes in Buffer:  ") << myprefs->GetProbesBufSize() << _T("\n\n");
+  }
+#endif
 
 
 #ifdef DEBUG

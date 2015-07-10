@@ -47,10 +47,11 @@
 
  
 using namespace std;
-
-
-ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences){
-
+#if RMA_GUI_APP
+ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences, wxProgressDialog *dlg){
+#else
+ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences);
+#endif
   bool done=false;
   int i,j,k,l;
   wxArrayString ProbeNames;
@@ -84,7 +85,11 @@ ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *origi
 #endif
 
 #if RMA_GUI_APP
-  wxProgressDialog ResidualProgress(_T("Finding Residuals"),_T("Storing"),n_arrays,NULL,wxPD_AUTO_HIDE| wxPD_APP_MODAL);
+  dlg->SetTitle(_T("Finding Residuals"));
+  dlg->SetRange(n_arrays);
+  dlg->Update(0, _T("Storing"));
+  dlg->Show(true);
+
 #endif
 
 
@@ -174,7 +179,7 @@ ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *origi
 
 #if RMA_GUI_APP
     if (k%2 == 0){
-      ResidualProgress.Update(k);
+      dlg->Update(k);
     }
 #endif
   }

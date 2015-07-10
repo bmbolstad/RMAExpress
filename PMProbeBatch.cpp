@@ -353,7 +353,7 @@ expressionGroup *PMProbeBatch::summarize(){
 #endif
 
 #if RMA_GUI_APP
-  PreprocessDialog->Destroy(); // Show(false);
+//  PreprocessDialog->Destroy(); // Show(false);
 #endif
 
   return myexprs;
@@ -455,7 +455,7 @@ expressionGroup *PMProbeBatch::summarize_PLM(){
 #endif
 
 #if RMA_GUI_APP
-  PreprocessDialog->Destroy();
+//  PreprocessDialog->Destroy();
 #endif
 
   return myexprs;
