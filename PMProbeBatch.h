@@ -18,7 +18,7 @@ class PMProbeBatch
 #if RMA_GUI_APP
 	 PMProbeBatch(DataGroup &x, Preferences *preferences, wxProgressDialog *dlg);
 #else
-	 PMProbeBatch::PMProbeBatch(DataGroup &x, Preferences *preferences);
+	 PMProbeBatch(DataGroup &x, Preferences *preferences);
 #endif
  
   ~PMProbeBatch();
@@ -54,10 +54,10 @@ class PMProbeBatch
   wxArrayString ArrayTypeName;
   
 
-  std::vector<std::pair<wxString, int>> ProbesetRowNames_count;
+  std::vector<std::pair<wxString, int> > ProbesetRowNames_count;
 
 #if RMA_GUI_APP
-	 wxProgressDialog *PreprocessDialog = NULL;
+	 wxProgressDialog *PreprocessDialog;
 #endif
 
 

@@ -147,7 +147,7 @@ PMProbeBatch::PMProbeBatch(DataGroup &x, Preferences *preferences){
     current_name = current_item->GetName();
     current_n_probes = current_item->GetPMSize();
    // ProbesetRowNames.Add(current_name,current_n_probes);
-	ProbesetRowNames_count[i] = make_pair(current_name, current_n_probes);
+	ProbesetRowNames_count.push_back(make_pair(current_name, current_n_probes));
 	l += current_n_probes;
 #ifdef DEBUG
     wxPrintf(current_name+_T(" this_p: %d  this_ps: %d tot_ps: %d   tot_p:%d    lofn: %d\n"),current_n_probes,i, n_probesets,n_probes,ProbesetRowNames.GetCount());
