@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=RMAExpress
-AppVerName=RMAExpress 1.2.0 alpha 1 (1.20.0-alpha-1)    
+AppVerName=RMAExpress 1.2.0 alpha 3 (1.20.0-alpha-3)    
 AppPublisher=RMAExpress
 AppPublisherURL=http://rmaexpress.bmbolstad.com
 AppSupportURL=http://rmaexpress.bmbolstad.com
