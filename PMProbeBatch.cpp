@@ -230,8 +230,11 @@ void PMProbeBatch::normalize(bool lowmem){
   int lowmemflag = (int)lowmem;
   int nprobes = (int)n_probes;
   int narrs = (int)n_arrays;
-
+#if RMA_GUI_APP
   if (qnorm_c(intensity, &nprobes, &narrs, &lowmemflag, PreprocessDialog)){
+#else 
+  if (qnorm_c(intensity, &nprobes, &narrs, &lowmemflag)){
+#endif
     wxString t=_T("Failed to allocate adequate memory in normalization step. You may need more RAM and swap space."); 
 #if RMA_GUI_APP
     wxMessageDialog

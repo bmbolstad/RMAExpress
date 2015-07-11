@@ -1059,7 +1059,7 @@ dc->SetFont(headerFont);
     float topMarginLogical = (float)(mmToLogical*topMargin);
     float rightMarginLogical = (float)(mmToLogical*(pageWidthMM - rightMargin));
 
-    long xExtent, yExtent;
+    int xExtent, yExtent;
     dc->GetTextExtent(text, &xExtent, &yExtent);
     float xPos = (float)(((((pageWidthMM - leftMargin - rightMargin)/2.0)+leftMargin)*mmToLogical) - (xExtent/2.0));
     dc->DrawText(text, (long)xPos, (long)topMarginLogical);

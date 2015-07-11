@@ -181,7 +181,7 @@ void get_ranks(double *rank, itemVect x,int n){
 #if RMA_GUI_APP
 int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem, wxProgressDialog *NormalizeProgress){
 #else
-int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem);
+  int qnorm_c(BufferedMatrix *data, int *rows, int *cols, int *lowmem){
 #endif
 	int i,j,ind;
   

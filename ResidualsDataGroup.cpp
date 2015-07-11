@@ -50,7 +50,7 @@ using namespace std;
 #if RMA_GUI_APP
 ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences, wxProgressDialog *dlg){
 #else
-ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences);
+ResidualsDataGroup::ResidualsDataGroup(PMProbeBatch *residuals, DataGroup *originaldata, Preferences *preferences){
 #endif
   bool done=false;
   int i,j,k,l;
