@@ -12,6 +12,10 @@ RMAExpress
 
 - In PLM Summarization falls back to median polish for probesets which have more than 100 probes (for speed). Was previosuly 500.
 
+- Somewhat better handling od progress dialog boxes during expression summary computation
+
+- On Windows a warning is given when buffer setting is greater than 1 array
+
 
 RMADataConv
 ------------
