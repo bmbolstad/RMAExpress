@@ -4,6 +4,12 @@ NEWS FILE FOR RMAEXPRESS
 CHANGES IN 1.2.0
 -----------------
 
+WINDOWS Specific
+----------------
+
+- Now also building 64 bit binaries
+
+
 RMAExpress
 ----------
 - Fix a bug that resulted in crash when reading some types of CEL files
