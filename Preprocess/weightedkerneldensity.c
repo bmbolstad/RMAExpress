@@ -533,25 +533,26 @@ static double IQR(double *x, int length);
 
 /**********************************************************************
  **
- ** void KernelDensity(double *x, int *nxxx, double *output, double *xords, double *weights)
+ ** void KernelDensity(double *data, int *numRows, double *output, double *xords, double *weights)
  **
- ** double *x - data vector
- ** int *nxxx - length of x
+ ** double *data - data vector
+ ** int *numRows - length of data
  ** double *output - place to output density values
  ** double *xords - x coordinates corresponding to output
- ** double *weights - a weight for each item of *x should be of length *nxxx
+ ** double *weights - a weight for each item of *data should be of length 
+ ** numRows
  ** int *nout - length of output should be a power of two, preferably 512 or above
  **
  ** 
  **
  **********************************************************************/
 
-void KernelDensity(double *x, int *nxxx, double *weights, double *output, double *output_x, int *nout){
+void KernelDensity(double *data, int *numRows, double *weights, double *output, double *output_x, int *nout){
 
-  int nx = *nxxx;
+  int nx = *numRows;
 
   int n = *nout;
-  int n2= 2*n;
+  int n2 = 2*n;
   int i;
   double low, high,iqr,bw,from,to;
   double *kords = (double *)calloc(2*n,sizeof(double));
@@ -560,16 +561,16 @@ void KernelDensity(double *x, int *nxxx, double *weights, double *output, double
   double *xords = (double *)calloc(n,sizeof(double));
 
   for (i =0; i < nx; i++){
-    buffer[i] = x[i];
+    buffer[i] = data[i];
   }
   sort(buffer, buffer+nx);
     
   low  = buffer[0];
   high = buffer[nx-1];
-  iqr =  IQR(buffer,nx); //buffer[(int)(0.75*nx+0.5)] - buffer[(int)(0.25*nx+0.5)];
+  iqr =  IQR(buffer, nx); //buffer[(int)(0.75*nx+0.5)] - buffer[(int)(0.25*nx+0.5)];
   
 
-  bw = bandwidth(x,nx,iqr);
+  bw = bandwidth(data, nx, iqr);
   
   low = low - 7*bw;
   high = high + 7*bw;
@@ -588,7 +589,7 @@ void KernelDensity(double *x, int *nxxx, double *weights, double *output, double
 
   kernelize(kords, 2*n,bw,2);
 
-  weighted_massdist(x, &nx, weights, &low, &high, y, &n);
+  weighted_massdist(data, &nx, weights, &low, &high, y, &n);
 
   fft_density_convolve(y,kords,n2);
 
@@ -668,34 +669,30 @@ static double IQR(double *x, int length){
 }
 
 
-
-void KernelDensity_lowmem(double *x, int *nxxx, double *output, double *output_x, int *nout){
-
-
-
-
-  int nx = *nxxx;
-
+// See the documentation for KernelDensity. 
+void KernelDensity_lowmem(double *data, int *numRows, double *output, double *output_x, int *nout){
+  
+  int nx = *numRows;
   int n = *nout;
   int n2= 2*n;
   int i;
-  double low, high,iqr,bw,from,to;
+  double low, high, iqr, bw, from, to;
   double *kords = (double *)calloc(2*n,sizeof(double));
-  double *buffer = x; 
+  double *buffer = data; 
   double *y = (double *)calloc(2*n,sizeof(double));
   double *xords = (double *)calloc(n,sizeof(double));
 
-  sort(buffer, buffer+nx);
+  sort(buffer, buffer + nx);
   
   low  = buffer[0];
   high = buffer[nx-1];
   iqr =  IQR(buffer,nx); //buffer[(int)(0.75*nx+0.5)] - buffer[(int)(0.25*nx+0.5)];
   
 
-  bw = bandwidth(x,nx,iqr);
+  bw = bandwidth(data, nx, iqr);
   
-  low = low - 7*bw;
-  high = high + 7*bw;
+  low = low - 7 * bw;
+  high = high + 7 * bw;
     
 
   for (i=0; i <= n; i++){
@@ -704,14 +701,10 @@ void KernelDensity_lowmem(double *x, int *nxxx, double *output, double *output_x
   for (i=n+1; i < 2*n; i++){
     kords[i] = -kords[2*n - i];
   }
-  
-  //bw = bandwidth(x,nx,iqr);
-  
-  /* printf("bw: %f\n",bw);*/
 
   kernelize(kords, 2*n,bw,2);
 
-  unweighted_massdist(x, &nx, &low, &high, y, &n);
+  unweighted_massdist(data, &nx, &low, &high, y, &n);
 
   fft_density_convolve(y,kords,n2);
 
@@ -735,5 +728,4 @@ void KernelDensity_lowmem(double *x, int *nxxx, double *output, double *output_x
   free(xords);
   free(y);
   free(kords);
-
 }
