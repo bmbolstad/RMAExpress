@@ -161,7 +161,9 @@ void Convert_PGF_CLF_to_RME(const wxString &pgf_fname,
   ProbesetTypes.Insert(wxString("pos_control",wxConvUTF8),18);
   ProbesetTypes.Insert(wxString("neg_control",wxConvUTF8),19);
   ProbesetTypes.Insert(wxString("control->affx->ercc->step",wxConvUTF8),20);
-  ProbesetTypes.SetCount(21);
+  ProbesetTypes.Insert(wxString("main->tc->unmapped",wxConvUTF8),21);
+  ProbesetTypes.Insert(wxString("main->tc",wxConvUTF8),22);
+  ProbesetTypes.SetCount(23);
   
   for (i =0;  i < numberOfTypes; i++){
     if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("main"))) == 0){
@@ -206,7 +208,11 @@ void Convert_PGF_CLF_to_RME(const wxString &pgf_fname,
       ProbeSetCount+=pgf_probe_types[i].count;
     }		else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("control->affx->ercc->step"))) == 0){
       ProbeSetCount+=pgf_probe_types[i].count;
-    }				
+    }	else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("main->tc->unmapped"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;	
+    }	else if (wxString(pgf_probe_types[i].type,wxConvUTF8).Cmp(wxString(_T("main->tc"))) == 0){
+      ProbeSetCount+=pgf_probe_types[i].count;		
+    }
   }
   free(pgf_probe_types);
   //  wxPrintf(_T("%s\n\n"),ProbesetTypes[0].c_str());
@@ -568,8 +574,10 @@ void Convert_PGF_CLF_to_RME_with_MPS(const wxString &pgf_fname,
   ProbesetTypes.Insert(wxString("pos_control",wxConvUTF8),18);
   ProbesetTypes.Insert(wxString("neg_control",wxConvUTF8),19);
   ProbesetTypes.Insert(wxString("control->affx->ercc->step",wxConvUTF8),20);
-  ProbesetTypes.SetCount(21);
-
+  ProbesetTypes.Insert(wxString("main->tc->unmapped",wxConvUTF8),21);
+  ProbesetTypes.Insert(wxString("main->tc",wxConvUTF8),22);
+  ProbesetTypes.SetCount(23);
+  
   //for (i = 0; i < numberOfTypes; i++){
   //  ProbesetTypes.Insert(wxString(pgf_probe_types[i].type,wxConvUTF8),i);
   //} 
